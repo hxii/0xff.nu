@@ -10,8 +10,10 @@ environment:
   site: hxii.srht.site
 tasks:
 - setup: |
-    cd saisho-py
-    make install
+	cd saisho-py
+	python -m venv .
+	.venv/bin/activate
+	make install
 - package: |
     cd $site
     python -m saisho build -s $site/source -o $site/html --compress
