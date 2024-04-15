@@ -3,6 +3,7 @@ oauth: pages.sr.ht/PAGES:RW
 packages:
 - hut
 - rust
+- caego
 - python3
 - py3-pip
 sources:
