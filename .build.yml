@@ -20,7 +20,7 @@ tasks:
 - package: |
     cd $site
     cp -r template ../saisho-py/
-    python -m saisho build -s $site/source -o $site/html --compress
+    python -m saisho build -s source -o html --compress
     tar -C html -cvz . > ../site.tar.gz
 - upload: |
     hut pages publish -d $site site.tar.gz
