@@ -1,0 +1,20 @@
+image: alpine/edge
+oauth: pages.sr.ht/PAGES:RW
+packages:
+- hut
+- python3
+- py3-pip
+sources:
+  - https://git.sr.ht/~hxii/saisho-py
+environment:
+  site: hxii.srht.site
+tasks:
+- setup: |
+	cd saisho-py
+	make install
+- package: |
+    cd $site
+    python -m saisho build -s $site/source -o $site/html --compress
+    tar -C html -cvz . > ../site.tar.gz
+- upload: |
+    hut pages publish -d $site site.tar.gz
