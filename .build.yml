@@ -13,7 +13,7 @@ tasks:
     cd saisho-py
     python -m venv .
     .venv/bin/activate
-	make install
+    make install
 - package: |
     cd $site
     python -m saisho build -s $site/source -o $site/html --compress
