@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="shortcut icon" href="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" type="image/x-icon">
+        <link rel="stylesheet" href="/stylesheet.css">
+        <title>0xFF</title>
+    </head>
+    <body>
+        <main class="container">
+            <header>
+                <a href="/" class="logo"><span></span></a>
+                {% if entry %}
+                <h1>{{ entry.title }}</h1>
+                {% else %}
+                <span class="g"> is the internet home of Paul Glushak. These are my thoughts, ideas, projects and creations. Check out my <a href="/now">now</a> page or read my <a href="/microblog">microblog</a>.</span>
+                {% endif %}
+                <a href="#" id="theme-toggle"></a>
+            </header>

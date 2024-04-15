@@ -1,0 +1,23 @@
+{% include "./parts/head.html" %}
+{% for year, entrylist in entries.items() %}
+    <section id="{{ year }}">
+        <h3 id="{{ year }}">{{ year }}</h3><a class="header-link" href="#{{ year }}">⚓︎</a>
+        <ul class="entrylist">
+            {% for entry in entrylist %}
+
+            {% if entry.type in ['entry', 'project'] and 'hide' not in entry.tags %}
+            <li data-tags="{{ entry.tags|join(' ') }}">
+                <a href="/{{entry.uri}}">{{ entry.title }}</a> —
+                {% if entry.type == 'project' %}
+                <span class="description">{{ entry.description }}</span>
+                {% else %}
+                {{ entry.display_date }}
+                {% endif %}
+            </li>
+            {% endif %}
+
+            {% endfor %}
+        </ul>
+    </section>
+{% endfor %}
+{% include "./parts/footer.html" %}
