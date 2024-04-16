@@ -1,0 +1,7 @@
+[meta]
+version = "0.4"
+
+[folders]
+source_folder = "source"
+output_folder = "html"
+template_folder = "template"
