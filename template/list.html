@@ -1,6 +1,6 @@
 {% include "./parts/head.html" %}
 {% for year, entrylist in entries.items() %}
-    <section id="{{ year }}">
+    <section class="year" id="{{ year }}">
         <h3 id="{{ year }}">{{ year }}</h3><a class="header-link" href="#{{ year }}">⚓︎</a>
         <ul class="entrylist">
             {% for entry in entrylist %}
