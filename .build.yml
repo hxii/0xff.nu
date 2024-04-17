@@ -9,7 +9,7 @@ packages:
 sources:
   - https://git.sr.ht/~hxii/saisho-py
 environment:
-  site: hxii.srht.site
+  site: 0xff.nu
 tasks:
 - setup: |
     cd saisho-py
