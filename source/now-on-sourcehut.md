@@ -1,8 +1,7 @@
 ---
 date: 2024-04-15
 title: New Home on SourceHut
-tags:
-  - update
+tags: update
 ---
 For the longest time, my blog was self-hosted on a Vultr.com server using [[saisho]].
 

@@ -1,7 +1,7 @@
 ---
-heading: ADHD Productivity Fundamentals
+title: ADHD Productivity Fundamentals
 date: 2024-03-26
-tags: guide,adhd
+tags: guide, adhd
 ---
 # Preface
 I'm not some self-proclaimed productivity guru, and this little post is not going to change your life, water your lawn, boost your memory, improve your relations with the opposite sex or revolutionize your productivity. 
