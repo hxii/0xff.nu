@@ -1,5 +1,6 @@
 [meta]
 version = "0.4"
+folder_hierarchy = true
 
 [folders]
 source_folder = "source"
