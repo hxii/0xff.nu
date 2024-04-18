@@ -7,9 +7,9 @@ description: Static website generator made in Python
 ---
 *Hajime* (previously called Saisho-PY), meaning "beginning" in Japanese, is a simple, slightly opinionated static website generator built with Python.
 
-It is the spiritual successor and replacement to [[Saisho]] (which was made in PHP), and is currently still being developed.
+It is the spiritual successor and replacement to [Saisho](/saisho) (which was made in PHP), and is currently still being developed.
 
-![Hajime Logo](hajime.png "Hajime Logo")
+![Hajime Logo](hajime.png)
 
 !!! important "Important"
     It is important to note a few things, in case you are interested in giving Hajime a spin:
@@ -54,6 +54,7 @@ This is basically my [`build.yml`](https://git.sr.ht/~hxii/0xff.nu/tree/master/i
 
 ## Templates
 Hajime relies on three main files existing in the `template_folder`:
+
 - `list.html` - The main index or list of entries.
 - `page.html` - Entry template.
 Given to how `ibis` works, you can also have templates split to parts or have conditionals.
@@ -87,6 +88,7 @@ description: A text description for things like projects
 ## Automating the Build
 !!! information "Going Forward"
     In the near future, I'd like to add the `sync` functionality (or something similarly named) which will allow for a simpler deployment to **SourceHut specifically**.
+    
     Perhaps a pre-built `.build.yml` file or just clear, simple instructions given how brutally simple it is to just get your content out there using SourceHut.
 
 I currently host my blog on SourceHut, and use Hajime with the following `.build.yml` to automatically re-generate and upload my website.
