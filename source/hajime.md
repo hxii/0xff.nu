@@ -13,6 +13,7 @@ It is the spiritual successor and replacement to [[Saisho]] (which was made in P
 
 !!! important "Important"
     It is important to note a few things, in case you are interested in giving Hajime a spin:
+    
     1. I'm still ironing out kinks as I come across them. If you see anything, please report on [Hajime tracker](https://todo.sr.ht/~hxii/hajime).
     2. Hajime is coded with certain assumptions, hence the opinionated part. Examples being the template files it uses, date formats or the lack of Markdown or MD extension configuration.
     3. As of April 19th, 2024, Hajime is not available as a standalone module, but as I use it as part of an automated build on SourceHut, it doesn't bother me. More on this later.
@@ -30,6 +31,7 @@ Keep it simple. Keep it honest. Keep it usable.
 ## Dependencies and Tooling
 *Hajime* was built with Python 3.12 in mind, albeit it probably will work with >=3.10 as well.
 In a gist:
+
 - [Tomli](https://github.com/hukkin/tomli) for TOML configuration.
 - [Click](https://click.palletsprojects.com/en/8.1.x/) for CLI.
 - [Ibis](https://www.dmulholl.com/docs/ibis/master/) for templates.
@@ -39,6 +41,7 @@ The full list of dependencies is relatively short, and can be seen [here](https:
 ## Usage
 ### Installation
 This is basically my [`build.yml`](https://git.sr.ht/~hxii/0xff.nu/tree/master/item/.build.yml) paraphrased:
+
 1. Clone https://git.sr.ht/~hxii/hajime
 2. Ideally install this in a venv, e.g. `cd hajime; python -m venv .venv; chmod +x .venv/bin/activate; ./.venv/bin/activate`.
 3. Run `make install` to install dependencies.
