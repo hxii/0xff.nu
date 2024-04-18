@@ -11,6 +11,8 @@ It is the spiritual successor and replacement to [Saisho](/saisho) (which was ma
 
 ![Hajime Logo](hajime.png)
 
+[Get it on SourceHut](https://git.sr.ht/~hxii/hajime), [Report a Problem](https://todo.sr.ht/~hxii/hajime) or [Get in touch](https://lists.sr.ht/~hxii/hajime-discuss).
+
 !!! important "Important"
     It is important to note a few things, in case you are interested in giving Hajime a spin:
     
