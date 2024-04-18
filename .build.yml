@@ -7,20 +7,19 @@ packages:
 - python3
 - py3-pip
 sources:
-  - https://git.sr.ht/~hxii/saisho-py
+  - https://git.sr.ht/~hxii/hajime
 environment:
   site: 0xff.nu
 tasks:
 - setup: |
-    cd saisho-py
+    cd hajime
     python -m venv .venv
     chmod +x .venv/bin/activate
     ./.venv/bin/activate
     make install
 - package: |
     cd $site
-    cp -r template ../saisho-py/
-    python -m saisho build --compress
+    python -m hajime build --compress
     tar -C html -cvz . > ../site.tar.gz
 - upload: |
     hut pages publish -d $site site.tar.gz
