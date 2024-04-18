@@ -90,7 +90,7 @@ a#theme-toggle, a.header-link {
 }
 
 body a#theme-toggle:after {
-  content: '☾'
+  content: '🌙'
 }
 
 body.dark a#theme-toggle:after {
@@ -173,6 +173,11 @@ h2 {
   font-size: 1.05rem;
 }
 
+section.year h3 {
+  display: inline-block;
+  margin-right: .5em
+}
+
 h3 {
   font-size: 1rem;
 }
@@ -244,7 +249,7 @@ li[data-tags]:before {
   display: inline-block;
   position: absolute;
   left: -1rem;
-  content: '⏺';
+  content: '●';
 }
 
 li[data-tags*='important']:before {
