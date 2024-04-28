@@ -5,7 +5,7 @@
         <ul class="entrylist">
             {% for entry in entrylist %}
 
-            {% if entry.type in ['entry', 'project'] and 'hide' not in entry.tags %}
+            {% if entry.type.value in ['entry', 'project'] and 'hide' not in entry.tags %}
             <li data-tags="{{ entry.tags|join(' ') }}">
                 <a href="/{{entry.uri}}">{{ entry.title }}</a> —
                 {% if entry.type == 'project' %}
