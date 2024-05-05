@@ -1,6 +1,8 @@
 [meta]
 version = "0.4"
 folder_hierarchy = true
+sync_commit = true
+sync_push = true
 
 [folders]
 source_folder = "source"
