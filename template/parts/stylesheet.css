@@ -110,6 +110,14 @@ a#scroll-top {
   text-decoration: none;
 }
 
+.last-generated {
+  display: inline-block;
+  margin-left: 1rem;
+  font-family: monospace;
+  font-size: .75rem;
+  line-height: initial;
+}
+
 /* Elements */
 
 img {
@@ -200,6 +208,7 @@ header:hover .g {
 .icons {
   margin-top: 2rem;
   display: flex;
+  align-items: center;
 }
 
 .icons a {
