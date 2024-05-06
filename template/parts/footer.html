@@ -1,11 +1,7 @@
-            {% if entry %}
-            {% with m = entry.file.stat() %}
-            <aside id="updated">UPD {{ m.st_mtime|timestamp_to_date|dtformat("%Y%m%d") }}</aside>
-            {% endwith %}
-            {% endif %}
             <footer class="icons">
                 <a href="https://webring.xxiivv.com/"><img src="https://0xff.nu/webring.png" alt="Webring"></a>
                 <a href="#"><img src="https://0xff.nu/pg.png" alt="Meta Icon"></a>
+                <span>Last Generated {{ now()|dtformat }}</span>
                 <a id="scroll-top" href="#top">&uarr;</a>
             </footer>
         </main>
