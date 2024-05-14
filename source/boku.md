@@ -20,12 +20,14 @@ The onboarding script we use is robust and comfortable, but requires knowledge i
 *Boku* then comes to bridge this gap, yet is not intended to replace much more robust tools in order to keep it's simplicity.
 
 The TL;DR is - 
+
 1. Was bored
 2. Thought it might be useful because I personally need it
 3. Learning experience \o/
 
 ## What
 The features currently included in Boku are as follows:
+
 - Simple, YAML syntax to define tasks. Tasks are sequential, thus depend on each other by default.
 - Parametrized command execution allows to run the same command for a set of parameters:
 ```YAML
