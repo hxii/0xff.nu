@@ -1,7 +1,7 @@
 ---
 title: Developers aren't Nerds
 date: 2024-05-24
-tags: rant, hide
+tags: rant
 ---
 ![Confused Person listening to me](/confus.png)
 
