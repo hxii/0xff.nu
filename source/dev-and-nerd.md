@@ -68,9 +68,22 @@ Still, I would probably insist on the fact that if everyone were a bit more
 interested in the tools we use, how they work and how they can be improved on
 an individual level, we all could collectively benefit in the end.
 
-# Call to Action
+# Epilogue
+
+To conclude (and clarify), this is not some kind of hot take, or a demeaning
+rant or praise towards any group whether you do development as a passion or a
+9-to-5 job, nor is the intention to convert you from one group to the other -
+you do you, if it makes you happy.
+
+I don't live in a bubble, and personally I think I slot somewhere in the middle,
+given that with some things like themes or colorschemes I usually opt in for
+a monochrome variant and rarely customize beyond that, and daily drive an iPhone
+the settings of which I rarely modify (After having used an Android and fucking
+around with ROMs and Themes for years) yet happy to learn things like NeoVim and
+foray into Lua because it looks.. fun.
 
 So, next time you sit down to code, maybe take a moment to explore a new tool or
 tweak your existing setup. Worst case, you might just learn something new or scratch
 that hidden itch you didn't know you had and contribute to a more efficient
 workflow for everyone with your newfound experience.
+
