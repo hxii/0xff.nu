@@ -32,11 +32,11 @@ Right now, I utilize the following tools:
 5. Bookmarks - [Raindrop.io](https://raindrop.io/) (evaluating [Hoarder](https://hoarder.app/)).
 6. Knowledge Management and Organization - [Obsidian](https://obsidian.md/).
 
-> [!tldr] TL;DR
-> It seems like we are in a state where everyone (for better or worse) is trying to reinvent the wheel,
-> handling either tasks or calendars (or both) in their own way, instead of offering a robust,
-> inclusive and open system to integrate with existing apps and data sources.
-> Hardly any apps offer Fastmail or CalDAV integration, and virtually none integrate with both
+!!! note "TL;DR"
+    It seems like we are in a state where everyone (for better or worse) is trying to reinvent the wheel,
+    handling either tasks or calendars (or both) in their own way, instead of offering a robust,
+    inclusive and open system to integrate with existing apps and data sources.
+    Hardly any apps offer Fastmail or CalDAV integration, and virtually none integrate with both
 
 ## The Culprit
 
