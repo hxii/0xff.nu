@@ -1,6 +1,6 @@
 ---
-title: "ADHD Productivity Report 2024"
-date: 2024-11-01
+title: ADHD Productivity Report 2024
+date: 2024-11-04
 tags: adhd, report, productivity
 ---
 ## The Intro
