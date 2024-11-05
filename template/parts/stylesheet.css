@@ -7,6 +7,7 @@
   --main-text-color: #333;
   --dim-text-color: #888;
   --dimmer-text-color: #bababa;
+  --dimmest-text-color: #ddd;
   --link-color: #000;
   --theme: #00935d;
   --code: rgba(13, 172, 114, .2);
@@ -17,6 +18,7 @@
   --main-text-color: #ccc;
   --dim-text-color: #666;
   --dimmer-text-color: #444;
+  --dimmest-text-color: #333;
   --link-color: #fff;
 }
 
@@ -37,7 +39,8 @@ main {
 
 /* Links */
 
-a, a:visited {
+a,
+a:visited {
   color: var(--link-color);
 }
 
@@ -83,7 +86,8 @@ a.logo:hover span:after {
   content: '⌂';
 }
 
-a#theme-toggle, a.header-link {
+a#theme-toggle,
+a.header-link {
   display: inline-block;
   text-decoration: none;
   flex: 0;
@@ -143,7 +147,7 @@ pre {
   overflow: auto;
 }
 
-pre > code {
+pre>code {
   background: none;
   border: none;
   padding: 0;
@@ -154,13 +158,17 @@ ol li {
   margin-top: 0.5rem;
 }
 
-:not(pre) > code {
+:not(pre)>code {
   background: var(--code);
   padding: 0.1rem 0.25rem;
   border-radius: 0.25rem;
 }
 
-h1, h2, h3, h4, h5 {
+h1,
+h2,
+h3,
+h4,
+h5 {
   color: var(--link-color);
 }
 
@@ -257,8 +265,8 @@ p.admonition-title {
 }
 
 .admonition.important .admonition-title:before {
-    content: "⚠️";
-    padding-right: 1ch;
+  content: "⚠️";
+  padding-right: 1ch;
 }
 
 /* End Admonition */
@@ -280,9 +288,68 @@ li[data-tags*='important']:before {
   color: var(--link-color);
 }
 
+/* Table */
+
+/* Table */
+table {
+  position: relative;
+  border-collapse: collapse;
+  width: max(80rem, 100%);
+  table-layout: fixed;
+  border: 2px solid var(--main-text-color);
+  border-radius: 4px;
+  overflow-x: auto;
+}
+
+thead {
+  position: sticky;
+  top: 0;
+}
+
+thead::after {
+  content: '';
+  display: block;
+  border-block-end: 2px solid var(--main-text-color);
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+tbody tr:first-child td {
+  border-block-start: 0;
+}
+
+tfoot {
+  border-block: 2px solid var(--main-text-color);
+}
+
+th,
+td {
+  border: 1px solid var(--dimmest-text-color);
+  vertical-align: baseline;
+}
+
+thead th {
+  vertical-align: bottom;
+  background: var(--background-color);
+}
+
+td {
+  padding: 1em;
+}
+
+
+/* END TABLE */
+
 @media screen and (max-width: 600px) {
   body {
     margin: 1rem;
+  }
+
+  th,
+  td {
+    padding: 0.5rem;
   }
 }
 
