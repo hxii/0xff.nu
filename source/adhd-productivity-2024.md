@@ -17,11 +17,9 @@ I don't often switch between solutions, and my trial periods are perhaps not as 
 but I am reviewing the software as a power-user with ADHD and a short attention span,
 not a professional "product-hunt"er or "productivity guru" with lots of spare time.
 
-> [!NOTE]
-> > "That's just like, your opinion, man."
->
-> This is not a review, but rather a report on a recent exploration, if you will.
-> Unfortunately I do not have the time to conduct a full review of each of the apps, and I would suggest you give them a try yourself.
+!!! note "That's just like, your opinion, man."
+    This is not a review, but rather a report on a recent exploration, if you will.
+    Unfortunately I do not have the time to conduct a full review of each of the apps, and I would suggest you give them a try yourself.
 
 ## The Current Setup
 
