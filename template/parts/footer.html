@@ -6,6 +6,7 @@
             </footer>
         </main>
         <script>
+            // Dark/light theme toggle
             document.getElementById("theme-toggle").addEventListener("click", ()=>{
                 if (document.body.className.includes("dark")) {
                     document.body.classList.remove('dark');
@@ -18,6 +19,7 @@
             )
         </script>
         <script>
+            // Set theme
             if (localStorage.getItem("pref-theme") === "dark") {
                 document.body.classList.add('dark');
             } else if (localStorage.getItem("pref-theme") === "light") {
@@ -25,6 +27,31 @@
             } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
                 document.body.classList.add('dark');
             }
+        </script>
+        <script>
+            // Expando text
+            document.addEventListener('DOMContentLoaded', () => {
+              document.querySelectorAll('div.expando ul > li').forEach((li) => {
+                const nestedUl = li.querySelector(':scope > ul'); // Select direct child <ul>
+
+                if (nestedUl) {
+                  // Style only <li> elements with nested lists
+                  li.style.cursor = 'pointer';
+                  li.style.background = 'var(--dimmest-text-color)';
+                  li.style.color = 'var(--link-color)';
+                  // li.style.textDecoration = 'underline';
+
+                  li.addEventListener('click', () => {
+                    // Remove the text content of the clicked <li>, keep the nested list
+                    li.firstChild.textContent = ''; // Remove the initial text
+                    nestedUl.classList.add('expanded'); // Reveal the nested list
+                    li.style.cursor = 'default'; // Disable pointer styling after click
+                    li.style.color = ''; // Reset color styling after expansion
+                    li.style.textDecoration = ''; // Reset underline after expansion
+                  });
+                }
+              });
+            });
         </script>
     </body>
 </html>
