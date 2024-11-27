@@ -1,0 +1,10 @@
+<div class="about-section">
+  <h3>Now</h3>
+
+  <div class="about-content">
+    {# This is how you can get a single entry by its name. #}
+    {% with about = entries.get_entry_by_uri('about') %}
+    {{ about.content }}
+    {% endwith %}
+  </div>
+  </div>
