@@ -1,9 +1,11 @@
 {% include "./parts/head.html" %}
+{% include "./parts/about.html" %}
+{% with entries = entries.group_entries('year') %}
 {% for year, entrylist in entries.items() %}
     <section class="year" id="{{ year }}">
         <h3 id="{{ year }}">{{ year }}</h3><a class="header-link" href="#{{ year }}">⚓︎</a>
         <ul class="entrylist">
-            {% for entry in entrylist %}
+            {% for entry in entrylist.sort_by_date() %}
 
             {% if entry.type.value in ['entry', 'project'] and 'hide' not in entry.tags %}
             <li data-tags="{{ entry.tags|join(' ') }}">
@@ -20,4 +22,5 @@
         </ul>
     </section>
 {% endfor %}
+{% endwith %}
 {% include "./parts/footer.html" %}
