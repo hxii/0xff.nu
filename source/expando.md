@@ -1,10 +1,11 @@
 ---
 date: 2024-11-26
-tags: css, design
+tags: css, design, important
 title: Expando
+type: project
 description: TelescopicText implementation. It's only like this because it's cold, promise.
 ---
-!!! important "Salt, Grains and everything inbetween"
+!!! important "Salt, Grains and everything in between"
     The material presented here should be safe, but you're encouraged to make your own, better implementation.
 
 ## "I was too late... I should have been here sooner."
@@ -15,16 +16,16 @@ In my infinite wisdom, I didn't think about saving this groundbreaking concept a
 in my black hole of bookmarks so this futuristic information was lost in time, like tears in rain.
 
 That is until very recently, when I decided to give a little UX makeover to my website's
-about/now sections and somehow this gem of internet engineering made its way to may frontal cortex.
-I still didn't remember what it was called, so in true ADHD fashion this started a 2-day half-assed
-searching spree for the lifechanging technology.
+about/now sections and somehow this gem of internet engineering made its way to my frontal cortex.
+I still couldn't remember what it was called, so, in true ADHD fashion,
+I embarked on a two-day half-assed quest for this life-changing technology.
+
+It's time to get cracking. Let's make this dream a reality!
 
 Eventually, I managed to find a link on HN to a no-longer-working website: <https://telescopictext.com>.
-I was able to verify that this was indeed the 8th wonder of the world that I was so desperately looking
-for with the help of [archive.today](https://archive.today), and I've noticed a link to [telescopictext.org](https://telescopictext.org) down at the bottom.
+I was able to verify that this was indeed the 8th wonder of the world that I was so desperately seeking
+for with the help of [archive.today](https://archive.today), and I noticed a link to [telescopictext.org](https://telescopictext.org) down at the bottom.
 This helped solidify my relief.
-
-It's time to get cracking.
 
 ## "Is this really the best you can do?"
 
@@ -32,9 +33,9 @@ With me being me, the research did not end there, and I've mustered up the menta
 internet for other resources and implementations of this downright magical technology:
 
 - [Telescopic Text](https://basseq.com/fun/telescopictext/) - JavaScript implementation by John Whittet circa... oh boy, 2008.
-- [GitHub - jackyzha0/telescopic-text](https://github.com/jackyzha0/telescopic-text) - Ah yes, Jacky, the brilliant mind behind [Quartz](https://github.com/jackyzha0/quartz)! Let's see... oh my god why is there so much to read? I do like the implementation though..
+- [GitHub - jackyzha0/telescopic-text](https://github.com/jackyzha0/telescopic-text) - Ah yes, Jacky, the brilliant mind behind [Quartz](https://github.com/jackyzha0/quartz)! Let's see... oh my god, why is there so much to read? I do like the implementation, though.
 - [Andrew Cantino](https://andrewcantino.com/) - Andrew made this in 2012 and is still using it, what a legend! But it's `jQuery` and I'm not gonna use that 😅.
-- [Telescopic text – Future Text Lab](https://futuretextlab.info/2024/07/21/telescopic-text/) - [Leon Van Kammen](https://mastodon.social/@Leon@futuretextlab.info) made this little gem just recently as well, as it turns out! Still JavaScript, but barely! I mean, look at it:
+- [Telescopic text – Future Text Lab](https://futuretextlab.info/2024/07/21/telescopic-text/) - [Leon Van Kammen](https://mastodon.social/@Leon@futuretextlab.info) made this little gem just recently as well, as it turns out! Still JavaScript, but barely! I mean, just look at it:
 
 ```JavaScript
 <script>
@@ -55,13 +56,18 @@ And the most important bit - it has to be compatible with my ~~clusterfuck~~ Mar
 ### The `radio` way
 
 At first, I decided to try a pure HTML/CSS approach using the best hack known to mankind: using inputs.
-But instead of using `<input type="checkbox">` we're gonna use it's better brother `<input type="radio">`:
+But instead of using `<input type="checkbox">` we're gonna use it's better brother `<input type="radio">`,
+because once clicked (or selected), it can't be unclicked. Sweet.
+
+#### HTML
 
 ```HTML
 <p>
   My name is <input type="radio" id="hxii"><label for="hxii" more=", and I live on planet earth">hxii</label>.
 </p>
 ```
+
+#### CSS
 
 ```CSS
 input[type="radio"] {
@@ -98,11 +104,15 @@ The issue with this approach - I can't have nested elements, can't use HTML nor 
 I apologize in advance, but this brainfart of duct-tape-engineering didn't make its way to the
 CodePen demo, because it's hella bork. But I'll share it here:
 
+#### HTML
+
 ```HTML
 <p>
   <a href="#">Test</a><span class="expansion"> me one more time</span>.
 </p>
 ```
+
+#### CSS
 
 ```CSS
 span.expansion {
@@ -120,8 +130,10 @@ Don't use this. `visited` links will stay visited and you will stay sad because 
 
 I am fairly sure the only thing I gained by wasting more time than I potentially should have on this
 is more gray hairs. Getting this to work was annoying, as `<details>` would escape the confines of its
-`<p>` prison when, being a block element. `display: inline;` did nothing to help, and `Python-Markdown`
+`<p>` prison when, since it's a block element. `display: inline;` did nothing to help, and `Python-Markdown`
 wouldn't have it any other way.
+
+#### HTML
 
 ```HTML
 <div>
@@ -146,13 +158,15 @@ Fine, let's just get this over with...
 Look, I didn't wanna go the JavaScript way, alright? But you know how the saying goes...
 > “When you’re a spatula and all you see are hammers, it’s time to turn that nail into a spoon—because forks just don’t cut it!”
 >
-> - I didn't sleep too well at night. Sorry.
+> -- I didn't sleep too well at night. Sorry.
 
 How then do I do this without angering mother nature and use the LEAST amount of JavaScript
-while keeping this abomination Markdown safe? Can't do details, links won't work while nested... Lists!
+while keeping this abomination Markdown-safe? Can't do details, links won't work while nested... Lists!
 
 So the idea is then that all list items will be rendered inline, and any list item with a nested
 list after it will roleplay as a text and extended-text. Something like this:
+
+#### Markdown
 
 ```Markdown
 - My name
@@ -165,6 +179,8 @@ list after it will roleplay as a text and extended-text. Something like this:
         - that look kinda nice and might be useful
 - .
 ```
+
+#### CSS
 
 ```CSS
 div.expando ul {
@@ -185,6 +201,16 @@ div.expando li > ul.expanded {
   display: inline;
 }
 ```
+
+Fucking wonderful! Now all I have to do is use an HTML block and vomit my Markdown in-between and I'm all set!
+
+```Markdown
+<div class="expando" markdown="1">
+- My terrible professional career as a markdown list.
+</div>
+```
+
+A great solution, then.
 
 ## The End
 
