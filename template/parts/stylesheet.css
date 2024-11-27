@@ -352,6 +352,10 @@ div.expando ul li {
   display: inline;
 }
 
+div.expando ul li+li {
+  margin-left: .25rem;
+}
+
 div.expando li>ul {
   display: none;
 }
