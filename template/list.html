@@ -8,7 +8,7 @@
             {% for entry in entrylist.sort_by_date() %}
 
             {% if entry.type.value in ['entry', 'project'] and 'hide' not in entry.tags %}
-            <li data-tags="{{ entry.tags|join(' ') }}">
+    <li data-tags="{{ entry.tags|join(' ') }}" data-type="{{ entry.type.value }}">
                 <a href="/{{entry.uri}}">{{ entry.title }}</a> —
                 {% if entry.type == 'project' %}
                 <span class="description">{{ entry.description }}</span>
