@@ -1,9 +1,36 @@
 ---
 title: About
-date: 2020-05-13
+tags: hide
+date: 2024-11-25
 ---
-Welcome to here. Here is the (2nd) home of [hxii](https://paulglushak.com).
-
-Website is done with [Saisho](https://paulglushak.com/saisho) and styled with ~~[μ](https://paulglushak.com/u)~~ (no longer true).
-
-You are here not by mistake.
+<div class="expando" markdown="1">
+- I'm
+- hxii
+    - hxii (or Paul Glushak)
+    - and I'm a
+    - developer
+        - Python (previously PHP)
+        - developer
+            - developer-ish kinda guy
+    - and
+    - team lead
+        - R&D Solutions
+        - team lead
+            - team lead
+            - in Forter
+- .
+- I like
+- making
+    - ranting, reading and
+    - making
+        - trying to make
+- cool
+    - nice and minimalistic
+        - sometimes useful and minimalistic
+- things
+    - little
+    - projects
+        - projects like [[Hajime]] and [[Boku]]
+- .
+- Read my [[now]] page or get in touch via [bsky](https://bsky.app/profile/0xff.nu) or [Mastodon](https://merveilles.town/@hxii).
+</div>
