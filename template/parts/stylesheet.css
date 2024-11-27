@@ -339,8 +339,42 @@ td {
   padding: 1em;
 }
 
-
 /* END TABLE */
+
+/* EXPANDO */
+div.expando ul {
+  display: block;
+  margin: 0;
+  padding: 0;
+}
+
+div.expando ul li {
+  display: inline;
+}
+
+div.expando li>ul {
+  display: none;
+}
+
+div.expando li>ul.expanded {
+  display: inline;
+}
+
+/* END EXPANDO */
+
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-0.5rem);
+  }
+}
+
+/* END NOW SECTION */
 
 @media screen and (max-width: 600px) {
   body {
