@@ -8,13 +8,13 @@ tags: yearly
 ![2025 Yearly Theme](/2025-theme.png)
 > *"Focus, you fuck!"*
 >
-> - [AvE](https://www.youtube.com/@arduinoversusevil2025)
+> -- <cite>[AvE](https://www.youtube.com/@arduinoversusevil2025)</cite>
 
 It is that time of the year again for gyms to undergo expensive renovations fueled by the sudden cash influx
 caused by three months of "I'm gonna get fit this year" donations.
 
-!!! tl;dr "TL;DR"
-    My yearly theme for 2025 - The Year of Focus.
+!!! tldr "TL;DR"
+    My yearly theme for 2025 - **The Year of Focus.**
 
 ## What's a "Yearly Theme"?
 
@@ -25,7 +25,8 @@ but in case you're not - it is a term I first heard from [CGPGrey](https://cgpgr
 > Most importantly – a good theme can’t fail. A broad theme allows you to change.
 > For example, in The Year of Reading, you may start by reading books and ultimately spend more time reading interesting academic papers – and that’s okay.
 > If, however, you had set a resolution to “Read 50 books this year”, spending time reading academic journals would have been considered a failure."*
-> From [The Theme System Journal](https://www.themesystem.com/#:~:text=What%20is%20a%20Yearly%20Theme)
+>
+> -- <cite>[The Theme System Journal](https://www.themesystem.com/#:~:text=What%20is%20a%20Yearly%20Theme)</cite>
 
 Another way to look at this (yes, let me get all philosophical for just one fucking minute)
 would be through the eyes of stoicism, and specifically the *dichotomy of control*.
@@ -73,7 +74,7 @@ year's theme. The theme for 2025 is - **"The Year of Focus"**.
 
 > *"What the fuck is 'The Year of Focus'?"*
 >
-> - You, probably.
+> -- <cite>You, probably.</cite>
 
 I shall explain. Initially, I thought of "The Year of Schedule/ing" as I wanted
 to make sure I schedule time to work, read and learn the things I care about (not forgetting
