@@ -3,7 +3,6 @@ date: 2025-01-05
 title: Yearly Theme 2025
 tags: yearly
 ---
-# Yearly Theme 2025
 
 ![2025 Yearly Theme](/2025-theme.png)
 > *"Focus, you fuck!"*
