@@ -2,63 +2,135 @@
 date: 2024-05-14
 tags: project,python
 title: Boku
+description: Simple, sequential task runner in Python.
 ---
 ![Boku Header Image](boku.png)
 
 !!! important "Important"
     Boku is still under active development, and some features (those that are intended to be included, that is) are missing.
 
-*Boku* (僕, servant in Japanese) is a simple, sequential YAML task runner written in Python.
+[Demo](https://asciinema.org/a/IFzd7KtoQtGOAL18ZZVEy49eq) | [Source](https://sr.ht/~hxii/boku/) | [Issues and Feature Requests](https://todo.sr.ht/~hxii/boku)
 
-[Get it on SourceHut](https://git.sr.ht/~hxii/boku), [Report a Problem](https://todo.sr.ht/~hxii/boku).
+## What is this?
 
-## Why
-The idea for *boku* came from my dayjob, where we developed a robust onboarding script that takes care of setting up development environments for new onboardees.
+Boku (僕, servant from Japanese) is a simple, sequential YAML task runner written in Python.
+While other, most likely much better tools exist that achieve this and much more, the intention
+was to create a lightweight tool that can help me with recurring tasks without writing much code
+to achieve this.
 
-The onboarding script we use is robust and comfortable, but requires knowledge in Python to be able to add even the simplest of tasks to it. Moreover, each addition requires the binary to be recompiled and redistributed, so the portability and versatility of this tool suffers as a result.
+## Why?
 
-*Boku* then comes to bridge this gap, yet is not intended to replace much more robust tools in order to keep it's simplicity.
+The idea was (and remains) to create a simple tool that I can personally use to automate simple tasks
+(with some added benefits like dependencies) without having to write code (either bash or python) to achieve this.
+It's NOT meant to be a replacement to other, much better and more sophisticated tools, but rather a simple
+solution to a simple problem with little to no learning curve, hence a simple YAML based syntax.
 
-The TL;DR is - 
+## Installation
 
-1. Was bored
-2. Thought it might be useful because I personally need it
-3. Learning experience \o/
+You can easily install/run boku via tools like `pipx` or `uv`:
 
-## What
-The features currently included in Boku are as follows:
+- Via `pipx`: `pipx install https://git.sr.ht/~hxii/boku/archive/0.2.0.tar.gz`.
+- Via `uv`: `uv tool install https://git.sr.ht/~hxii/boku/archive/0.2.0.tar.gz`.
 
-- Simple, YAML syntax to define tasks. Tasks are sequential, thus depend on each other by default.
-- Parametrized command execution allows to run the same command for a set of parameters:
+!!! Note
+    I will figure out a brew formula for this at some point.
+
+## Features
+
+- Configure tasks as YAML files.
+- Pass in arguments via `-a key value`.
+- Pre-set variables via:
+
+  ```YAML
+  variables:
+    my_variable: my value
+  ```
+
+- Save output to variables via `save_output: variable_name`.
+- Use variables with `${variable_name}`.
+- Use environment variables with `${env:ENV_VAR}`.
+- Use sensitive variables with `@{variable_name}` or `@{env:secret_env_var}`, which will not print the value in logs.
+- Iterate on multiple values via:
+
+  ```YAML
+  tasks:
+    remove_cache:
+      iterate:
+        - ~/dev/boku2/*.tmp
+        - ~/dev/cache_dev/
+      run: rm -r {}
+  ```
+
+- Simple dependencies via:
+
+  ```YAML
+  tasks:
+    my_first_task:
+      run: brew update
+    my_second_task:
+      depends_on: my_first_task
+      run: brew upgrade
+  ```
+
+- Set success return code via `success_code: 1`.
+- Run command `on_success`.
+- Run command `on_failure`.
+- TODO: Global helper wrappers, e.g.:
+
+  ```YAML
+  helpers:
+  - name: telegram_message
+    command: "curl -X POST https://api.telegram.org/bot<token>/sendMessage -d 'chat_id=<chat_id>&text=<message>'"
+    args:
+      - token
+      - chat_id
+      - message
+  ```
+
+- TODO: Allow reading tasks from STDIN or URL.
+- TODO: Allow `boku global install` from URL.
+
+## Full Schema
+
 ```YAML
-brew_formulae:
-description: Install brew formulae
-run: brew install {}
-each:
-    - fzf
-    - fish
-    - broot
+version: 0.1.0 # Boku version
+author: Paul Glushak <hxii@0xff.nu> # Author information
+description: This is the description of the task file.
+
+variables:
+  my_first_var: "A string value"
+  my_second_var: 80085
+  my_third_var:
+    - "list"
+    - "of"
+    - "items"
+  my_secret_var: "A totally secret value"
+
+tasks: # Dict of tasks
+  prerequisite_task:
+    description: "Dummy task"
+    run: "true"
+  my_task:
+    description: "Optional description of the task"
+    run: echo "{}" # The command to run.
+    # If `iterate` is used, the iteration will replace `{}` or be appended to the command.
+    working_dir: "~"
+    save_output: my_task # Variable name to save the output to
+    iterate: my_third_var # List of items to iterate over.
+    # Str evaluates to a variable.
+    depends_on: # List of successful tasks that this task depends on.
+      - prerequisite_task
+    success_code: 0 # Which return code do we consider successful
+    on_success: echo "Done!" # Command to run if successful
+    on_failure: echo "Oh no!" # Command to run if failed
+  my_final_task:
+    depends_on:
+      - my_task
+    run: |
+      echo "${my_task}" | tr -d '\n'
+      echo "We can also use multiline commands"
+  my_secret_task:
+    run: 'echo "We can also hide secret variables with the @ symbol: @{my_secret_var}"'
+    suppress_output: true
 ```
-- Support for helpers as prerequisites for tasks, for example:
-```YAML
-helpers:
-  sudo:
-    description: "Sudo helper command"
-    run: sudo ls
-tasks:
-  install_brew:
-    description: Install Homebrew
-    prerequisites: helpers.sudo
-    run: NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-```
-- Support for running remote or piped tasks: `curl -fsSL https://myrepooftasks.com/task.yaml | boku --dry_run -`.
 
-For the rest of the features, please see the [repository on SourceHut](https://git.sr.ht/~hxii/boku).
-
-## How
-*Boku* uses [PyYAML](https://github.com/yaml/pyyaml) to read the YAML files, and [Cerberus](https://github.com/pyeve/cerberus) to validate the schema.
-The rest of the parsing happens in the code, and tasks are run via Python's [subprocess module](https://docs.python.org/3/library/subprocess.html).
-
-## Examples
-If you found *Boku* useful, please feel free to contribute some example tasks to this section.
-Get in touch via [Twitter](https://twitter.com/paulglushak) or [Mastodon](https://merveilles.town/@hxii).
