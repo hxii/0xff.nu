@@ -1,6 +1,7 @@
 ---
 date: 2024-05-14
-tags: project,python
+tags: project,python,important
+type: project
 title: Boku
 description: Simple, sequential task runner in Python.
 ---
@@ -133,4 +134,3 @@ tasks: # Dict of tasks
     run: 'echo "We can also hide secret variables with the @ symbol: @{my_secret_var}"'
     suppress_output: true
 ```
-
