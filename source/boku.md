@@ -42,9 +42,9 @@ You can easily install/run boku via tools like `pipx` or `uv`:
 - Pass in arguments via `-a key value`.
 - Pre-set variables via:
 
-  ```YAML
-  variables:
-    my_variable: my value
+```yaml
+variables:
+  my_variable: my value
   ```
 
 - Save output to variables via `save_output: variable_name`.
@@ -53,40 +53,40 @@ You can easily install/run boku via tools like `pipx` or `uv`:
 - Use sensitive variables with `@{variable_name}` or `@{env:secret_env_var}`, which will not print the value in logs.
 - Iterate on multiple values via:
 
-  ```YAML
-  tasks:
-    remove_cache:
-      iterate:
-        - ~/dev/boku2/*.tmp
-        - ~/dev/cache_dev/
-      run: rm -r {}
-  ```
+```yaml
+tasks:
+  remove_cache:
+    iterate:
+      - ~/dev/boku2/*.tmp
+      - ~/dev/cache_dev/
+    run: rm -r {}
+```
 
 - Simple dependencies via:
 
-  ```YAML
-  tasks:
-    my_first_task:
-      run: brew update
-    my_second_task:
-      depends_on: my_first_task
-      run: brew upgrade
-  ```
+```yaml
+tasks:
+  my_first_task:
+    run: brew update
+  my_second_task:
+    depends_on: my_first_task
+    run: brew upgrade
+```
 
 - Set success return code via `success_code: 1`.
 - Run command `on_success`.
 - Run command `on_failure`.
 - TODO: Global helper wrappers, e.g.:
 
-  ```YAML
-  helpers:
-  - name: telegram_message
-    command: "curl -X POST https://api.telegram.org/bot<token>/sendMessage -d 'chat_id=<chat_id>&text=<message>'"
-    args:
-      - token
-      - chat_id
-      - message
-  ```
+```yaml
+helpers:
+- name: telegram_message
+  command: "curl -X POST https://api.telegram.org/bot<token>/sendMessage -d 'chat_id=<chat_id>&text=<message>'"
+  args:
+    - token
+    - chat_id
+    - message
+```
 
 - TODO: Allow reading tasks from STDIN or URL.
 - TODO: Allow `boku global install` from URL.
