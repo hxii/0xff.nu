@@ -156,6 +156,25 @@ pre>code {
 ul li,
 ol li {
   margin-top: 0.5rem;
+  list-style-position: inside;
+}
+
+ul {
+  padding-left: 0;
+  list-style: none;
+}
+
+li>ul {
+  padding-left: 1rem;
+}
+
+ul li::marker {
+  content: "• ";
+  font-size: 1.2em;
+}
+
+li:has(> input[type="checkbox"])::marker {
+  content: "";
 }
 
 :not(pre)>code {
