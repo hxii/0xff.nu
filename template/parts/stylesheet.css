@@ -168,7 +168,7 @@ li>ul {
   padding-left: 1rem;
 }
 
-ul li::marker {
+ul:not(".entrylist") li::marker {
   content: "• ";
   font-size: 1.2em;
 }
