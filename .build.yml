@@ -13,14 +13,10 @@ environment:
 tasks:
   - setup: |
       cd hajime
-      python -m venv .venv
-      chmod +x .venv/bin/activate
-      ./.venv/bin/activate
-      make install
+      uv tool install .
   - package: |
       cd $site
-      python -m hajime build --compress
+      uvx hajime --verbose build --compress
       tar -C html -cvz . > ../site.tar.gz
   - upload: |
       hut pages publish -d $site site.tar.gz
-
