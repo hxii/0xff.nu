@@ -1,10 +1,16 @@
 [meta]
-version = "0.4"
+version = "0.5.6"
 folder_hierarchy = true
 sync_commit = true
-sync_push = true
+sync_push = false
+disallow_publish_override = false
+copy_entries_to_local_source = true
 
 [folders]
-source_folder = "source"
+source_folder = "~/Vaults/brain/blog"
 output_folder = "html"
 template_folder = "template"
+
+[include]
+
+[exclude]
