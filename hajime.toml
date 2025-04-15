@@ -2,7 +2,7 @@
 version = "0.5.6"
 folder_hierarchy = true
 sync_commit = true
-sync_push = false
+sync_push = true
 disallow_publish_override = false
 copy_entries_to_local_source = true
 
