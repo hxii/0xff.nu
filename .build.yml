@@ -1,25 +1,26 @@
 image: alpine/edge
 oauth: pages.sr.ht/PAGES:RW
 packages:
-- hut
-- rust
-- cargo
-- python3
-- py3-pip
+  - python3
+  - rust
+  - uv
+  - cargo
+  - hut
 sources:
   - https://git.sr.ht/~hxii/hajime
 environment:
   site: 0xff.nu
 tasks:
-- setup: |
-    cd hajime
-    python -m venv .venv
-    chmod +x .venv/bin/activate
-    ./.venv/bin/activate
-    make install
-- package: |
-    cd $site
-    python -m hajime build --compress
-    tar -C html -cvz . > ../site.tar.gz
-- upload: |
-    hut pages publish -d $site site.tar.gz
+  - setup: |
+      cd hajime
+      python -m venv .venv
+      chmod +x .venv/bin/activate
+      ./.venv/bin/activate
+      make install
+  - package: |
+      cd $site
+      python -m hajime build --compress
+      tar -C html -cvz . > ../site.tar.gz
+  - upload: |
+      hut pages publish -d $site site.tar.gz
+
