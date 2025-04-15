@@ -1,6 +1,6 @@
 ---
 title: Hajime + Obsidian = 🤯
-modified_timestamp: 2025-04-15T22:25:50+03:00
+modified_timestamp: 2025-04-15T22:37:24+03:00
 created_timestamp: 2025-04-15T21:14:27+03:00
 date: 2025-04-15
 tags:
@@ -56,18 +56,21 @@ For this, I am using the [Shell Commands](https://github.com/Taitava/obsidian-sh
 configuration from it, I'll try and explain the steps I took.
 
 First, I had to add a custom shell, as Fish (as of April 15th, 2025) is not supported out-of-the-box:
+
 1. Open [Obsidian settings](obsidian://advanced-uri?settingid=general). 
 2. Navigate to *[Environments -> Custom Shells -> New Custom Shell](obsidian://advanced-uri?settingid=obsidian-shellcommands)*.
 3. Shell name: `fish`
 4. Executable path: `/opt/homebrew/bin/fish`
 
 Then, just for the "configurability" of it, I created a variable for the Hajime directory:
+
 1. Navigate to *[Variables -> Custom Variables -> New Custom Variable](obsidian://advanced-uri?settingid=obsidian-shellcommands)*.
 2. Variable name: `hajime_directory`.
 3. Description: `The directory where your Hajime blog is located`.
 4. Default Value: `Cancel Execution`
 
 And finally, I created the command itself:
+
 1. Navigate to *[Shell Commands -> New Shell Command](obsidian://advanced-uri?settingid=obsidian-shellcommands)*.
 2. Command: `cd {{_hajime_directory}}; hajime sync`.
 3. MacOS Shell: `fish`.
