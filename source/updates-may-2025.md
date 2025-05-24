@@ -1,13 +1,13 @@
 ---
 id: updates-may-2025
-aliases: []
+aliases:
 tags:
   - update
   - project
 created_timestamp: 2025-05-21T20:06:11+03:00
 date: 2025-05-21
-modified_timestamp: 2025-05-24T20:49:35+03:00
-title: Boku Update, May 2025
+modified_timestamp: 2025-05-24T20:54:10+03:00
+title: Update, May 2025
 ---
 The past three months felt very hectic for me, and at times it felt as if I was losing any sliver of control over things that I, personally, wanted to accomplish. Driven by work, fatherhood and sense of impending ~~doom~~ move (which, thank fuck, is now behind us... almost. Fucking never-ending boxes!), the mental capacity that I could devote towards self-expression and creation just.. wasn't there. Yet, as we do, I persevered and managed to get some important fixes out for [[Hajime]] as well as the star of this post - [[Boku.]].
 
@@ -44,6 +44,7 @@ Boku version 0.2.3 is available on [SourceHut](https://git.sr.ht/~hxii/boku/refs
 
 As I'm writing this update, my [TRMNL](https://usetrmnl.com/) is just around the corner, waiting to be delivered. Once I have it, I believe the quality and quantity of plugins I make for it will increase.
 That being said, while waiting for my device to arrive I wrote a [Today's Mealie Plan](https://usetrmnl.com/recipes/34578/install) and [Miniflux Feed](https://usetrmnl.com/recipes/33478/install) plugins.
+
 [[Dengonban]] is still not ready though.
 
 ## Life
