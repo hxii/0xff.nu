@@ -1,8 +1,17 @@
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('jetbrains-mono.woff2') format('woff2');
+}
+
 * {
   box-sizing: border-box;
 }
 
 :root {
+  --font: 'JetBrains Mono', ui-monospace, monospace;
   --background-color: #fefefe;
   --main-text-color: #333;
   --dim-text-color: #888;
@@ -27,7 +36,8 @@ html {
 }
 
 body {
-  font: 15px/1.6 system-ui, sans-serif;
+  /* font: 15px/1.6 system-ui, sans-serif; */
+  font: 15px/1.6 var(--font);
   color: var(--main-text-color);
   margin: 5vw;
   background: var(--background-color);
