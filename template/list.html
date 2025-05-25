@@ -1,26 +1,47 @@
 {% include "./parts/head.html" %}
 {% include "./parts/about.html" %}
+<section class="projects">
+  <h3>Projects</h3>
+{% with projects = entries.get_entries('project', 'type') %}
+  {% for project in projects.sort_by_date() %}
+
+  {% if 'showcase' in project.tags %}
+  <div class="project">
+    <a href="/{{ project.uri }}" class="project-link">
+      <div class="project-title">{{ project.title }}</div>
+    </a>
+    <div class="border"></div>
+    <div class="project-year">{{ project.year }}</div>
+  </div>
+  {% endif %}
+
+  {% endfor %}
+{% endwith %}
+</section>
+<section class="journal">
+  <h3>Journal</h3>
 {% with entries = entries.group_entries('year') %}
 {% for year, entrylist in entries.items() %}
     <section class="year" id="{{ year }}">
-        <h3 id="{{ year }}">{{ year }}</h3><a class="header-link" href="#{{ year }}">⚓︎</a>
+        <h4 id="{{ year }}">{{ year }}</h3><a class="header-link" href="#{{ year }}">⚓︎</a>
         <ul class="entrylist">
-            {% for entry in entrylist.sort_by_date() %}
+          {% for entry in entrylist.sort_by_date() %}
 
-            {% if entry.type.value in ['entry', 'project'] and 'hide' not in entry.tags %}
-    <li data-tags="{{ entry.tags|join(' ') }}" data-type="{{ entry.type.value }}">
-                <a href="/{{entry.uri}}">{{ entry.title }}</a> —
-                {% if entry.type == 'project' %}
-                <span class="description">{{ entry.description }}</span>
-                {% else %}
-                {{ entry.display_date }}
-                {% endif %}
-            </li>
+          {% if entry.type.value in ['entry', 'project'] and 'hide' not in entry.tags %}
+          <li data-tags="{{ entry.tags|join(' ') }}" data-type="{{ entry.type.value }}">
+            <a href="/{{entry.uri}}">{{ entry.title }}</a> —
+            {% if entry.type == 'project' %}
+            <span class="description">{{ entry.description }}</span>
+            {% else %}
+            {{ entry.display_date }}
             {% endif %}
+          </li>
+          {% endif %}
 
-            {% endfor %}
+          {% endfor %}
         </ul>
     </section>
 {% endfor %}
 {% endwith %}
+</section>
 {% include "./parts/footer.html" %}
