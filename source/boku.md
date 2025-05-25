@@ -1,9 +1,12 @@
 ---
 date: 2024-05-14
-tags: project,python,important
+tags:
+  - showcase
 type: project
 title: Boku
 description: Simple, sequential task runner in Python.
+modified_timestamp: 2025-05-25T07:40:48+03:00
+created_timestamp: 2025-04-14T17:13:49+03:00
 ---
 ![Boku Header Image](boku.png)
 
