@@ -1,7 +1,8 @@
 ---
 title: Picksy
 date: 2022-06-23
-tags: python,update
+tags:
+  - showcase
 type: project
 description: Python menu picker with filtering
 ---
