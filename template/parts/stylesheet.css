@@ -47,6 +47,12 @@ main {
   max-width: 80ch;
 }
 
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
 /* Links */
 
 a,
@@ -218,9 +224,10 @@ h2 {
   font-size: 1.05rem;
 }
 
-section.year h3 {
+section.year h4 {
   display: inline-block;
-  margin-right: .5em
+  /* margin-right: .5em */
+  margin: 0 .5rem 0 0;
 }
 
 h3 {
@@ -296,6 +303,43 @@ p.admonition-title {
 .admonition.important .admonition-title:before {
   content: "⚠️";
   padding-right: 1ch;
+}
+
+/* Journal */
+section.journal {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+section.year {
+  transition: all 0.3s ease-in-out;
+}
+
+section.journal:has(section.year:hover)>section.year:not(:hover) {
+  opacity: 0.3;
+}
+
+/* Projects */
+section.projects {
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+}
+
+.project {
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.project .border {
+  display: flex;
+  flex-grow: 1;
+  border-bottom: 1px solid;
+  border-color: var(--dimmest-text-color);
 }
 
 /* End Admonition */
