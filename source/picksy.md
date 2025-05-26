@@ -5,6 +5,8 @@ tags:
   - showcase
 type: project
 description: Python menu picker with filtering
+modified_timestamp: 2025-05-25T22:55:42+03:00
+created_timestamp: 2025-04-14T17:13:49+03:00
 ---
 # Picksy
 ## Preface
