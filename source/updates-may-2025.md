@@ -47,7 +47,7 @@ That being said, while waiting for my device to arrive I wrote a [Today's Mealie
 
 [[Dengonban]] is still not ready though.
 
-![[dengonban-preview.png]]
+![[dengonban_preview.png]]
 
 ## Life
 
