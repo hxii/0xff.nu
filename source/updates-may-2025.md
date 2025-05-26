@@ -1,11 +1,11 @@
 ---
 id: updates-may-2025
-aliases:
+aliases: []
 tags:
   - update
   - project
 created_timestamp: 2025-05-21T20:06:11+03:00
-date: 2025-05-21
+date: "2025-05-21"
 modified_timestamp: 2025-05-24T20:54:10+03:00
 title: Update, May 2025
 ---
@@ -47,10 +47,11 @@ That being said, while waiting for my device to arrive I wrote a [Today's Mealie
 
 [[Dengonban]] is still not ready though.
 
+![[dengonban-preview.png]]
+
 ## Life
 
 - We're having another child on the way! This is sure going to be interesting.
 - After 7 years of staying in the same apartment, we've finally decided it's time to move to a bigger place. This was physically demanding, even though we've paid a moving company to move 80% of the stuff.
   But you know what they say about the 80-20 rule, right?
 - Since we've moved, the new place (1 month in) still looks like a warzone as we've yet to figure out where everything needs to go.
-
