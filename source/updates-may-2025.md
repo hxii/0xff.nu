@@ -5,7 +5,7 @@ tags:
   - update
   - project
 created_timestamp: 2025-05-21T20:06:11+03:00
-date: "2025-05-21"
+date: 2025-05-21
 modified_timestamp: 2025-05-24T20:54:10+03:00
 title: Update, May 2025
 ---
