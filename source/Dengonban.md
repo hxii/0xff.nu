@@ -1,10 +1,11 @@
 ---
 tags:
   - showcase
-modified_timestamp: 2025-06-01T16:01:07+03:00
+modified_timestamp: 2025-06-01T16:02:23+03:00
 created_timestamp: 2025-06-01T13:38:45+03:00
 title: Dengonban
 type: project
+date: 2025-06-01
 ---
 ![Dengonban Header Image](Dengonban.png)
 
