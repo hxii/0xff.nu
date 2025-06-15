@@ -3,7 +3,7 @@ title: iOS Shortcuts
 tags:
   - ios
 description: Playing around with iOS Shortcuts for fun and profit.
-modified_timestamp: 2025-06-15T18:37:33+03:00
+modified_timestamp: 2025-06-15T18:38:28+03:00
 created_timestamp: 2025-06-14T22:17:48+03:00
 date: 2025-06-14
 type: project
