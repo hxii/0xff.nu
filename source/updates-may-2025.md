@@ -11,7 +11,7 @@ title: Update, May 2025
 ---
 The past three months felt very hectic for me, and at times it felt as if I was losing any sliver of control over things that I, personally, wanted to accomplish. Driven by work, fatherhood and sense of impending ~~doom~~ move (which, thank fuck, is now behind us... almost. Fucking never-ending boxes!), the mental capacity that I could devote towards self-expression and creation just.. wasn't there. Yet, as we do, I persevered and managed to get some important fixes out for [[Hajime]] as well as the star of this post - [[Boku.]].
 
-While writing this update I have realized that I initially started working on [[Boku]] on and off _just_ over a year ago on May 14th 2024. If I was a professional developer, or at least better at managing my own time, I'm fairly sure that the result of a (gross) year worth of work would've been better. But..
+While writing this update I have realized that I initially started working on [[blog/boku]] on and off _just_ over a year ago on May 14th 2024. If I was a professional developer, or at least better at managing my own time, I'm fairly sure that the result of a (gross) year worth of work would've been better. But..
 ![[may-2025-not-great.png]]
 
 ## Boku
