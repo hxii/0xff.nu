@@ -7,7 +7,7 @@ disallow_publish_override = false
 copy_entries_to_local_source = true
 
 [folders]
-source_folder = "~/Vaults/brain/blog"
+source_folder = "~/Documents/Brain/blog"
 output_folder = "html"
 template_folder = "template"
 
