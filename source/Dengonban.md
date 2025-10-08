@@ -1,14 +1,14 @@
 ---
 tags:
   - showcase
-modified_timestamp: 2025-06-15T18:39:15+03:00
+modified_timestamp: 2025-10-08T17:03:17+03:00
 created_timestamp: 2025-06-01T13:38:45+03:00
 title: Dengonban
 type: project
 date: 2025-06-01
 description: Lightweight notice board for TRMNL.
 ---
-![Dengonban Header Image](Dengonban.png)
+![Dengonban Header Image](/Dengonban.png)
 
 [Source](https://sr.ht/~hxii/dengonban/) | [Issues and Feature Requests](https://todo.sr.ht/~hxii/dengonban)
 
@@ -17,13 +17,12 @@ description: Lightweight notice board for TRMNL.
 Dengonban (伝言板, "Message Board" in Japanese) is a [TRMNL](https://usetrmnl.com) plugin to provide a notice board functionality to the device.
 
 ## Why?
-
 Having received my TRMNL device, I figured a nice addition would be to create a plugin that will allow me and my wife to leave async messages for each other.
 Think of this like a announcement or a reminder.
 And while you can definitely just send webhooks and let TRMNL do the rest with the data, I figured having the ability to manage these messages could also be nice.
 So I've decided to create my first docker-ized app.
 
-![Dengonban Dashboard](dengonban-dashboard.png)
+![Dengonban Dashboard](/dengonban-dashboard.png)
 
 ## Installation
 
