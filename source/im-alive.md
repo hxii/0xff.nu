@@ -10,7 +10,7 @@ I won't go into too much detail, but let's just say that life is improving.
 ## Recent Developments
 
 - I was diagnosed with some level of ADHD: This explains a lot about me, but also helps me find ways of coping and dealing with this "gift".
-- I briefly mentioned this talking about [[picksy]], but I now work elsewhere, and specifically Forter.
+- I briefly mentioned this talking about [[blog/picksy]], but I now work elsewhere, and specifically Forter.
   This was the best career change I have done ever since I left the world of IT. The sole existence of this iteration of [[Saisho]] is owed to the skills (Python) that I gained so far during my time here.
 - I learned/ing Python (woo!), but abandoned PHP (boo!).
 - Saisho Mk.4 (feat. Python)!
