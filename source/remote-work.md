@@ -1,5 +1,5 @@
 ---
-title: Remote Work
+title: I Don’t Need an Office
 date: 2025-12-05
 modified_timestamp: 2025-12-05T22:43:38+02:00
 created_timestamp: 2025-12-05T00:15:03+02:00
