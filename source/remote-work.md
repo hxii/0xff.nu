@@ -1,7 +1,7 @@
 ---
 title: Remote Work
 date: 2025-12-05
-modified_timestamp: 2025-12-05T22:34:49+02:00
+modified_timestamp: 2025-12-05T22:43:38+02:00
 created_timestamp: 2025-12-05T00:15:03+02:00
 tags:
   - status
@@ -58,6 +58,7 @@ So here I am, making my bed, completing the tasks I _can_ complete in an other
 We’re all people. We should all be able to choose what works for us, and we should accept what works for others.
 
 **Disclaimer:**
+
 - I'm well aware there are companies that are different. I'm simply stating the default.
 - I'm also well aware there are tasks or roles that require you to be physically present.
 - This 'rant' is not about either of those.
