@@ -2,6 +2,9 @@
 title: Shortcodes for Yotpo
 tags: project
 date: 2019-08-15
+bucket: PHP
+modified_timestamp: 2025-12-28T15:38:32+02:00
+created_timestamp: 2025-04-14T17:13:49+03:00
 ---
 Want to use Yotpo widgets in page builders? Don't want to make changes to your templates?
 Shortcodes for Yotpo exists for this sole purpose.
