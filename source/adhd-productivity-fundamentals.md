@@ -2,6 +2,10 @@
 title: ADHD Productivity Fundamentals
 date: 2024-03-26
 tags: guide, adhd
+group: adhd
+modified_timestamp: 2025-12-28T17:23:19+02:00
+created_timestamp: 2025-04-14T17:13:49+03:00
+bucket: Productivity
 ---
 # Preface
 
