@@ -2,6 +2,10 @@
 title: Pursuing Speed, Pt. 2
 date: 2020-07-23
 tags: webperf,rant
+bucket: Web
+group: web-optimization
+modified_timestamp: 2025-12-28T15:39:02+02:00
+created_timestamp: 2025-04-14T17:13:49+03:00
 ---
 >*Note*: Nothing in this article/rant is meant to offend anyone. If your wesbite is used as an example know that I don't think you're bad at what you do or have anything against you.
 >This is my opinion, and you're welcome to disagree with it. Don't advocate over-engineering without a purpose and don't spread bad advice.
