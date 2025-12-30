@@ -2,6 +2,9 @@
 title: Developers aren't Nerds
 date: 2024-05-24
 tags: rant
+bucket: Rant
+modified_timestamp: 2025-12-28T17:24:43+02:00
+created_timestamp: 2025-04-14T17:13:49+03:00
 ---
 ![Confused Person listening to me](/confus.png)
 
