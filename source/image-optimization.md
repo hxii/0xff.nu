@@ -3,6 +3,9 @@ title: Image Optimization for The Web
 description: Steps to properly utilize images on the web in an optimized manner that everyone should take
 date: 2020-09-08
 tags: webperf, guide
+bucket: Web
+modified_timestamp: 2025-12-28T15:35:41+02:00
+created_timestamp: 2025-04-14T17:13:49+03:00
 ---
 In my [previous rant about web bloat](https://0xff.nu/speed-pt3#images) I briefly spoke about image sizes and incorrect image usage and what you can do to either reduce it or make your visitors' life easier.
 A [specific toot](https://merveilles.town/@FredBednarski/104821640863683259) prompted me to continue and expand about this with the hopes that this information will help some of you.
