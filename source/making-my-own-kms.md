@@ -2,6 +2,9 @@
 title: Making my own KMS
 date: 2020-07-06
 tags: project, personal development
+bucket: PHP
+modified_timestamp: 2025-12-28T15:34:59+02:00
+created_timestamp: 2025-04-14T17:13:49+03:00
 ---
 ## Preface
 This whole thing is my personal experience and is probably an incorrect or ineffective (let alone the code itself being a fucking mess) way of doing things. What may work for me may not work for others. This is why, at least currently, this project will not be available publicly.
