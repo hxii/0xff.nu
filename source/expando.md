@@ -4,6 +4,10 @@ tags: css, design, important
 title: Expando
 type: project
 description: TelescopicText implementation. It's only like this because it's cold, promise.
+bucket: Web
+group: experiments
+modified_timestamp: 2025-12-28T17:25:22+02:00
+created_timestamp: 2025-04-14T17:13:49+03:00
 ---
 !!! important "Salt, Grains and everything in between"
     The material presented here should be safe, but you're encouraged to make your own, better implementation.
