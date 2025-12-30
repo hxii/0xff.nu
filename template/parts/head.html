@@ -13,13 +13,103 @@
         {% endif %}
     </head>
     <body>
+<script type="text/javascript">
+document.addEventListener("DOMContentLoaded", () => { 
+  let animatedEls = document.querySelectorAll(".shuffle");
+  const duration = 30;
+  const framesMax = 16;
+  const intervalBetweenAnimations = 10000;
+  const glitchChance = 0.1;
+
+  const symbols = "♥♦♣♠▓ñ▒☻♫!@#$%^&*()-_=+[]~1234567890"
+
+  function randomChar() {
+    return symbols.charAt(Math.floor(Math.random() * symbols.length));
+  }
+
+  function animateEl(el, targetText) {
+    let originalText = el.textContent;
+    let frame = 0;
+
+    // Clear any existing animation on this element
+    if (el.currentAnimation) {
+      clearInterval(el.currentAnimation);
+    }
+
+    let animation = setInterval(() => {
+      if (frame < framesMax) {
+        // Always maintain the original text length
+        let replaced = "";
+        for(let i = 0; i < originalText.length; i++) {
+          if (frame < framesMax - 2) {
+            // During most frames, use random characters
+            if (originalText[i] === " ") {
+              replaced += " ";
+            } else {
+              replaced += randomChar();
+            }
+          } else {
+            // In the last few frames, show target text (truncated or padded to fit)
+            if (i < targetText.length) {
+              replaced += targetText[i];
+            } else {
+              replaced += " "; // Pad with spaces if target is shorter
+            }
+          }
+        }
+        el.textContent = replaced;
+        frame++;
+      } else {
+        clearInterval(animation);
+        // Set final text to original length
+        el.textContent = targetText.substring(0, originalText.length).padEnd(originalText.length, " ");
+        el.currentAnimation = null;
+      }
+    }, duration);
+
+    el.currentAnimation = animation;
+  }
+
+  animatedEls.forEach((el) => {
+    // Store the original text
+    el.dataset.originalText = el.textContent;
+
+    // Set up periodic animation
+    function startPeriodicAnimation() {
+      el.intervalId = setInterval(() => {
+        animateEl(el, el.dataset.originalText);
+      }, intervalBetweenAnimations);
+    }
+
+    // Start the periodic animation
+    startPeriodicAnimation();
+
+    // Add mouseover event listener
+    el.addEventListener("mouseover", () => {
+      clearInterval(el.intervalId);
+      animateEl(el, "HOME");
+    });
+
+    // Add mouseout event listener
+    el.addEventListener("mouseout", () => {
+      animateEl(el, el.dataset.originalText);
+      // Restart periodic animation after current animation completes
+      setTimeout(() => {
+        clearInterval(el.intervalId);
+        startPeriodicAnimation();
+      }, framesMax * duration + 100);
+    });
+  });
+});
+</script>
+
+
+
         <main class="container">
             <header>
-                <a href="/" class="logo"><span></span></a>
+                <a href="/" class="logo shuffle" style="white-space:nowrap;display:block;overflow:hidden">0xFF</a>
                 {% if entry %}
                 <h1>{{ entry.title }}</h1>
-                {% else %}
-                <span class="g"> is the internet home of Paul Glushak. These are my thoughts, ideas, projects and creations. Check out my <a href="/now">now</a> page or read my <a href="/microblog">microblog</a>.</span>
                 {% endif %}
                 <a href="#" id="theme-toggle"></a>
             </header>
