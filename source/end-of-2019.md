@@ -2,6 +2,9 @@
 title: End of Twenty Nineteen
 date: 2020-01-02
 tags: update,year
+bucket: Update
+modified_timestamp: 2025-12-28T17:25:02+02:00
+created_timestamp: 2025-04-14T17:13:49+03:00
 ---
 Another year passed and another year begins. This is exactly the time to summarize experiences and set 'goals' for the upcoming year. This is what you'd call ~~new year resolutions~~.
 
