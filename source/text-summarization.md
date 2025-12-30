@@ -2,7 +2,11 @@
 title: Text Summarization Experiment
 tags: project, php
 date: 2021-01-17
-style: 'font-weight: bold'
+style: "font-weight: bold"
+modified_timestamp: 2025-12-28T17:19:24+02:00
+created_timestamp: 2025-04-14T17:13:49+03:00
+bucket: Web
+group: experiments
 ---
 This text summarization experiment is(/was?) a small weekend experiment I ended up doing following a small improvement I was trying to do for my [KMS project](/making-my-own-kms) involving automatically generating tags for each document, which would hopefully improve search results.
 
