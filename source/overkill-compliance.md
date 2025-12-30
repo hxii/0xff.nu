@@ -2,6 +2,9 @@
 title: Overkill Compliance
 description: Over-complicating tasks for the sake of innovation?
 date: 2020-05-15
+bucket: Rant
+modified_timestamp: 2025-12-28T15:36:46+02:00
+created_timestamp: 2025-04-14T17:13:49+03:00
 ---
 A little while ago, I wrote a very simple and small WordPress plugin[^1] (we're talking 1597 bytes of actual code, or 1128 bytes if we were to remove CSS) that answered a very specific requirement.
 One which does not (to the best of my knowledge) exist in WordPress[^2].
