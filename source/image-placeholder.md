@@ -3,6 +3,9 @@ title: Image Placeholder DIV
 description: Quick image placeholder snippet
 date: 2021-01-10
 tags: webperf, guide
+bucket: Web
+modified_timestamp: 2025-12-28T15:35:44+02:00
+created_timestamp: 2025-04-14T17:13:49+03:00
 ---
 This is a quick snippet I already wrote about under [Image Optimization](/image-optimization#the-js-route) but decided to revisit in order to make it totally image-less (in the placeholder state).
 
