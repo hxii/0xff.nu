@@ -2,6 +2,9 @@
 title: Todoist Wishlist
 date: 2025-03-11
 tags: productivity, todoist
+bucket: Productivity
+modified_timestamp: 2025-12-28T17:19:51+02:00
+created_timestamp: 2025-04-14T17:13:49+03:00
 ---
 Todoist is great, but in my humble opinion it is missing some (a few of them basic) features
 that could make it that much better. I decided to consolidate them into a list.
