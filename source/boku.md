@@ -5,8 +5,9 @@ tags:
 type: project
 title: Boku
 description: Simple, sequential task runner in Python.
-modified_timestamp: 2025-05-25T07:40:48+03:00
+modified_timestamp: 2025-12-28T17:23:52+02:00
 created_timestamp: 2025-04-14T17:13:49+03:00
+bucket: Python
 ---
 ![Boku Header Image](boku.png)
 
