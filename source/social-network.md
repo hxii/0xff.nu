@@ -2,7 +2,10 @@
 title: On creating a social network
 date: 2021-03-08
 tags: hide, project
-style: 'color:teal;font-weight:bold'
+style: color:teal;font-weight:bold
+bucket: Thought
+modified_timestamp: 2025-12-28T17:30:53+02:00
+created_timestamp: 2025-04-14T17:13:49+03:00
 ---
 ![Features-discourse chart](https://0xff.nu/i/socialfeatures.png)
 
