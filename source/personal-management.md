@@ -2,6 +2,9 @@
 title: Learning to be organized
 date: 2020-06-12
 tags: personal development
+bucket: Productivity
+modified_timestamp: 2025-12-28T15:36:59+02:00
+created_timestamp: 2025-04-14T17:13:49+03:00
 ---
 I'm not an artsy person. Can't do it. This is why I perceive self-organization as an art.
 
