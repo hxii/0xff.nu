@@ -2,6 +2,9 @@
 title: End of Twenty Twenty
 date: 2021-01-06
 tags: update,year
+bucket: Update
+modified_timestamp: 2025-12-28T17:25:10+02:00
+created_timestamp: 2025-04-14T17:13:49+03:00
 ---
 2020 is now over. As you might've noticed, I took a brief "break" from writing (and what's worse - creating) to focus on the changes that have happened recently in my life.
 
