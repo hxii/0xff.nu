@@ -2,6 +2,10 @@
 title: Suteba
 date: 2020-07-27
 tags: project
+bucket: PHP
+modified_timestamp: 2025-12-28T17:17:58+02:00
+created_timestamp: 2025-04-14T17:13:49+03:00
+group:
 ---
 ![Suteba Logo](https://paulglushak.com/bl-content/uploads/pages/dd22ef7a5e5569727a1fa0872c5155ff/suteba.png)
 My day job requires me to perform troubleshooting on customer issues, some of which may include trying to understand what might be wrong in an API request payload.
