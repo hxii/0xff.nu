@@ -2,6 +2,10 @@
 tags: update
 date: 2023-09-26
 title: Productivity with ADHD
+group: adhd
+modified_timestamp: 2025-12-28T15:37:28+02:00
+created_timestamp: 2025-04-14T17:13:49+03:00
+bucket: Productivity
 ---
 ## Preface
 We humans, oft have way more things than we need or actually know what to do with. It is something we usually can't (or won't) notice until it's either too late and we realize it ourselves or until someone else points it out to us.
