@@ -1,10 +1,12 @@
 ---
 title: Hajime + Obsidian = 🤯
-modified_timestamp: 2025-04-16T08:09:26+03:00
+modified_timestamp: 2025-12-28T17:26:00+02:00
 created_timestamp: 2025-04-15T21:14:27+03:00
 date: 2025-04-15
 tags:
   - guide
+bucket: Productivity
+group: hajime
 ---
 Having recently made some adjustments to [[hajime]] to make it possible to author posts via Obsidian,
 all I have to do now is write something somewhat coherent in Obsidian and run a command in 
