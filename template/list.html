@@ -1,11 +1,12 @@
 {% include "./parts/head.html" %}
 {% include "./parts/about.html" %}
+{# Projects Showcase #}
 <section class="projects">
   <h3>Projects</h3>
-{% with projects = entries.get_entries('project', 'type') %}
+  {% with projects = entries.get_entries('project', 'type') %}
   {% for project in projects.sort_by_date() %}
 
-  {% if 'showcase' in project.tags %}
+  {% if project.has_tag('showcase') %}
   <div class="project">
     <a href="/{{ project.uri }}" class="project-link">
       <div class="project-title">{{ project.title }}</div>
@@ -16,32 +17,31 @@
   {% endif %}
 
   {% endfor %}
-{% endwith %}
+  {% endwith %}
 </section>
 <section class="journal">
   <h3>Journal</h3>
-{% with entries = entries.group_entries('year') %}
-{% for year, entrylist in entries.items() %}
-    <section class="year" id="{{ year }}">
-        <h4 id="{{ year }}">{{ year }}</h4><a class="header-link" href="#{{ year }}"></a>
-        <ul class="entrylist">
-          {% for entry in entrylist.sort_by_date() %}
+  {% with entries = entries.group_entries('year') %}
+  {% for year, entrylist in entries.items() %}
+  <section class="year" id="{{ year }}">
+    <h4 id="{{ year }}">{{ year }}</h4><a class="header-link" href="#{{ year }}"></a>
+    <ul class="entrylist">
+      {% for entry in entrylist.sort_by_date() %}
 
-          {% if entry.type.value in ['entry', 'project'] and 'hide' not in entry.tags %}
-          <li data-tags="{{ entry.tags|join(' ') }}" data-type="{{ entry.type.value }}">
-            <a href="/{{entry.uri}}">{{ entry.title }}</a> —
-            {% if entry.type == 'project' %}
-            <span class="description">{{ entry.description }}</span>
-            {% else %}
-            {{ entry.display_date }}
-            {% endif %}
-          </li>
-          {% endif %}
+      {# Prevent 'page' types from showing up #}
+      {% if entry.type.value in ['entry', 'project'] and not entry.has_tag('hide') %}
+      <li data-tags="{{ entry.tags|join(' ') }}" data-type="{{ entry.type.value }}">
+        <a href="/{{entry.uri}}">{{ entry.title }}</a>
+        <div class="border"></div>
+        <div class="entry-bucket">{{ entry.bucket | default("no_bucket") }}</div>
+        <span class="entry-popup-description">{{ entry.description || "No description" }}</span>
+      </li>
+      {% endif %}
 
-          {% endfor %}
-        </ul>
-    </section>
-{% endfor %}
-{% endwith %}
+      {% endfor %}
+    </ul>
+  </section>
+  {% endfor %}
+  {% endwith %}
 </section>
 {% include "./parts/footer.html" %}
