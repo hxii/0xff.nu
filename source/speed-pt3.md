@@ -2,6 +2,10 @@
 title: Pursuing Speed, Pt. 3
 date: 2020-08-12
 tags: webperf,rant
+bucket: Web
+group: web-optimization
+modified_timestamp: 2025-12-28T15:39:36+02:00
+created_timestamp: 2025-04-14T17:13:49+03:00
 ---
 >This entry (and collection of links) is a continuation of [Pursuing Speed, Pt. 2](https://0xff.nu/speed-pt2) which you can read for context.
 >
