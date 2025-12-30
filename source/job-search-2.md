@@ -2,6 +2,9 @@
 title: The quest for a job in 2020, Part 2
 tags: rant, 2020
 date: 2020-10-19
+bucket: Update
+modified_timestamp: 2025-12-28T17:27:24+02:00
+created_timestamp: 2025-04-14T17:13:49+03:00
 ---
 It seems like I was looking for a new job [just recently](/job-search), and somehow to my dismay, I found myself doing the exact same thing, again, just last week.
 
