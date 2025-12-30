@@ -2,6 +2,10 @@
 title: Minimalism in Design
 date: 2019-12-02
 tags: rant, webperf
+bucket: Web
+modified_timestamp: 2025-12-28T17:28:45+02:00
+created_timestamp: 2025-04-14T17:13:49+03:00
+group: small-web
 ---
 > This article was originally posted on my [LinkedIn page](https://www.linkedin.com/pulse/minimalism-design-paul-glushak/).
 
