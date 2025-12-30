@@ -2,6 +2,7 @@
                 <a href="https://webring.xxiivv.com/"><img src="https://0xff.nu/webring.png" alt="Webring"></a>
                 <a href="#"><img src="https://0xff.nu/pg.png" alt="Meta Icon"></a>
                 <span class="last-generated">GEN {{ now()|dtformat }}</span>
+                <span class="source-link"><a href="https://git.sr.ht/~hxii/0xff.nu">SRC</a></span>
                 <a id="scroll-top" href="#top">&uarr;</a>
             </footer>
         </main>
@@ -39,7 +40,7 @@
                   li.style.cursor = 'pointer';
                   li.style.background = 'var(--dimmest-text-color)';
                   li.style.color = 'var(--link-color)';
-                  // li.style.textDecoration = 'underline';
+                  li.classList.add('unexpanded');
 
                   li.addEventListener('click', () => {
                     // Remove the text content of the clicked <li>, keep the nested list
@@ -49,6 +50,7 @@
                     li.style.background = ''; // Reset background styling after expansion
                     li.style.color = ''; // Reset color styling after expansion
                     li.style.textDecoration = ''; // Reset underline after expansion
+                    li.classList.remove('unexpanded');
                   });
                 }
               });
