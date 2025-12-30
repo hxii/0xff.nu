@@ -4,6 +4,10 @@ date: 2021-03-03
 tags: project, webdev
 type: project
 description: A simple, lightweight spam prevention feature
+group: experiments
+bucket: PHP
+modified_timestamp: 2025-12-28T17:21:42+02:00
+created_timestamp: 2025-04-14T17:13:49+03:00
 ---
 Recently I've finally decided to deal with the spam problem I've been having while using [FormSubmit](https://formsubmit.io/).
 Despite FormSubmit having their own spam prevention methods, I was still receiving pointless emails from bots using the form:
