@@ -2,6 +2,9 @@
 title: I'm alive
 tags: update
 date: 2023-05-10
+bucket: Update
+modified_timestamp: 2025-12-28T17:26:56+02:00
+created_timestamp: 2025-04-14T17:13:49+03:00
 ---
 I realize it has been a while since I last wrote here, but I am good and well.
 Many things have occurred since I last wrote here, most of them good.
