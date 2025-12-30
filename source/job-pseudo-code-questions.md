@@ -2,6 +2,9 @@
 title: Job Application Pseudo-code Questions
 date: 2020-02-16
 tags: dayjob
+bucket: Rant
+modified_timestamp: 2025-12-28T17:27:09+02:00
+created_timestamp: 2025-04-14T17:13:49+03:00
 ---
 Part of my job as a support engineer (Tier 3 Support, whatever that means.. advanced support, in short) includes coming up with things.
 Now, some of those things are meant to make someone's life easier and some are there to low-key torment you. I learned something and decided to share this with you.
