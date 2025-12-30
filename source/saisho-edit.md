@@ -4,6 +4,9 @@ date: 2021-01-07
 tags: project
 type: project
 description: A tiny editor for Saisho
+bucket: PHP
+modified_timestamp: 2025-12-28T15:38:03+02:00
+created_timestamp: 2025-04-14T17:13:49+03:00
 ---
 Saisho Edit is a very simple (in harmony with Saisho) post editor for [Saisho](/saisho). The primary purpose is to allow creating and editing new posts from anywhere using the web.
 
