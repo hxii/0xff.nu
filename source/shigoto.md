@@ -4,6 +4,10 @@ tags: project, personal development
 type: project
 description: Todo.txt parser and manager
 date: 2020-05-30
+bucket: PHP
+modified_timestamp: 2025-12-28T17:30:26+02:00
+created_timestamp: 2025-04-14T17:13:49+03:00
+group: experiments
 ---
 ![Shigoto Logo](https://paulglushak.com/flag-shigoto.png)
 
