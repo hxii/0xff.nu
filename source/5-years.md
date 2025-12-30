@@ -2,6 +2,9 @@
 title: 5 years
 date: 2020-06-21
 tags: rant,dayjob
+bucket: Rant
+modified_timestamp: 2025-12-28T17:23:04+02:00
+created_timestamp: 2025-04-14T17:13:49+03:00
 ---
 "Where do you see yourself in 5 years?" is a silly, loaded question that I unfortunately find myself struggling with answering every time I go for an interview.
 
