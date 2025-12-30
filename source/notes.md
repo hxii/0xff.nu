@@ -2,6 +2,9 @@
 title: Making Notes.cx
 date: 2021-08-01
 tags: project
+bucket: PHP
+modified_timestamp: 2025-12-28T15:36:27+02:00
+created_timestamp: 2025-04-14T17:13:49+03:00
 ---
 A couple of days ago I launched my newest project - [Notes.cx](https://notes.cx/help), which is a  small tool came to mind while I was in the car with my wife. At the time, I was working (and still am) on [Diary.by](https://diary.by), another project of mine, so I asked my wife what would be the chances that she would find use in something like Diary.by.
 
