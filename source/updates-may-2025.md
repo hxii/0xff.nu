@@ -6,8 +6,9 @@ tags:
   - project
 created_timestamp: 2025-05-21T20:06:11+03:00
 date: 2025-05-21
-modified_timestamp: 2025-05-26T18:01:28+03:00
+modified_timestamp: 2025-12-28T17:20:04+02:00
 title: Update, May 2025
+bucket: Update
 ---
 The past three months felt very hectic for me, and at times it felt as if I was losing any sliver of control over things that I, personally, wanted to accomplish. Driven by work, fatherhood and sense of impending ~~doom~~ move (which, thank fuck, is now behind us... almost. Fucking never-ending boxes!), the mental capacity that I could devote towards self-expression and creation just.. wasn't there. Yet, as we do, I persevered and managed to get some important fixes out for [[Hajime]] as well as the star of this post - [[Boku.]].
 
