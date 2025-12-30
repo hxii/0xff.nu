@@ -3,8 +3,9 @@ title: 2025 - The year of all the things
 tags:
   - status
 date: 2025-04-15
-modified_timestamp: 2025-04-15T20:08:27+03:00
+modified_timestamp: 2025-12-28T17:22:26+02:00
 created_timestamp: 2025-04-14T17:13:49+03:00
+bucket: Update
 ---
 On one hand 2025 just started, while on the other -- oh fuck, we're already in April!
 The thing for me is, neither of those realizations help with the thought that this year is
