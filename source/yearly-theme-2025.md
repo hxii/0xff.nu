@@ -2,6 +2,9 @@
 date: 2025-01-05
 title: Yearly Theme 2025
 tags: yearly
+bucket: Rant
+modified_timestamp: 2025-12-28T17:20:47+02:00
+created_timestamp: 2025-04-14T17:13:49+03:00
 ---
 
 ![2025 Yearly Theme](/2025-theme.png)
