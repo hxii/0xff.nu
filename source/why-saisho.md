@@ -2,6 +2,9 @@
 title: Why saisho?🤔
 date: 2020-05-23
 tags: project,update
+bucket: Rant
+modified_timestamp: 2025-12-28T17:20:27+02:00
+created_timestamp: 2025-04-14T17:13:49+03:00
 ---
 Why did I make *Saisho*? To be honest with you, I didn't think I was going to use it. In a sense, at least that's what I thought initially, *Saisho* was **too** minimal.
 
