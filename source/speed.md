@@ -2,6 +2,10 @@
 title: Pursuing Speed
 date: 2020-07-20
 tags: webperf,rant
+bucket: Web
+modified_timestamp: 2025-12-28T15:39:27+02:00
+created_timestamp: 2025-04-14T17:13:49+03:00
+group: web-optimization
 ---
 Continuing my rambling about [pursuing minimalism](https://0xff.nu/pursuing-minimalism), I'd like to also say a few words about speed having "finished" rewriting my own website engine, once again.
 
