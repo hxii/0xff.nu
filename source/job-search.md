@@ -1,6 +1,9 @@
 ---
 title: The quest for a job in 2020
 date: 2020-06-12
+bucket: Update
+modified_timestamp: 2025-12-28T17:27:16+02:00
+created_timestamp: 2025-04-14T17:13:49+03:00
 ---
 Some of you may know that I was recently fired. While I'm not going to go into too much detail, I'll say that it
 was due to COVID-19 related cutbacks or related reasons (at least according to my former boss).
