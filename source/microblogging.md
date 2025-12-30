@@ -3,6 +3,9 @@ title: A case for microblogging
 tags: rant, saisho
 date: 2020-09-21
 description: Making a case for microblogging. Is it good for me? How should it be implemented? How to do it correctly?
+bucket: Thought
+modified_timestamp: 2025-12-28T17:28:18+02:00
+created_timestamp: 2025-04-14T17:13:49+03:00
 ---
 >This entry is just me thinking out loud and trying to make a case for microblogging.
 
