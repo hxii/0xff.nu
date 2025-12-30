@@ -5,8 +5,9 @@ tags:
   - guide
 description: "How-to: Creating a super simple URL shortening service without SQL"
 date: 2020-10-08
-modified_timestamp: 2025-04-15T14:05:01+03:00
+modified_timestamp: 2025-12-28T17:26:46+02:00
 created_timestamp: 2025-04-14T17:13:49+03:00
+bucket: PHP
 ---
 You know how they say the best way to learn something is to teach it?
 I personally don't have time to participate in something like [100 days of code](https://www.100daysofcode.com/) or anything similar, but that doesn't mean that I shouldn't do *something*, you know?
