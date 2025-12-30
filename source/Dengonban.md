@@ -1,12 +1,13 @@
 ---
 tags:
   - showcase
-modified_timestamp: 2025-10-08T17:03:17+03:00
+modified_timestamp: 2025-12-28T17:24:22+02:00
 created_timestamp: 2025-06-01T13:38:45+03:00
 title: Dengonban
 type: project
 date: 2025-06-01
 description: Lightweight notice board for TRMNL.
+bucket: Python
 ---
 ![Dengonban Header Image](/Dengonban.png)
 
