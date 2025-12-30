@@ -2,6 +2,10 @@
 title: ADHD Productivity Report 2024
 date: 2024-11-04
 tags: adhd, report, productivity
+group: adhd
+modified_timestamp: 2025-12-28T17:32:35+02:00
+created_timestamp: 2025-04-14T17:13:49+03:00
+bucket: Productivity
 ---
 ## The Intro
 
