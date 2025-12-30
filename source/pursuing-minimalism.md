@@ -1,6 +1,10 @@
 ---
 title: Pursuing Minimalism
 date: 2020-05-14
+bucket: Web
+modified_timestamp: 2025-12-28T17:29:56+02:00
+created_timestamp: 2025-04-14T17:13:49+03:00
+group: small-web
 ---
 Minimalism is a tricky subject as it's very personal - your interpretation of *minimal* may differ from mine, as may it's execution.
 
