@@ -2,6 +2,10 @@
 tags: calendar, productivity
 date: 2024-05-05
 title: Making Sense of The Calendar
+bucket: Productivity
+group: adhd
+modified_timestamp: 2025-12-28T17:33:59+02:00
+created_timestamp: 2025-04-14T17:13:49+03:00
 ---
 I use multiple calendars to separate contexts as well as todo lists to get stuff done, and since I use [Fantastical](https://www.fastmail.com/) to consolidate all of these sources to a "single window" into my schedule (but also each source separately), not categorizing or writing meeting and block titles properly causes all of them to appear similar, which in turn requires more mental effort as I'd have to look and read the titles to understand the task's importance once I need to do anything with the schedule.
 
