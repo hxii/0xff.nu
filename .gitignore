@@ -2,3 +2,11 @@
 html/
 *.save
 .DS_Store
+
+# Node
+node_modules/
+package.json
+package-lock.json
+
+# Linting
+stylelint.config.mjs
