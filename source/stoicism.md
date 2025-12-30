@@ -2,6 +2,10 @@
 title: Stoicism
 date: 2021-07-05
 tags: update, personal development
+group: stoicism
+bucket: Thought
+modified_timestamp: 2025-12-28T17:31:14+02:00
+created_timestamp: 2025-04-14T17:13:49+03:00
 ---
 ![A gem cannot be polished without friction, nor a man perfected without trials.](https://0xff.nu/i/stoic.png)
 
