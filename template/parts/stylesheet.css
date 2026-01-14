@@ -106,13 +106,6 @@ body a#theme-toggle::after {
 }
 
 body.dark a#theme-toggle::after {
-  /* content: "☀"; */
-
-  /* color: orange; */
-
-  /* transform-origin: center; */
-
-  /* animation: 2s ease-in-out infinite sun; */
   content: "☀";
   display: inline-block;
   position: relative;
@@ -147,6 +140,12 @@ a#scroll-top {
 
 img {
   max-width: 100%;
+}
+
+/* img helpers */
+img.inline {
+  display: inline-block;
+  max-height: 1em;
 }
 
 blockquote {
@@ -215,13 +214,17 @@ li > ul {
   padding-left: 1rem;
 }
 
-ul:not(.entrylist) li::marker {
-  content: "• ";
+article ul:not(.entrylist) li::before {
+  content: "* ";
   font-size: 1.2em;
 }
 
 li:has(> input[type="checkbox"])::marker {
   content: "";
+}
+
+.footnote li p {
+  display: inline;
 }
 
 h1,
@@ -523,24 +526,24 @@ div.expando ul {
   display: table;
   margin: 0;
   padding: 0;
-}
 
-div.expando ul li {
-  display: inline;
-  padding: 0;
-  margin: 0;
-}
+  li {
+    display: inline;
+    padding: 0;
+    margin: 0;
 
-div.expando ul li + li.unexpanded {
-  margin-left: 0.5ch;
-}
+    + li.unexpanded {
+      margin-left: 0.5ch;
+    }
 
-div.expando li > ul {
-  display: none;
-}
+    > ul {
+      display: none;
 
-div.expando li > ul.expanded {
-  display: inline;
+      .expanded {
+        display: inline;
+      }
+    }
+  }
 }
 
 /* END EXPANDO */
@@ -548,6 +551,10 @@ div.expando li > ul.expanded {
 /* TOC */
 div.toc ul {
   li {
+    &::before {
+      content: "";
+    }
+
     > ul {
       border-left: 2px solid var(--dimmest-text-color);
 
@@ -582,6 +589,7 @@ div.toc ul {
 
 /* END NOW SECTION */
 
+/* SMALL SCREEN ADJUSTMENTS */
 @media screen and (width <= 600px) {
   body {
     margin: 1rem;
@@ -602,6 +610,9 @@ div.toc ul {
   }
 }
 
+/* END SMALL SCREEN ADJUSTMENTS */
+
+/* ANIMATIONS */
 @keyframes sun {
   0% {
     transform: rotate(0deg) scale(1);
@@ -625,6 +636,7 @@ div.toc ul {
     transform: rotate(-18deg);
   }
 }
+/* END ANIMATIONS */
 
 /* TEMP */
 .entry-popup-description {
