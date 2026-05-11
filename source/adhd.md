@@ -1,0 +1,19 @@
+---
+title: ADHD is...
+modified_timestamp: 2026-05-10T21:41:54+03:00
+created_timestamp: 2026-05-09T00:28:49+03:00
+date: 2026-05-08
+tags:
+  - adhd
+bucket: adhd
+---
+# ADHD is...
+1. Your brain making your body physically rebel against sitting down and working – like actually being unable to sit because it's uncomfortable and borderline painful, no matter if you're a textbook, poster boy for ergonomics or a crooked shrimp.
+2. Remembering the faces of people you were introduced to five years ago, but not their name
+3. Needing the utmost concentration while preparing meal dividers for your newborn, as your fucking brain just can't count to 6 without thinking about literally anything else.
+4. Trying to find the most bizarre object on your desk to play with or combine together with a different object to form an ADHD-fuelled megazord because that fucking 30 minute meething turned out to be 1 hour long.
+5. Creating a whole new fucking HomeAssistant dashboard right fucking NOW instead of toggling a switch because your wife told you that the light in the bathroom didn't turn on.
+6. Drinking coffee or black tea and going straight to bed, because caffeine doesn’t work on you
+7. Remembering every single little things about a video game you’ve played over a year ago, yet failing to remember what you’ve had for breakfast two days ago
+8. Accepting the fact that when you tell people you have ADHD they will just fucking dismiss it, and then get surprised when it manifests itself
+9. Having tens of unstarted projects in your backlog, because everything is interesting and you *want* to do them all, but just don't have enough time

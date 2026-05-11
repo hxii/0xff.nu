@@ -1,0 +1,34 @@
+{% include "./parts/head.html" %}
+{% if not entry.has_tag("no-info") %}
+<section class="entry-info">
+  <div class="entry-date">
+    <span class="entry-info-label">DATE</span>
+    <span class="entry-info-value">{{ entry.date }}</span>
+  </div>
+  <div class="entry-bucket">
+    <span class="entry-info-label">BUCKET</span>
+    <span class="entry-info-value">{{ entry.bucket | default("<mark class='redacted'>No Bucket</mark>") }}</span>
+  </div>
+  <div class="entry-location">
+    <span class="entry-info-label">LOC</span>
+    <span class="entry-info-value">{{ entry.location }}</span>
+  </div>
+  {% if entry.group %}
+  <details class="related-entries">
+    {% with siblings = entry.siblings %}
+    <summary class="related-title">{{ siblings | len }} more things on <strong>{{ entry.group }}</strong></summary>
+    <ul class="related-entry-list">
+      {% for related in entry.siblings %}
+      <li><a href="/{{ related.uri }}">{{ related.title }}</a> – {{ related.display_date }}</li>
+      {% endfor %}
+    </ul>
+    {% endwith %}
+  </details>
+  {% endif %}
+</section>
+{% endif %}
+<article>
+  <img src="/{{ entry.image }}" alt="{{ entry.title }}">
+    {{ entry.content }}
+</article>
+{% include "./parts/footer.html" %}
