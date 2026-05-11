@@ -148,6 +148,19 @@ img.inline {
   max-height: 1em;
 }
 
+#gallery {
+  display: flex;
+  flex-direction: row;
+  gap: 2px;
+}
+
+#gallery .lqip {
+  width: 32px;
+  height: 32px;
+  border: 1px solid #eee;
+  outline: 1px solid #222;
+}
+
 blockquote {
   border-left: 2px solid;
   padding: 0.5rem 1rem;
