@@ -21,8 +21,8 @@
 </section>
 <section class="journal">
   <h3>Journal</h3>
-  {% with entries = entries.group_entries('year') %}
-  {% for year, entrylist in entries.items() %}
+  {% with entries = entries.get_entries('entry', 'type') & grouped = entries.group_entries('year') %}
+  {% for year, entrylist in grouped.items() %}
   <section class="year" id="{{ year }}">
     <h4 id="{{ year }}">{{ year }}</h4><a class="header-link" href="#{{ year }}"></a>
     <ul class="entrylist">
@@ -44,4 +44,5 @@
   {% endfor %}
   {% endwith %}
 </section>
+{% include "./parts/gallery.html" %}
 {% include "./parts/footer.html" %}
