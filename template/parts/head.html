@@ -11,6 +11,11 @@
         {% else %}
         <title>0xFF</title>
         {% endif %}
+        <style>
+        {% with lqip = context.lqip & css = lqip.shared_css() %}
+        {{ css }}
+        {% endwith %}
+        </style>
     </head>
     <body>
 <script type="text/javascript">
