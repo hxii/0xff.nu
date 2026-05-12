@@ -4,10 +4,11 @@ path_hierarchy = true
 sync_commit = true
 sync_push = true
 disallow_publish_override = false
+copy_entries_to_local_source = false
 site_url = "https://0xff.nu"
 
 [paths]
-source_path = "~/Documents/Brain/blog"
+source_path = "source"
 output_path = "html"
 template_path = "template"
 
@@ -22,7 +23,7 @@ image = "image.html"
 
 [obsidian]
 obsidian_mode = true
-vault_path = "~/Documents/Brain"
-copy_entries_to_local_source = true
-attachment_path = "~/Documents/Brain/Files"
+vault_root = "~/Documents/Brain"
+entries_path = "blog"
+attachments_path = "Files"
 resolve_attachments = true
