@@ -1,12 +1,19 @@
 ---
 title: ADHD is...
-modified_timestamp: 2026-05-11T22:26:03+03:00
+modified_timestamp: 2026-05-12T12:53:56+03:00
 created_timestamp: 2026-05-09T00:28:49+03:00
 date: 2026-05-08
 tags:
   - adhd
 bucket: adhd
 ---
+![[adhd-headache.png]]
+As I go through life, the understanding that some of us are just not... built for the chaotic, clusterfuck of a circus that society pressures the world to become was not only cemented, but also encased in an indestructible material. Every time I hear someone's downplaying, minimizing and trivializing "aren't we all a little bit ADHD?" comment I feel an urge to shake some sense into them.
+
+Instead of doing that, here's a glimpse into how I experience ADHD.
+
+> [!INFO]
+> This post will be updated from time to time.
 # ADHD is...
 1. Your brain making your body physically rebel against sitting down and working – like actually being unable to sit because it's uncomfortable and borderline painful, no matter if you're a textbook, poster boy for ergonomics or a crooked shrimp.
 2. Remembering the faces of people you were introduced to five years ago, but not their name
