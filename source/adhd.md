@@ -12,7 +12,7 @@ As I go through life, the understanding that some of us are just not... built fo
 
 Instead of doing that, here's a glimpse into how I experience ADHD.
 
-> [!INFO]
+> [!IMPORTANT]
 > This post will be updated from time to time.
 # ADHD is...
 1. Your brain making your body physically rebel against sitting down and working – like actually being unable to sit because it's uncomfortable and borderline painful, no matter if you're a textbook, poster boy for ergonomics or a crooked shrimp.
