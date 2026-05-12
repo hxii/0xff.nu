@@ -4,7 +4,6 @@ path_hierarchy = true
 sync_commit = true
 sync_push = true
 disallow_publish_override = false
-copy_entries_to_local_source = true
 site_url = "https://0xff.nu"
 
 [paths]
