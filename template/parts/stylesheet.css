@@ -11,7 +11,9 @@
 }
 
 :root {
-  --font: "JetBrains Mono", ui-monospace, monospace;
+  --font:
+    "JetBrains Mono", ui-monospace, "Cascadia Code", "Source Code Pro", Menlo,
+    Consolas, "DejaVu Sans Mono", monospace;
   --background-color: #fefefe;
   --main-text-color: #333;
   --dim-text-color: #888;
@@ -344,6 +346,7 @@ aside {
 .admonition {
   border: 2px solid var(--main-text-color);
   border-radius: 4px;
+  padding-bottom: 1rem;
 }
 
 .admonition p {
@@ -352,13 +355,19 @@ aside {
 
 p.admonition-title {
   font-weight: bold;
+  text-transform: uppercase;
   border-bottom: 2px solid;
   border-color: inherit;
   padding-bottom: 1rem;
 }
 
-.admonition.important .admonition-title::before {
+:is(.admonition.important, .admonition.warning) .admonition-title::before {
   content: "⚠️";
+  padding-right: 1ch;
+}
+
+:is(.admonition.note, .admonition.information) .admonition-title::before {
+  content: "ℹ️";
   padding-right: 1ch;
 }
 
@@ -579,7 +588,7 @@ div.toc ul {
         display: block;
         content: "–";
         position: absolute;
-        left: -1.8ch;
+        left: -1rem;
         width: 10px;
         color: var(--dimmest-text-color);
       }
