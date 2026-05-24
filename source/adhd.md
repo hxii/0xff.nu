@@ -1,6 +1,6 @@
 ---
 title: ADHD is...
-modified_timestamp: 2026-05-12T12:53:56+03:00
+modified_timestamp: 2026-05-12T17:16:58+03:00
 created_timestamp: 2026-05-09T00:28:49+03:00
 date: 2026-05-08
 tags:
