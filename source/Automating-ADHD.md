@@ -1,6 +1,6 @@
 ---
 date: 2025-11-26
-modified_timestamp: 2026-01-21T13:02:35+02:00
+modified_timestamp: 2026-05-24T14:34:25+03:00
 created_timestamp: 2025-11-26T12:50:31+02:00
 tags:
   - adhd
@@ -147,6 +147,7 @@ mode: single
 > [!NOTE] Wife's Version
 > I ended up being able to convince my wife to allow me to create a similar automation for her, as she also seldom forgets to partake in the medicinal journey, albeit with her own pills.
 > She however, did not want to put her medication in a small jar with a vibration sensor glued to it, so I proposed a different solution for her. The principle is the same to the one I use, but the activation is different.
+> 
 > 1. Wife forgets to take her medication
 > 2. A notification is being broadcast through **NTFY** as well as the living room smart speaker
 > 3. Wife scans an **NFC Tag** which runs a **iOS Shortcuts Automation** 
