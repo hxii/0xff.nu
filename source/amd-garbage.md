@@ -1,7 +1,7 @@
 ---
 title: AMD GPU Crashes
-modified_timestamp: 2026-05-07T19:55:06+03:00
-created_timestamp: 2026-05-07T14:14:45+03:00
+modified_timestamp: 2026-05-12T20:48:04+03:00
+created_timestamp: 2026-05-07T14:30:32+03:00
 date: 2026-05-07
 tags:
   - update
@@ -18,22 +18,22 @@ While opening a tab in Obsidian, with no significant GPU load sans LM Studio run
 It started with a hang, with 4/5 of my screen turning gray. A minute after, black screen, driver fallback and I was able to see my desktop again.
 
 The first harbinger of doom was a window similar to this one, except it said there was a driver "timeout", and while I was filling out the report, that crashed as well and showed me this window.
-![[Obsidian_2026-05-07_14-05-01.jpg]]
+![[Obsidian_2026-05-07_14-05-01.webp]]
 
 The GPU, of course, is now disabled.
-![[CoreKeeper_2026-05-07_14-12-32.jpg]]
+![[CoreKeeper_2026-05-07_14-12-32.webp]]
 
 Reliability history doesn't even show the problem:
-![[Pasted image 20260507142313.png]]
+![[Pasted image 20260507142313.webp]]
 
 System events however is able to shed some light
-![[Pasted image 20260507142550.png]]
+![[Pasted image 20260507142550.webp]]
 
 All three warnings are identical -- `Display driver amduw23g-198974-eda2a421 stopped responding and has successfully recovered.`
 The two errors above the warnings are `The iommu has detected an error.`, and the information item is `Process C:\Windows\System32\DriverStore\FileRepository\u0198974.inf_amd64_dcac9659486b668a\B025819\atieclxx.exe (process ID:2984) reset policy scheme from {8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c} to {8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c}`
 
 I've decided to filter the logs by `(?i)amd.*|D3D.*|Direct3D.*`:
-![[Pasted image 20260507143304.png]]
+![[Pasted image 20260507143304.webp]]
 
 These are the messages:
 ```
@@ -62,4 +62,4 @@ Display driver amduw23g-196283-af4b12f4 stopped responding and has successfully 
 As you can see, driver updates did happen, but the messages are the same otherwise.
 
 An attempt to disable and re-enable the device via Device Manager results in the same `iommu` error:
-![[Pasted image 20260507193022.png]]
+![[Pasted image 20260507193022.webp]]
