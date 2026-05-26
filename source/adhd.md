@@ -1,11 +1,12 @@
 ---
 title: ADHD is...
-modified_timestamp: 2026-05-12T17:16:58+03:00
+modified_timestamp: 2026-05-26T16:15:45+03:00
 created_timestamp: 2026-05-09T00:28:49+03:00
 date: 2026-05-08
 tags:
   - adhd
-bucket: adhd
+bucket: Rant
+group: adhd
 ---
 ![[adhd-headache.png]]
 As I go through life, the understanding that some of us are just not... built for the chaotic, clusterfuck of a circus that society pressures the world to become was not only cemented, but also encased in an indestructible material. Every time I hear someone's downplaying, minimizing and trivializing "aren't we all a little bit ADHD?" comment I feel an urge to shake some sense into them.
