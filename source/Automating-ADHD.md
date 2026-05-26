@@ -1,6 +1,6 @@
 ---
 date: 2025-11-26
-modified_timestamp: 2026-05-26T16:09:06+03:00
+modified_timestamp: 2026-05-26T16:14:47+03:00
 created_timestamp: 2025-11-26T12:50:31+02:00
 tags:
   - adhd
@@ -201,7 +201,7 @@ Firstly, a couple of notes:
 3. Then it checks if any reminders are returned, and creates a message that looks something like `We really need to buy <items[0:-2]> and <items[-1]>` – so basically connecting all the items except the last one with a `,` and then adding the last item as `and <last_item>`.
 4. The shortcut then plays a sound, and displays the message on the screen.
 
-> [!INFO]
+> [!NOTE]
 > Take note that the iOS Shortcut shared below shows a message, rather than speaking out the list. You can easily change it to do just that.
 
 Link to Shortcut: [Shortcuts](https://www.icloud.com/shortcuts/6bda826b333843648569177180553b3d)
