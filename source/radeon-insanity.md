@@ -6,6 +6,7 @@ date: 2026-05-07
 tags:
   - update
   - ongoing
+bucket: Rant
 ---
 My Gigabyte RX6750XT Gaming has been crashing for no apparent reason.
 
