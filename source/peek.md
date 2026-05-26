@@ -4,9 +4,10 @@ tags:
   - python
   - project
 date: 2026-03-27
-modified_timestamp: 2026-05-06T15:28:09+03:00
+modified_timestamp: 2026-05-26T16:16:16+03:00
 created_timestamp: 2026-05-06T15:21:07+03:00
 description: Terminal-based (TUI) network monitoring dashboard
+bucket: Python
 ---
 > [!WARNING]
 > `peek` was a tool of necessity that was coded with LLM assistance due to lack of time.
