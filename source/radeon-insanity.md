@@ -1,6 +1,6 @@
 ---
 title: AMD GPU Crashes
-modified_timestamp: 2026-05-24T21:44:36+03:00
+modified_timestamp: 2026-05-25T11:21:19+03:00
 created_timestamp: 2026-05-07T14:30:32+03:00
 date: 2026-05-07
 tags:
@@ -71,7 +71,8 @@ When the driver recovered, this is what I saw.
 ![[radeon-insanity-1779647378322.webp]]
 
 The interesting thing is, that the sliver on top was functional:
-![|287x27](https://x.com/paulglushak/status/2058618385890435421?s=20)
+
+<blockquote class="twitter-tweet" data-media-max-width="560"><p lang="en" dir="ltr">My Radeon RX6750XT is doing weird shit. <a href="https://t.co/ip7ciC6sQQ">pic.twitter.com/ip7ciC6sQQ</a></p>&mdash; Paul (hxii) 🇺🇦 (@paulglushak) <a href="https://twitter.com/paulglushak/status/2058618385890435421?ref_src=twsrc%5Etfw">May 24, 2026</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 <kbd>CTRL</kbd> + <kbd>ALT</kbd> + <kbd>DEL</kbd> opened the respective screen, but the gray rectangle of impending doom was still above. The only thing helped was restarting the system, once again.
 
