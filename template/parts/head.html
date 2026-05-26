@@ -111,10 +111,32 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
         <main class="container">
-            <header>
-                <a href="/" class="logo shuffle" style="white-space:nowrap;display:block;overflow:hidden">0xFF</a>
-                {% if entry %}
-                <h1>{{ entry.title }}</h1>
-                {% endif %}
-                <a href="#" id="theme-toggle"></a>
-            </header>
+          <header>
+              <a href="/" class="logo shuffle" style="white-space:nowrap;display:block;overflow:hidden">0xFF</a>
+              {% if entry %}
+              <h1>{{ entry.title }}</h1>
+              {% endif %}
+              <a href="#" id="theme-toggle"></a>
+          </header>
+
+          <div class="about-section">
+            <div class="news-banner">
+              <div class="banner-image">
+                <img src="/new.gif" alt="new">
+              </div>
+              <div class="banner-content">
+                <div class="banner-content-message">
+                  Do you like how I do things?
+                </div>
+                <div class="banner-content-message">
+                  Want me on your team?
+                </div>
+                <div class="banner-content-message">
+                  Read my <a href="https://hxii.github.io/" target="_blank">CV</a> and <strong><a href="mailto:cv+hireme@paul.glushak.net?subject=I want to hire you!">⭐ Hire me! ⭐</a></strong>
+                </div>
+                <div class="banner-content-message">
+                  Do you like how I do things?
+                </div>
+              </div>
+            </div>
+
