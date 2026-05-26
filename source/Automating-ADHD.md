@@ -1,6 +1,6 @@
 ---
 date: 2025-11-26
-modified_timestamp: 2026-05-24T14:44:50+03:00
+modified_timestamp: 2026-05-26T16:09:06+03:00
 created_timestamp: 2025-11-26T12:50:31+02:00
 tags:
   - adhd
@@ -34,6 +34,8 @@ And so, as part of my never-ending pursuit for improving and streamlining as muc
 
 The principle of this automation, which actually has two parts, is both create a reminder that is based on completion date and nag me in case I forgot to remove the bio-hazard waste.
 
+![[Automating-ADHD-1779800936007.webp]]
+
 The magic is achieved by placing the magnetic switch on the drawer of the litter-box, which you ideally will only open when performing maintenance on the feline waste container.
 
 ### Reminding me to take my meds
@@ -44,7 +46,7 @@ I often forget to take my meds in the morning, especially with how hectic some m
 
 So I came up with a solution through HomeAssistant to keep annoying me until I take my meds.
 
-#### Hardware Requirements
+![[Automating-ADHD-1779800895686.webp]]#### Hardware Requirements
 - Vibration sensor that can report [XYZ](https://www.zigbee2mqtt.io/supported-devices/#e=x_axis) or [tilt](https://www.zigbee2mqtt.io/supported-devices/#e=tilt) and can comfortably fit in/on your jar
 - A jar or a box that can safely store medicine
 #### The Setup
@@ -154,5 +156,52 @@ mode: single
 > 4. The automation pens the **Health** app on the Medication view and executes a **HomeAssistant Automation** which sends a **NTFY** notification and sets the **Input Boolean** to true
 ## Interaction Based
 ### Reminding me to buy cat food and litter
+#### Hardware Requirements
+- Any Zigbee button connected to HomeAssistant
+#### The Setup
+I realized I often forget to make sure I add cat litter or food when cleaning their litterbox or putting food for them (the containers are located near each other).
 
+You could theoretically over-engineer this using a weight sensor, but I honestly couldn't be bothered.
+
+My solution? An IKEA Tradfri button with a sticker on it!
+![[Automating-ADHD-1779799278713.webp]]
+
+The button is connected to HomeAssistant, and with the help of [Switch Manager](https://github.com/Sian-Lee-SA/Home-Assistant-Switch-Manager) they create a new Todoist task and send a notification to a specific channel using [NTFY](https://ntfy.sh).
+
+As YAML, it looks like this:
+```YAML
+- action: todoist.new_task
+  metadata: {}
+  data:
+    project: Home
+    content: Buy Cat Sand
+    priority: 2
+    due_date_string: tomorrow 9am
+- action: notify.ntfy_home
+  metadata: {}
+  data:
+    title: 😾 Cat Sand
+    message: We need to buy cat sand!
+```
+
+Will this stop me from forgetting? Probably not. But it does help now that there is less "resistance" when creating the reminder.
 ### Important Shopping List
+> [!WARNING]
+> This is an experimental automation, and did not get the *WIFE SEAL OF APPROVAL™*.
+
+#### The Idea
+The point here was to prioritize certain items on the shopping list above other, and to make sure I get whatever is important when I go out on errands that are not necessarily shopping.
+
+Firstly, a couple of notes:
+1. This was made for iOS Shortcuts, but the logic can probably be adapted to Android as well
+2. This also requires a manual interaction – changing the priority on a shopping list item to high
+#### The Flow
+1. The shortcut runs using an automation based on "When CarPlay connects"
+2. The shortcut finds all reminders for the `Shopping` list where the priority is set as `high` and the item is not completed
+3. Then it checks if any reminders are returned, and creates a message that looks something like `We really need to buy <items[0:-2]> and <items[-1]>` – so basically connecting all the items except the last one with a `,` and then adding the last item as `and <last_item>`.
+4. The shortcut then plays a sound, and displays the message on the screen.
+
+> [!INFO]
+> Take note that the iOS Shortcut shared below shows a message, rather than speaking out the list. You can easily change it to do just that.
+
+Link to Shortcut: [Shortcuts](https://www.icloud.com/shortcuts/6bda826b333843648569177180553b3d)
