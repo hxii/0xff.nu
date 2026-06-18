@@ -18,7 +18,7 @@
     {% with siblings = entry.siblings %}
     <summary class="related-title">{{ siblings | len }} more things on <strong>{{ entry.group }}</strong></summary>
     <ul class="related-entry-list">
-      {% for related in entry.siblings %}
+      {% for related in siblings %}
       <li><a href="/{{ related.uri }}">{{ related.title }}</a> – {{ related.display_date }}</li>
       {% endfor %}
     </ul>
