@@ -22,6 +22,14 @@
   --link-color: #000;
   --theme: #d57100;
   --code-background: color-mix(in srgb, var(--theme), transparent 90%);
+  --theme-toggle-width: 40px;
+  --theme-toggle-height: calc(var(--theme-toggle-width) / 2);
+  --indicator-size: calc(
+    var(--theme-toggle-height) - (var(--theme-toggle-height) / 100 * 40)
+  );
+  --indicator-gap: calc(
+    (var(--theme-toggle-height) - var(--indicator-size)) / 2
+  );
 }
 
 .dark {
@@ -93,29 +101,37 @@ a.header-link {
 }
 
 body a#theme-toggle {
-  font-size: 1.25rem; /* Pictogram too small :< */
+  width: var(--theme-toggle-width);
+  height: var(--theme-toggle-height);
+  position: relative;
+  background: var(--dimmest-text-color);
+  border-radius: calc(var(--theme-toggle-height) / 2);
+  transition: background 0.3s ease-in-out;
 }
 
 body a#theme-toggle::after {
-  content: "☽";
-  color: #35d;
-  display: inline-block;
-  transform-origin: top center;
-  will-change: transform, opacity;
+  content: "";
+  height: var(--indicator-size);
+  width: var(--indicator-size);
+  top: var(--indicator-gap);
+  left: var(--indicator-gap);
+  position: absolute;
+  background: var(--theme);
+  border-radius: calc(var(--indicator-size) / 2);
+  transition:
+    left 0.5s cubic-bezier(1, 0.02, 0.22, 0.46),
+    background 0.3s ease-in-out;
+}
 
-  /* animation: 2s linear infinite alternate star; */
-  animation: star 2.6s cubic-bezier(0.5, 0.05, 0.1, 0.95) infinite;
+body.dark a#theme-toggle {
+  background: var(--theme);
 }
 
 body.dark a#theme-toggle::after {
-  content: "☀";
-  display: inline-block;
-  position: relative;
-  z-index: 2;
-  color: orange;
-  transform-origin: center;
-  will-change: transform, opacity;
-  animation: sun 6s linear infinite;
+  left: calc(
+    (var(--theme-toggle-width) - var(--indicator-size)) - var(--indicator-gap)
+  );
+  background: var(--background-color);
 }
 
 a#scroll-top {
@@ -623,8 +639,14 @@ div.toc ul {
   overflow: hidden;
   height: 2em;
   gap: 1ch;
-  background: color-mix(in srgb, blue, transparent 90%);
+  background: color-mix(in srgb, maroon, transparent 90%);
   margin-bottom: 1em;
+}
+
+.banner-image {
+  height: calc(2em - 2px);
+  display: flex;
+  align-items: center;
 }
 
 .banner-content {
