@@ -5,7 +5,7 @@ tags:
   - draft
 created: "[[2026-05-31]]"
 status: new
-modified_timestamp: 2026-05-31T19:02:27+03:00
+modified_timestamp: 2026-06-18T14:17:41+03:00
 created_timestamp: 2026-05-31T18:18:18+03:00
 title: Hxii's Calendar Spec
 type: project
