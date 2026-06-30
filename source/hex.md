@@ -3,26 +3,29 @@ title: hex
 date: 2026-06-18
 tags:
   - python
-  - draft
-modified_timestamp: 2026-06-30T14:30:08+03:00
+  - ai
+  - showcase
+modified_timestamp: 2026-06-30T18:36:12+03:00
 created_timestamp: 2026-06-18T17:26:14+03:00
 type: project
+bucket: Python
 ---
 > [!WARNING]
 > This project is a work in progress, so the content in this post will most likely be updated.
 > Last updated `2026-06-30`
 
-`hex` is an executive assistant agent that I vibe-coded to assist me in managing my ADHD through the different systems I use on a daily basis.
+![[hex-1782833721999.png]]
 
-If I had more time to spare to this project, most (if not all) of the code would've been written by me, alas balancing an active job search, two kids (and learning fucking Swift lol) while trying to keep some of my sanity take most of my available time.
+As I wrote before – I have ADHD. And while the systems that I put in place for myself do help a fair bit, there is still much that is left to chance, which obviously my brain will forget or get overwhelmed by.
 
-While the systems that I put in place for myself do help a fair bit, there is still much that is left to chance, which obviously my brain will forget or get overwhelmed by.
 So, with the recent AI buzz-word explosion, I've decided to brush up my knowledge of AI and LLMs beyond just installing `opencode` or `pi` and scouring *HuggingFace* for new tiny models to run locally, and actually both *use* agentic coding and *utilize* agents for tasks that are beyond the "I'm too fucking lazy to read this article; Summarize in two paragraphs" prompt.
 
-I've decided to share a bit about the reasoning and execution to serve as an inspiration to others – whether you're also working on an ADHD agent or just fucking around with LLMs and need inspiration, maybe this is for you! 🤖
+If I had more time to spare to this project, most (if not all) of the code would've been written by me, but balancing an active job search, two kids (and learning fucking Swift lol) while trying to keep some of my sanity take most of my available time and desire to do anything else.
+
+I've decided to share a bit about the reasoning behind this monstrosity and some of the execution to try and inspire others – whether you're also working on an ADHD agent or just fucking around with LLMs and need inspiration, maybe this is for you! 🤖
 
 ## hex's toolbox
-Given the effort that is already required from me to manhandle my own grey matter, I really don't want to hand-hold `hex` by spoon feeding him the entire fucking context behind every single "I want to make sure I go for a walk tomorrow morning" request and all the data it needs to act, so I had to provide it with access to the high-friction bits of ADHD management nightmare:
+Given the olympian effort required from me to manhandle my own grey matter, I really don't want to hand-hold `hex` and spoon-feed him the entire fucking context behind every single "I want to make sure I go for a walk tomorrow morning" request and all the data it needs to act, so I had to provide it with access to the high-friction bits of ADHD management nightmare:
 
 - **Calendar** – `hex` can read events by default, and create and edit events with permission. Currently `hex` is accessing my FastMail calendar using `icalendar`, but Fastmail do offer an [MCP server](https://www.fastmail.help/hc/en-us/articles/15869557281295-Connecting-AI-tools-via-Fastmail-s-MCP-server) which I will probably move to using instead
 - **Todoist** – `hex` can manage my tasks by using the [Todoist MCP server](https://ai.todoist.net/mcp), with the goal tools being filtered out
@@ -40,8 +43,8 @@ Tools are one thing, but for `hex` to work properly, he needs some other useful 
 	2. [Qdrant](https://github.com/qdrant/qdrant) vector storage for facts and transient memories
 	3. Preferences storage using SQLite
 - **Tool Sub-agents** – `hex` uses tools via slim sub-agents in order to prevent the entirety of the main context and prompt being used with a simple tool call. 
-- **Specialists** – `hex` employs a selection of specialists, which are basically separate agents running secondary system prompts that are more verbose than tool agents and are designed for `hex` to delegate requests, maintaining opinion, personality and context detachment from the main agent
-- **External (physical) Actions** – since there's a high chance my brain will shut down and I'll just ignore the fucking incoming Telegram message, I've decided to use a [Watcher](https://www.seeedstudio.com/watcher) device I had laying around and give `hex` the ability to know when I'm literally in front of my damn screen and to demand I finish that fucking "Fix bathroom light automation" task that's two weeks overdue by *saying it to me*
+- **Specialists** – `hex` employs a selection of specialists, which are basically separate agents running secondary system prompts that are more verbose than tool agents and are designed for `hex` to delegate requests, maintaining opinion, personality and context detachment from the main agent. A couple of examples below.
+- **External (physical) Actions** – since there's a high chance my brain will shut down and I'll just ignore the fucking incoming Telegram message, I've decided to use a [Watcher](https://www.seeedstudio.com/watcher) device I had laying around and give `hex` the ability to know when I'm literally in front of my damn screen and to demand I finish that fucking "Fix bathroom light automation" task that's two weeks overdue by *saying it to me*. More on Watcher below.
 - **Skills** – for the rest of the things I need `hex` to do by itself, I've added a relatively simple skills system, which loads a prompt appendix if any of the ~~swear words~~ trigger words or phrases are used. This gives `hex` extra context when it's most likely needed.
 
 ### Specialist – Freya
@@ -88,7 +91,7 @@ Health and recovery analyst for Paul. You interpret the Apple Watch / AutoSleep 
 ```
 
 ### Specialist – Carrie
-Job hunting is annoying, so sometimes I need something or someone to provide `carrie`r advice (get it? 😄) or safeguarding against me applying to something I definitely won't fit in.
+Job hunting is annoying, so sometimes I need something or someone to provide `carrie`r advice (get it?) or stop me from applying to something I definitely won't fit in.
 
 ```
 ---
@@ -135,15 +138,61 @@ Paul's career advisor. He's a Python developer in Israel seeking remote roles in
 3. Recommendation: apply / skip / long shot
 4. Next action (one sentence)
 ```
+
+### Watcher Integration – AKA poor-man's [Reachy Mini](https://reachymini.net)
+This was, and is somewhat of an ambitious goal, but I'm hoping to get this to work sometime soon.
+
+![[hex-1782821458417.jpeg]]
+
+For the time being, I've disabled the watcher integration as the whole flow is far from painless and requires a summoning circle to get to work.
+
+```mermaid
+flowchart TD
+    cam["Camera capture<br/>every 5–10 s"] --> post["Send capture and ref to VLM"]
+    post --> face{"Face match?"}
+    face -->|unknown| drop[Drop; no response]
+    face -->|Paul?| cool{"Cooldown<br/>elapsed?"}
+    cool -->|no| drop
+    cool -->|yes| think["Agent reasoning"]
+    think --> tts["TTS → audio file"]
+    tts --> url["Return audio URL"]
+    url --> play["Speaker playback"]
+    play -.->|next poll| cam
+
+    classDef built fill:#d4edda,stroke:#28a745,color:#000
+    classDef slow fill:#fff3cd,stroke:#ffc107,color:#000
+    classDef broken fill:#f8d7da,stroke:#dc3545,color:#000
+
+    class cam,post,think,drop built
+    class face,cool,tts,url slow
+    class play broken
+```
+
+The whole thing is a Rube Goldberg machine: custom ESP32 firmware that doesn't actually run on the device yet, a roundtrip with reference and capture images to a vision-model for face matching, TTS generation that blocks the response cycle, and a pull-based polling loop that adds 5–10s of latency *on top*. The Watcher sits on my desk looking cute while half the pipeline exists only in a markdown plan and the other half times out.
+
 ## What did I gain?
 While I'm still tweaking the agenda and task handling, `hex` became quite indispensable in being able to use my Obsidian vault as a data anchor, while researching and helping me fill in knowledge gaps and fact-checking the existing information, all while maintaining the standard that is right for me and my ADHD.
 
-`hex` also helps (together with `Carrie` the career specialist) filter out jobs (or find ones I missed) in my current job hunt.
+`hex` helps (together with `Carrie` the career specialist) filter out jobs (or find ones I missed) in my current job hunt by flagging things I want to avoid, research about companies and their culture and more.
+
+For agenda, `hex` highlights any meeting conflicts, suggests removing tasks that are overdue and most likely no longer relevant or suggest prioritizing certain tasks over others depending on how I'm feeling that day.
+
+Keep in mind that not all parts are working as they should, so there is most likely tons of potential still left on the three-legged table.
 
 ## What would I do differently?
-As the project is still ongoing, I can't say for a fact what I'd do differently.
-But if there was one thing that I would ABSO-FUCKING-LUTELY do is ditch `DeepSeek-V4` earlier than I have.
+As the project is still ongoing, the list of things I'd do differently is not exhaustive.
 
-I cannot even convey the amount of headache I had with trying to mitigate the `<||DSML||>` tags leaking, breaking the agent only to find out that this is a widespread issue for a while now.
+One thing that I would ABSO-FUCKING-LUTELY do differently is ditch `DeepSeek-V4` earlier than I have. I cannot even convey the amount of headache I had with trying to mitigate the `<||DSML||>` tags leaking, breaking the agent only to find out that this is a widespread issue for a while now.
 
-So in case you're making something similar for yourself – as of `2026-06-30`stay the fuck away from DeepSeek-v4.
+So in case you're making something similar for yourself – as of `2026-06-30` stay the fuck away from DeepSeek-v4.
+
+Another would be, granted I could afford it, is to perform the trial and error on a locally running model (which is actually the end-goal anyways), but this requires some hard-earned dollarinos leaving my wallet to get a 3090 or better.
+
+And I guess if I had to think of another thing, it would probably be compiling a list of how all my data-points interact between one another BEFORE integrating them and then wondering why the fuck `hex` continues to take informational events into account when planning my agenda.
+
+## Closing Notes
+
+`hex` isn't perfect. [Hermes](https://hermes-agent.nousresearch.com), even with its unsolicited erotica, will probably do a much better job after I'd spend a week setting it up just right.
+It's a janky, half-finished, DeepSeek-traumatized mess that occasionally forgets to ask me why the fuck I'm messaging it at 2AM. But it's mine, it works for my brain, and it yells at me to go for walks.
+
+Go build something that yells at you.
