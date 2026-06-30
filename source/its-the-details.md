@@ -1,6 +1,6 @@
 ---
 title: It's the little things
-modified_timestamp: 2026-06-30T12:42:40+03:00
+modified_timestamp: 2026-06-30T14:34:29+03:00
 created_timestamp: 2026-06-29T23:04:52+03:00
 date: 2026-06-29
 tags:
@@ -31,7 +31,9 @@ One thing that was important for me, is to make this fake control have some "wei
 To do that, I animated the `left` value in a non-linear fashion, using a `cubic-bezier` to make the animation slow down and accelerate in a "weighty" manner:
 
 ![[its-the-details-1782812341591.gif]]
+
 And if you'd like, I also uploaded it to CodePen so you can implement a similar toggle for yourself!
+
 ![[its-the-details-1782766174465.gif]]
 
 [CSS Dark/Light Theme Toggle](https://codepen.io/editor/hxii/pen/019f1437-26d0-7081-b20b-fd5cdd86912c?orientation=left&panel=files&show=preview)
