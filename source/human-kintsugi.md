@@ -1,8 +1,7 @@
 ---
 tags:
-  - draft
   - update
-modified_timestamp: 2026-07-23T01:29:36+03:00
+modified_timestamp: 2026-07-23T01:37:18+03:00
 created_timestamp: 2026-07-15T19:16:33+03:00
 date: 2026-07-22
 bucket: Update

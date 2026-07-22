@@ -12,8 +12,8 @@
 
 :root {
   --font:
-    "JetBrains Mono", ui-monospace, "Cascadia Code", "Source Code Pro", Menlo,
-    Consolas, "DejaVu Sans Mono", monospace;
+    "JetBrains Mono", ui-monospace, "Cascadia Code", "Source Code Pro", menlo,
+    consolas, "DejaVu Sans Mono", monospace;
   --background-color: #fefefe;
   --main-text-color: #333;
   --dim-text-color: #888;
@@ -30,6 +30,30 @@
   --indicator-gap: calc(
     (var(--theme-toggle-height) - var(--indicator-size)) / 2
   );
+  --m-c: #7a2;
+  --pill-base-c: color-mix(in srgb, var(--m-c) 40%, transparent 60%);
+  --pill-t-c: color-mix(
+    in srgb,
+    var(--pill-base-c) 60%,
+    var(--text-normal) 40%
+  );
+  --pill-b-c: color-mix(
+    in srgb,
+    var(--pill-base-c) 60%,
+    var(--text-normal) 40%
+  );
+}
+
+span.pill {
+  border: 1px solid var(--pill-b-c);
+  border-radius: 8px;
+  background: var(--pill-base-c);
+  color: var(--pill-t-c);
+
+  text-transform: uppercase;
+  font-size: 0.6em;
+
+  padding: 1px 6px;
 }
 
 .dark {
@@ -149,7 +173,6 @@ a#scroll-top {
 .last-generated {
   display: inline-block;
   margin-left: 1rem;
-  font-family: monospace;
   font-size: 0.75rem;
   line-height: initial;
 }
@@ -694,32 +717,6 @@ div.toc ul {
 
 /* END SMALL SCREEN ADJUSTMENTS */
 
-/* ANIMATIONS */
-@keyframes sun {
-  0% {
-    transform: rotate(0deg) scale(1);
-  }
-
-  100% {
-    transform: rotate(360deg) scale(1);
-  }
-}
-
-@keyframes star {
-  0% {
-    transform: rotate(-18deg);
-  }
-
-  50% {
-    transform: rotate(18deg);
-  }
-
-  100% {
-    transform: rotate(-18deg);
-  }
-}
-/* END ANIMATIONS */
-
 /* TEMP */
 .entry-popup-description {
   position: absolute;
@@ -747,4 +744,11 @@ div.toc ul {
 .entrylist li:hover > .entry-popup-description {
   display: block;
   opacity: 1;
+}
+
+/* Some Styling */
+
+.pxbg {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='3' height='3'><rect width='1' height='1' fill='rgba(0,0,0,.35)'/></svg>");
+  background-repeat: repeat;
 }
