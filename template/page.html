@@ -1,6 +1,7 @@
 {% include "./parts/head.html" %}
+<script src="/graphv2.js"></script>
 {% if not entry.has_tag("no-info") %}
-<section class="entry-info">
+<section class="entry-info pxbg">
   <div class="entry-date">
     <span class="entry-info-label">DATE</span>
     <span class="entry-info-value">{{ entry.date }}</span>
@@ -26,4 +27,16 @@
 <article>
     {{ entry.content }}
 </article>
+    <div id="graph"></div>
+<script>
+  kankei.create('#graph', {
+    nodeMap:`{{ entry.generate_kankei_relationships() }}`
+  });
+</script>
+        <div class="backlinks">
+      <h4>Backlinks</h4>
+    {% for backlink in entry.backlinks %}
+      <span style="display:block"><a href="/{{ backlink.uri }}">{{ backlink.title }}</a></span>
+    {% endfor %}
+    </div>
 {% include "./parts/footer.html" %}
