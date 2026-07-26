@@ -1,7 +1,11 @@
 ---
-modified_timestamp: 2026-04-02T15:34:00+03:00
+modified_timestamp: 2026-07-14T00:52:32+03:00
 created_timestamp: 2026-04-02T13:51:10+03:00
 type: project
+tags:
+  - draft
+parent:
+  - hajime
 ---
 The idea to implement some kind of LQIP (Low Quality Image Placeholder) came about as part of working on supporting `type: image` posts on this here website.
 
