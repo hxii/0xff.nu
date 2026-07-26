@@ -13,6 +13,7 @@
   const DEFAULT_VARS = {
     fg: "var(--main-text-color, currentColor)",
     muted: "var(--dim-text-color, #888)",
+    dimmer: "var(--dimmer-text-color, #aaa)",
     line: "var(--dimmest-text-color, #bbb)",
     center: "var(--theme, currentColor)",
     link: "var(--link-color, currentColor)",
@@ -37,12 +38,12 @@
     iterations: 300,
     animate: true,
     flowSpeed: 1.2,
-    travelerSpeed: 2.5,
     border: true,
     borderPad: 4,
     borderThickness: 1,
   };
 
+let mkSeq = 0;
   function rng(seed) {
     let s = seed >>> 0;
     return function () {
@@ -62,6 +63,7 @@
       children: [],
       siblings: [],
       related: [],
+      backlinks: [],
       nodes: {},
     };
 
@@ -77,6 +79,7 @@
       else if (role === "children") out.children.push(n);
       else if (role === "siblings") out.siblings.push(n);
       else if (role === "related") out.related.push(n);
+      else if (role === "backlinks") out.backlinks.push(n);
       return n;
     }
 
@@ -98,16 +101,15 @@
       const lm = line.match(/^(\w+)\[\s*(\d+)\s*:\s*@(\w+)\s*\]\s*:\s*$/);
       if (lm) {
         const role = lm[1],
-          count = +lm[2],
-          type = lm[3];
+          count = +lm[2];
         for (let k = 0; k < count; k++) {
+          let found = false;
           while (i < lines.length) {
             const lr = stripComment(lines[i]).trim();
-            i++;
-            if (lr && lr.startsWith("-")) {
+            if (lr.startsWith("-")) {
+              i++;
               addNode(
                 {
-                  type,
                   fields: lr
                     .slice(1)
                     .split(",")
@@ -115,9 +117,13 @@
                 },
                 role,
               );
+              found = true;
               break;
             }
+            if (lr) break; // next header / stray line: don't eat the rest
+            i++; // blank line between items
           }
+          if (!found) break;
         }
         continue;
       }
@@ -125,7 +131,7 @@
       const sm = line.match(/^(\w+)\[\s*@(\w+)\s*\]\s*:\s*(.+)$/);
       if (sm) {
         addNode(
-          { type: sm[2], fields: sm[3].split(",").map((s) => s.trim()) },
+          { fields: sm[3].split(",").map((s) => s.trim()) },
           sm[1],
         );
         continue;
@@ -161,17 +167,9 @@
     g.children.forEach(add);
     g.siblings.forEach(add);
     g.related.forEach(add);
+    g.backlinks.forEach(add);
 
-    const edges = [];
-    if (g.center && g.parent && g.parent !== g.center) {
-      edges.push([g.parent.id, g.center.id, "tree"]);
-    }
-    if (g.center)
-      g.children.forEach((c) => edges.push([g.center.id, c.id, "tree"]));
-    if (g.parent)
-      g.siblings.forEach((s) => edges.push([g.parent.id, s.id, "tree"]));
-    if (g.center)
-      g.related.forEach((r) => edges.push([g.center.id, r.id, "related"]));
+    const es = buildEdges(g);
 
     const pos = {};
     const vel = {};
@@ -209,7 +207,9 @@
         }
       }
 
-      edges.forEach(([aid, bid]) => {
+      es.forEach((e) => {
+        const aid = e.a,
+          bid = e.b;
         const a = pos[aid],
           b = pos[bid];
         const dx = b.x - a.x;
@@ -241,32 +241,33 @@
       });
     }
 
-    return pos;
+    return { pos, edges: es };
   }
 
-  function edges(g) {
+  // ponytail: dedup by unordered pair so a node listed in two roles
+  // (e.g. a child that's also a sibling) draws one line, not two.
+  // a->b encodes flow direction: the dash animation runs from a to b,
+  // so "inward" edges (backlinks) are flipped to point at the center.
+  function buildEdges(g) {
     const e = [];
-    if (g.center && g.parent && g.parent !== g.center) {
-      e.push({ a: g.parent.id, b: g.center.id, kind: "tree" });
-    }
-    if (g.center)
-      g.children.forEach((c) =>
-        e.push({ a: g.center.id, b: c.id, kind: "tree" }),
-      );
-    if (g.parent)
-      g.siblings.forEach((s) =>
-        e.push({ a: g.parent.id, b: s.id, kind: "tree" }),
-      );
-    if (g.center)
-      g.related.forEach((r) =>
-        e.push({ a: g.center.id, b: r.id, kind: "related" }),
-      );
+    const seen = new Set();
+    const add = (x, y, kind) => {
+      if (!x || !y || x === y) return;
+      const key = x.id < y.id ? x.id + "|" + y.id : y.id + "|" + x.id;
+      if (seen.has(key)) return;
+      seen.add(key);
+      e.push({ a: x.id, b: y.id, kind });
+    };
+    add(g.center, g.parent, "tree-up");
+    if (g.center) g.children.forEach((c) => add(g.center, c, "tree-down"));
+    if (g.parent) g.siblings.forEach((s) => add(g.parent, s, "tree-sib"));
+    if (g.center) g.related.forEach((r) => add(g.center, r, "related"));
+    if (g.center) g.backlinks.forEach((b) => add(b, g.center, "backlink"));
     return e;
   }
 
   function render(container, g, cfg) {
-    const pos = layout(g, cfg);
-    const es = edges(g);
+    const { pos, edges: es } = layout(g, cfg);
     const W = cfg.width,
       H = cfg.height;
 
@@ -288,21 +289,25 @@
     style.textContent = `
       svg { shape-rendering: crispEdges; }
       text { font-family: ${ff}; text-transform: uppercase; }
-      .k-line { stroke: ${c.line}; stroke-width: 1; fill: none; opacity: .8; }
-      .k-line-rel { stroke: ${c.line}; stroke-width: 1; stroke-dasharray: 1.5 2.5; fill: none; opacity: .4; }
+      .k-edge { fill: none; stroke-width: 1; }
+      .k-tree-up { stroke: ${c.muted}; opacity: .8; }
+      .k-tree-down { stroke: ${c.fg}; opacity: .9; }
+      .k-tree-sib { stroke: ${c.dimmer}; opacity: .7; }
+      .k-related { stroke: ${c.muted}; opacity: .4; }
+      .k-backlink { stroke: ${c.link}; opacity: .5; }
       .k-glyph { fill: ${c.fg}; text-anchor: middle; dominant-baseline: central; }
       .k-glyph-center { fill: ${c.center}; text-anchor: middle; dominant-baseline: central; }
       .k-glyph-root { fill: ${c.muted}; text-anchor: middle; dominant-baseline: central; }
       .k-label { font-size: ${cfg.labelSize}px; fill: ${c.fg}; text-anchor: middle; dominant-baseline: hanging; }
       .k-label-muted { font-size: ${cfg.labelSize}px; fill: ${c.muted}; text-anchor: middle; dominant-baseline: hanging; }
       .k-border { fill: ${c.muted}; opacity: .6; }
-      .k-traveler { fill: ${c.fg}; opacity: 0; }
       a.k-node { cursor: pointer; }
       a.k-node:hover .k-glyph, a.k-node:hover .k-glyph-center { fill: ${c.link}; }
       a.k-node:hover .k-label { fill: ${c.link}; }
+      .k-edge.k-hi { opacity: 1 !important; stroke-width: 1.5; }
+      .k-edge.k-lo { opacity: .12 !important; }
       @media (prefers-reduced-motion: reduce) {
-        .k-line, .k-line-rel { animation: none !important; stroke-dasharray: none; }
-        .k-traveler { display: none; }
+        .k-edge { animation: none !important; stroke-dasharray: none; }
       }
     `;
     svg.appendChild(style);
@@ -350,6 +355,15 @@
 
     const gEdges = document.createElementNS(ns, "g");
     const rand = rng(cfg.seed + 7);
+    // closer relationships flow faster; distant ones drift. Dash pattern
+    // encodes type: solid-ish for tree, dots for related, short for backlink.
+    const speedMul = {
+      "tree-down": 0.8,
+      "tree-up": 1,
+      "tree-sib": 1.3,
+      backlink: 1.5,
+      related: 1.8,
+    };
     es.forEach((e, idx) => {
       const a = pos[e.a],
         b = pos[e.b];
@@ -358,57 +372,31 @@
       const my = (a.y + b.y) / 2 + (rand() - 0.5) * 20;
       const path = document.createElementNS(ns, "path");
       path.setAttribute("d", `M${a.x},${a.y} Q${mx},${my} ${b.x},${b.y}`);
-      path.setAttribute(
-        "class",
-        e.kind === "related" ? "k-line-rel" : "k-line",
-      );
+      path.setAttribute("class", "k-edge k-" + e.kind);
+      path.setAttribute("data-a", e.a);
+      path.setAttribute("data-b", e.b);
       path.setAttribute("fill", "none");
+      path.setAttribute(
+        "stroke-dasharray",
+        e.kind === "related" ? "1.5 2.5" : e.kind === "backlink" ? "2 3" : "4 6",
+      );
 
       if (cfg.animate) {
         const len = approxPathLength(a, b, mx, my);
-        const dash = e.kind === "related" ? "1.5 2.5" : "4 6";
-        path.setAttribute("stroke-dasharray", dash);
         const anim = document.createElementNS(ns, "animate");
         anim.setAttribute("attributeName", "stroke-dashoffset");
         anim.setAttribute("from", "0");
         anim.setAttribute("to", String(-len));
-        anim.setAttribute("dur", cfg.flowSpeed + "s");
+        anim.setAttribute(
+          "dur",
+          (cfg.flowSpeed * (speedMul[e.kind] || 1)).toFixed(2) + "s",
+        );
         anim.setAttribute("repeatCount", "indefinite");
         anim.setAttribute("begin", idx * 0.15 + "s");
         path.appendChild(anim);
       }
 
       gEdges.appendChild(path);
-
-      if (cfg.animate && e.kind === "tree") {
-        const traveler = document.createElementNS(ns, "circle");
-        traveler.setAttribute("r", 1.5);
-        traveler.setAttribute("class", "k-traveler");
-        const motion = document.createElementNS(ns, "animateMotion");
-        motion.setAttribute("dur", cfg.travelerSpeed + "s");
-        motion.setAttribute("repeatCount", "indefinite");
-        motion.setAttribute("begin", idx * 0.4 + "s");
-        path.setAttribute("id", "k-edge-" + idx);
-        const mp = document.createElementNS(ns, "mpath");
-        mp.setAttributeNS(
-          "http://www.w3.org/1999/xlink",
-          "href",
-          "#k-edge-" + idx,
-        );
-        motion.appendChild(mp);
-        traveler.appendChild(motion);
-
-        const fadeIn = document.createElementNS(ns, "animate");
-        fadeIn.setAttribute("attributeName", "opacity");
-        fadeIn.setAttribute("values", "0;1;1;0");
-        fadeIn.setAttribute("keyTimes", "0;0.15;0.85;1");
-        fadeIn.setAttribute("dur", cfg.travelerSpeed + "s");
-        fadeIn.setAttribute("repeatCount", "indefinite");
-        fadeIn.setAttribute("begin", idx * 0.4 + "s");
-        traveler.appendChild(fadeIn);
-
-        gEdges.appendChild(traveler);
-      }
     });
     svg.appendChild(gEdges);
 
@@ -419,6 +407,7 @@
       ...g.children,
       ...g.siblings,
       ...g.related,
+      ...g.backlinks,
     ].filter(Boolean);
     const seen = new Set();
     all.forEach((n) => {
@@ -431,8 +420,8 @@
 
       const a = document.createElementNS(ns, "a");
       a.setAttribute("class", "k-node");
-      a.setAttribute("href", "/" + n.id);
-      a.setAttribute("xlink:href", "/" + n.id);
+      a.setAttribute("data-id", n.id);
+      a.setAttribute("href", n.id === "home" ? "/" : "/" + n.id);
 
       const glyph = document.createElementNS(ns, "text");
       glyph.setAttribute("x", p.x);
@@ -457,6 +446,20 @@
       label.setAttribute("class", isRoot ? "k-label-muted" : "k-label");
       label.textContent = n.title;
       a.appendChild(label);
+      a.addEventListener("mouseenter", () => {
+        gEdges.querySelectorAll(".k-edge").forEach((p) => {
+          const hi =
+            p.getAttribute("data-a") === n.id ||
+            p.getAttribute("data-b") === n.id;
+          p.classList.toggle("k-hi", hi);
+          p.classList.toggle("k-lo", !hi);
+        });
+      });
+      a.addEventListener("mouseleave", () => {
+        gEdges.querySelectorAll(".k-hi,.k-lo").forEach((p) =>
+          p.classList.remove("k-hi", "k-lo"),
+        );
+      });
 
       gNodes.appendChild(a);
     });
