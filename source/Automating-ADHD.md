@@ -1,6 +1,6 @@
 ---
 date: 2025-11-26
-modified_timestamp: 2026-05-26T16:14:47+03:00
+modified_timestamp: 2026-07-17T19:19:51+03:00
 created_timestamp: 2025-11-26T12:50:31+02:00
 tags:
   - adhd
@@ -9,6 +9,8 @@ tags:
 title: Automating ADHD
 group: adhd
 bucket: Productivity
+related:
+  - "[[adhd]]"
 ---
 
 > [!IMPORTANT]
