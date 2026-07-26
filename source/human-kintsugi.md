@@ -1,7 +1,7 @@
 ---
 tags:
   - update
-modified_timestamp: 2026-07-23T01:37:18+03:00
+modified_timestamp: 2026-07-26T23:44:40+03:00
 created_timestamp: 2026-07-15T19:16:33+03:00
 date: 2026-07-22
 bucket: Update
@@ -67,7 +67,7 @@ I have started a Human Kintsugi process for myself.
 
 - **`lisn`** – <span class="pill" style="--m-c: #eee">Private</span> <span class="pill" style="--m-c: #d4d433">Vibe-Coded</span> Lightweight multi-speaker transcription for Apple Silicon
 - **[`sixwhyo`](https://6yo.dev)** – A six-year-old code reviewer who's not afraid to ask "why?" about everything.
-- **[`hex`](https://0xff.nu/hex/)** – <span class="pill">Private</span> <span class="pill">Vibe-Coded</span> ADHD executive assistant Telegram bot.
+- **[[hex]]** – <span class="pill">Private</span> <span class="pill">Vibe-Coded</span> ADHD executive assistant Telegram bot.
 - **`hajime` Obsidian Mode** – Deeper integration with Obsidian, allowing note relationships in the generated static website.
 - **`boku`** – Lots of things were fixed and added in the [latest release of Boku](https://git.sr.ht/~hxii/boku/refs/0.2.4)
 - **`kankei`** – Lightweight markup used by `hajime`
