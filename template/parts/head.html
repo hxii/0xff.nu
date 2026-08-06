@@ -22,12 +22,12 @@
 <script type="text/javascript">
 document.addEventListener("DOMContentLoaded", () => { 
   let animatedEls = document.querySelectorAll(".shuffle");
-  const duration = 30;
-  const framesMax = 16;
+  const duration = 50;
+  const framesMax = 10;
   const intervalBetweenAnimations = 10000;
-  const glitchChance = 0.1;
+  const glitchChance = 0.3;
 
-  const symbols = "♥♦♣♠▓ñ▒☻♫!@#▙▞▖▘└┬"
+  const symbols = "♥♦♣♠▓ñ▒☻♫!@#*$"
 
   function randomChar() {
     return symbols.charAt(Math.floor(Math.random() * symbols.length));
