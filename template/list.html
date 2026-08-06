@@ -8,8 +8,11 @@
 
   {% if project.has_tag('showcase') %}
   <div class="project">
+    {% if project.extra.stricon %}
+      <img src="data:image/gif;base64,{{ project.extra.stricon }}" class="pixel-icon">
+      {% endif %}
     <a href="/{{ project.uri }}" class="project-link">
-      <div class="project-title">{{ project.title }}</div>
+      <span class="project-title">{{ project.title|spaceless }}</span>
     </a>
     <div class="border"></div>
     <div class="project-year">{{ project.year }}</div>
@@ -24,7 +27,7 @@
   {% with entries = entries.get_entries('entry', 'type') & grouped = entries.group_entries('year') %}
   {% for year, entrylist in grouped.items() %}
   <section class="year" id="{{ year }}">
-    <h4 id="{{ year }}">{{ year }}</h4><a class="header-link" href="#{{ year }}"></a>
+    <a class="header-link" href="#{{ year }}"><h4 id="{{ year }}">{{ year }}</h4></a>
     <ul class="entrylist">
       {% for entry in entrylist.sort_by_date() %}
 
@@ -33,7 +36,11 @@
       <li data-tags="{{ entry.tags|join(' ') }}" data-type="{{ entry.type.value }}">
         <a href="/{{entry.uri}}">{{ entry.title }}</a>
         <div class="border"></div>
-        <div class="entry-bucket">{{ entry.bucket | default("no_bucket") }}</div>
+        <!-- <div class="entry-bucket">{{ entry.bucket | default("no_bkt") }}</div> -->
+        <div class="readtime">
+          <img class="pixel-icon" src="readingtime.gif">
+          {{ entry.reading_time }} MIN
+        </div>
         <span class="entry-popup-description">{{ entry.description || "No description" }}</span>
       </li>
       {% endif %}
