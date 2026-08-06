@@ -15,10 +15,15 @@
     "JetBrains Mono", ui-monospace, "Cascadia Code", "Source Code Pro", menlo,
     consolas, "DejaVu Sans Mono", monospace;
   --background-color: #fefefe;
-  --main-text-color: #333;
+  --main-text-color: #444;
   --dim-text-color: #888;
   --dimmer-text-color: #bababa;
   --dimmest-text-color: #ddd;
+  --barely-visible-text-color: color-mix(
+    in srgb,
+    var(--main-text-color) 10%,
+    var(--background-color) 90%
+  );
   --link-color: #000;
   --theme: #d57100;
   --code-background: color-mix(in srgb, var(--theme), transparent 90%);
@@ -49,10 +54,8 @@ span.pill {
   border-radius: 8px;
   background: var(--pill-base-c);
   color: var(--pill-t-c);
-
   text-transform: uppercase;
   font-size: 0.6em;
-
   padding: 1px 6px;
 }
 
@@ -62,7 +65,16 @@ span.pill {
   --dim-text-color: #666;
   --dimmer-text-color: #444;
   --dimmest-text-color: #333;
+  --barely-visible-text-color: color-mix(
+    in srgb,
+    var(--main-text-color) 10%,
+    var(--background-color) 90%
+  );
   --link-color: #fff;
+
+  img.pixel-icon {
+    filter: invert();
+  }
 }
 
 html {
@@ -70,7 +82,7 @@ html {
 }
 
 body {
-  font: 15px/1.6 var(--font);
+  font: 15px/1.7 var(--font);
   color: var(--main-text-color);
   margin: 5vw;
   background: var(--background-color);
@@ -91,15 +103,15 @@ main {
 a,
 a:visited {
   color: var(--link-color);
+  text-decoration-color: var(--dimmer-text-color);
 }
 
 a:hover {
   color: var(--theme);
 }
 
-p a[href^="http"]::after {
-  content: "✈︎";
-  vertical-align: super;
+a[href^="http"]:not([href^="https://0xff.nu"])::after {
+  content: "↗";
   text-decoration: none;
   display: inline-block;
 }
@@ -116,8 +128,7 @@ a.logo:hover {
   border-color: var(--theme);
 }
 
-a#theme-toggle,
-a.header-link {
+a#theme-toggle {
   display: block;
   text-decoration: none;
   justify-self: end;
@@ -189,17 +200,25 @@ img.inline {
   max-height: 1em;
 }
 
-#gallery {
-  display: flex;
-  flex-direction: row;
-  gap: 2px;
+img.pixel-icon {
+  text-decoration: none;
+  width: 12px;
+  height: 12px;
+  image-rendering: crisp-edges;
+  aspect-ratio: 1 / 1;
 }
 
-#gallery .lqip {
-  width: 32px;
-  height: 32px;
-  border: 1px solid #eee;
-  outline: 1px solid #222;
+#gallery .gallery-images {
+  display: flex;
+  flex-direction: row;
+  gap: 4px;
+
+  .lqip {
+    width: 32px;
+    height: 32px;
+    border: 1px solid #eee;
+    outline: 1px solid #222;
+  }
 }
 
 blockquote {
@@ -210,6 +229,29 @@ blockquote {
 
 code {
   color: var(--theme);
+}
+
+a.headerlink {
+  visibility: hidden;
+
+  &::after {
+    content: "";
+    display: inline-block;
+    visibility: visible;
+    width: 12px;
+    height: 12px;
+    background-image: url("data:image/gif;base64,R0lGODdhDAAMAIAAAAAAAAAAACH5BAkKAAAALAAAAAAMAAwAAAIchBEZx2nOnoptUYXtyVojP0lb+I1QKToY+nFGAQA7");
+  }
+}
+
+p {
+  &:not(:last-child) {
+    margin-bottom: 2rem;
+  }
+
+  &.admonition-title {
+    margin: 1rem 0;
+  }
 }
 
 mark.redacted {
@@ -251,7 +293,7 @@ pre > code {
 
 ul li,
 ol li {
-  margin-top: 0.5rem;
+  /* margin-top: 0.5rem; */
   list-style-position: inside;
 }
 
@@ -287,6 +329,7 @@ h3,
 h4,
 h5 {
   color: var(--link-color);
+  margin-bottom: 2rem;
 }
 
 h1 {
@@ -296,10 +339,10 @@ h1 {
 header h1 {
   margin: 0;
   flex: 1;
-}
 
-header h1::before {
-  content: " / ";
+  &::before {
+    content: " / ";
+  }
 }
 
 h2 {
@@ -314,9 +357,28 @@ h4 {
   font-size: 0.9rem;
 }
 
-section.year h4 {
-  display: inline-block;
-  margin: 0 0.5rem 0 0;
+section.year {
+  display: flex;
+  flex-direction: row;
+  gap: 1ch;
+
+  a.header-link {
+    display: inline-block;
+    padding: 1ch;
+    writing-mode: vertical-lr;
+    background: repeating-linear-gradient(
+      -45deg,
+      transparent 0 6px,
+      var(--dimmest-text-color) 6px 7px
+    );
+    align-content: center;
+
+    h4 {
+      margin: 0;
+      display: inline-block;
+      background: var(--background-color);
+    }
+  }
 }
 
 header {
@@ -337,21 +399,32 @@ header {
 }
 
 .entrylist {
+  width: 100%;
   list-style-type: none;
   padding-left: 0;
+  margin: 0;
+  li {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0;
+    gap: 1ch;
+    &:not(:last-child) {
+      margin-bottom: 0.5rem;
+    }
+
+    .readtime {
+      color: var(--dim-text-color);
+      align-self: center;
+      font-size: 0.7rem;
+    }
+  }
 }
 
 .entrylist .description {
   color: var(--dimmer-text-color);
-}
-
-.entrylist li {
-  position: relative;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  gap: 1ch;
 }
 
 .entrylist a {
@@ -363,16 +436,12 @@ header {
   background: var(--background-color);
 }
 
-.entrylist li:not(:last-child) {
-  margin-bottom: 0.5rem;
-}
-
 .entrylist .entry-bucket {
   font-size: 0.7em;
   text-transform: uppercase;
   border: 1px solid;
   border-radius: 3px;
-  padding: 0 2px;
+  padding: 0 5px;
 }
 
 aside {
@@ -447,7 +516,7 @@ section.projects {
   display: flex;
   flex-grow: 1;
   border-bottom: 1px solid;
-  border-color: var(--dimmest-text-color);
+  border-color: var(--barely-visible-text-color);
 }
 
 .g {
@@ -457,18 +526,6 @@ section.projects {
   color: var(--dim-text-color);
   filter: blur(3px);
   opacity: 0.5;
-}
-
-li[data-tags]::before {
-  color: var(--background-color);
-  display: inline-block;
-  position: absolute;
-  left: -1rem;
-  content: "●";
-}
-
-li[data-tags*="important"]::before {
-  color: var(--link-color);
 }
 
 /* RELATED ENTRIES */
@@ -682,28 +739,45 @@ div.toc ul {
     transform: translateY(0);
   }
   33% {
-    transform: translateY(-1.6em);
+    transform: translateY(-1.7em);
   }
   66% {
-    transform: translateY(-3.2em);
+    transform: translateY(-3.4em);
   }
   100% {
-    transform: translateY(-4.8em);
+    transform: translateY(-5.1em);
   }
 }
 
 /* END BANNER */
 
 /* SMALL SCREEN ADJUSTMENTS */
-@media screen and (width <= 600px) {
+@media only screen and (max-width: 600px) {
   body {
     margin: 1rem;
-    font-size: 14px;
   }
 
   th,
   td {
     padding: 0.5rem;
+  }
+
+  section.year {
+    flex-direction: column;
+
+    a.header-link {
+      writing-mode: initial;
+      padding: 1ch;
+
+      h4 {
+        margin: 0;
+      }
+    }
+  }
+
+  .entrylist a {
+    max-width: 40ch;
+    text-overflow: ellipsis;
   }
 
   section.entry-info {
