@@ -5,10 +5,11 @@ tags:
   - python
   - ai
   - showcase
-modified_timestamp: 2026-06-30T18:36:12+03:00
+modified_timestamp: 2026-08-05T15:32:00+03:00
 created_timestamp: 2026-06-18T17:26:14+03:00
 type: project
 bucket: Python
+stricon: R0lGODdhDAAMAJEAAAAAAAAAAHl5eQAAACH5BAkKAAAALAAAAAAMAAwAAAIghB+nFiG9mpgTAkfzuzon3G1g94UVZybX+KiIYy3MUgAAOw==
 ---
 > [!WARNING]
 > This project is a work in progress, so the content in this post will most likely be updated.
