@@ -1,7 +1,10 @@
 <section id="gallery">
+  <h3>Gallery</h3>
   {% with images = entries.get_entries('image', 'type') & sorted = images.sort_by_date() %}
-  {% for image in sorted %} 
-  <a href="{{ image.uri }}"><div class="lqip" style="{{ image.lqip_inline_style }}"></div></a>
-  {% endfor %}
+  <div class="gallery-images">
+    {% for image in sorted %} 
+    <a href="{{ image.uri }}"><div class="lqip" style="{{ image.lqip_inline_style }}"></div></a>
+    {% endfor %}
+  </div>
   {% endwith %}
 </section>
