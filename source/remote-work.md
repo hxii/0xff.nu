@@ -8,7 +8,7 @@ tags:
   - rant
 bucket: Rant
 ---
-![[./wfh-lol.png]]
+![[wfh-lol.png]]
 We just don’t learn, do we? Not as employees, not as employers and not as people.
 
 As employees we’re not fighting for what we want, instead settling for whatever "perks" we’re so graciously given.
