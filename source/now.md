@@ -3,33 +3,33 @@ title: Now
 date: 2024-05-19
 tags: now, hide
 type: page
+stricon: R0lGODdhDAAMAJEAAAAAAAAAAJWVlQAAACH5BAkKAAAALAAAAAAMAAwAAAIdDI55pm3c1gtQBoFFPfj25Hka2FEjImZbulltdBQAOw==
+modified_timestamp: 2026-08-06T16:31:26+03:00
+created_timestamp: 2026-03-09T12:40:20+02:00
 ---
 This is a little [now](https://nownownow.com/about) page, inspired by [Derek Sivers](https://sive.rs/now) where I share what I am doing at this point in life (I'll try and update this periodically).
-Update November 26th, 2024.
 
-![me](/me.png)
+*Updated August 6th, 2026.*
+
+![[me.png]]
 
 ## Static (The About Section)
 
-My name is Paul Glushak, I go by the pseudonym "hxii". I am a small-web, lightweight tool afficionado. This website is a collection of thoughts and projects by me.
-This website is running on [Hajime](/hajime) and doesn't have any ads or tracking.
+My name is *Paul Glushak*, I have [[ADHD]] and online I go by the pseudonym `hxii`.
+I am a small-web, lightweight tool enthusiast.
+This website, which is generated using [[Hajime]], is a collection of thoughts and projects by me and doesn't have any ads or tracking.
 
-Get in touch via [Mastodon](https://merveilles.town/@hxii), [Twitter](https://twitter.com/paulglushak), [BlueSky](https://bsky.app/profile/0xff.nu) or ~~subscribe to my <a href="/feed.xml">feed</a>~~ (Not yet working, sorry! 🙇‍♂️).
+Get in touch via [Mastodon](https://merveilles.town/@hxii), [Twitter](https://twitter.com/paulglushak), [BlueSky](https://bsky.app/profile/0xff.nu) or subscribe to my [RSS feed](/feed.xml).
 
 ## Professional (Work Stuff)
 
-- Working as a R&D Solutions manager and Python developer at Forter.
-- Learning and improving as a developer and as a manager through trial and error.
+**I'm currently unemployed**, and am trying to find the next step in my career while continuing to work on fun stuff on the side!
+
+I've recently started leveraging LLMs for fun and profit to create things like [[hex]] and am also currently trying to learn *Swift* to create the ADHD app I've been dreaming about!
 
 ## Personal
 
-- Being a husband and a dad to a 4-year old.
-- Working on awesome tools again: [Hajime](/hajime) and [Boku](/boku).
-- Emphasizing, and improving [my own productivity](https://0xff.nu/adhd-productivity-fundamentals) and well-being through decluttering, documenting and learning, especially following the ADHD diagnosis I've been given.
-- Trying to be more social and keeping in touch, while keeping my sanity (IRC, Discord, IRL).
-- Learning new skills:
-  - Code editing in the terminal using [micro](https://github.com/zyedidia/micro) and nVim.
-  - Lua to supplement my Python knowledge and to be able to contribute and improve micro.
-  - CI/CD processes and automation in general.
-  - Unit testing in Python.
-  - Ukrainian.
+- I'm a husband and a dad to a 6-year old and a 9-month-old.
+- I still love creating (maybe somewhat niche) lightweight, focused tools like [[hajime]], [[boku]] and [[mkcv]].
+- I also recently (courtesy of my [[wife]]) picked up 3D printing, which also caused me to learn CAD.
+- I've added a [gallery section](/#gallery) to my website where I try and share some of the more artsy photos I take.
