@@ -5,7 +5,7 @@ tags:
   - showcase
 type: project
 description: Static website generator made in Python
-modified_timestamp: 2026-07-19T18:12:12+03:00
+modified_timestamp: 2026-07-29T17:00:02+03:00
 created_timestamp: 2025-04-14T17:13:49+03:00
 bucket: Python
 group: hajime
@@ -16,7 +16,7 @@ related:
 
 It is the spiritual successor and replacement to [Saisho](/saisho) (which was made in PHP), and is currently still being developed.
 
-![Hajime Logo](hajime.png)
+![[hajime.png]]
 
 [Get it on SourceHut](https://git.sr.ht/~hxii/hajime), [Report a Problem](https://todo.sr.ht/~hxii/hajime) or [Get in touch](https://lists.sr.ht/~hxii/hajime-discuss).
 
