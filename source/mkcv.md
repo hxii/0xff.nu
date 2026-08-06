@@ -1,7 +1,7 @@
 ---
 title: mkcv
 type: project
-modified_timestamp: 2025-12-27T19:41:07+02:00
+modified_timestamp: 2026-08-05T15:55:18+03:00
 created_timestamp: 2025-07-27T11:45:05+03:00
 date: 2025-07-27
 tags:
@@ -9,6 +9,7 @@ tags:
   - showcase
 description: YAML resume generator
 bucket: Python
+stricon: R0lGODdhDAAMAJEAAAAAAAAAAI+PjwAAACH5BAkKAAAALAAAAAAMAAwAAAIhhI8JwR3IhJTPBHEbtnruNTnf5YUWhmVjaYJaVDlypSQFADs=
 ---
 ## What is this?
 `mkcv` is a small and quick project designed to generate a resume from a YAML definition.
