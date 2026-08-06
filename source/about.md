@@ -2,6 +2,8 @@
 title: About
 tags: hide
 date: 2024-11-25
+modified_timestamp: 2026-08-06T16:00:29+03:00
+created_timestamp: 2026-03-09T12:40:20+02:00
 ---
 <div class="expando" markdown="1">
 - I'm
@@ -32,5 +34,5 @@ date: 2024-11-25
     - projects
         - projects like [[Hajime]] and [[Boku]]
 - .
-- Read my [[now]] page or get in touch via [bsky](https://bsky.app/profile/0xff.nu) or [Mastodon](https://merveilles.town/@hxii).
+- Read my <img class="pixel-icon" src="data:image/gif;base64,R0lGODdhDAAMAJEAAAAAAAAAAJWVlQAAACH5BAkKAAAALAAAAAAMAAwAAAIdDI55pm3c1gtQBoFFPfj25Hka2FEjImZbulltdBQAOw==">[[now]] page or get in touch via [bsky](https://bsky.app/profile/0xff.nu) or [Mastodon](https://merveilles.town/@hxii).
 </div>
