@@ -1,3 +1,6 @@
+{% if entry.title == "hexbench" %}
+  {% include "./bench.html" %}
+{% else %}
 {% include "./parts/head.html" %}
 <script src="/kankei-graph.js"></script>
 {% if not entry.has_tag("no-info") %}
@@ -40,3 +43,4 @@
     {% endfor %}
     </div>
 {% include "./parts/footer.html" %}
+{% endif %}
