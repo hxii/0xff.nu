@@ -5,12 +5,13 @@ tags:
   - showcase
 type: project
 description: Static website generator made in Python
-modified_timestamp: 2026-07-29T17:00:02+03:00
+modified_timestamp: 2026-08-06T16:53:25+03:00
 created_timestamp: 2025-04-14T17:13:49+03:00
 bucket: Python
 group: hajime
 related:
   - "[[saisho]]"
+stricon: R0lGODdhDAAMAKIAAAAAAAAAAGdnZ76+vunp6QAAAAAAAAAAACH5BAkKAAAALAAAAAAMAAwAAAMwCArRsauJQVsUcxA9HsMZsT0BJmZUV5qo2FBYCktDrBETCYaCF5wxjIexEg4jDkgCADs=
 ---
 *Hajime* (previously called Saisho-PY), meaning "beginning" in Japanese, is a simple, slightly opinionated static website generator built with Python.
 
