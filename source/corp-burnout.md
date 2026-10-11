@@ -7,7 +7,7 @@ created_timestamp: 2026-10-11T17:32:12+03:00
 title: Corporate Burnout
 date: 2026-10-11
 ---
-> [!INFO] What happened?
+> [!NOTE] What happened?
 > Some time ago I realized that I'm part of this stupid rat race, and I no longer wish to participate.
 > Also, I watched [The More Boring You Are, the More Impressive You’ll Become - The Paradox of Boredom](https://www.youtube.com/watch?v=9N4p02fZHO8&t=334s) last night.
 > 
