@@ -432,13 +432,22 @@ body {
   .desktop {
     overflow-y: auto;
     padding: 16px 16px 24px;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-content: start;
+    row-gap: 6px;
+    column-gap: 8px;
+  }
+  .desktop-home .desktop > noscript {
+    grid-column: 1 / -1;
   }
   .obj {
     position: relative;
-
+    display: block;
+    width: auto;
     left: auto !important;
     top: auto !important;
-    margin: 0 0 6px;
+    margin: 0;
     touch-action: manipulation;
   }
   .grip {
