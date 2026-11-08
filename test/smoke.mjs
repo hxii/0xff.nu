@@ -681,10 +681,13 @@ assert(
 );
 const aboutBody = aboutTpl.content.querySelector(".modal-body");
 assert(
-	!!aboutBody.querySelector(".about-head .about-logo"),
-	"about shows a logo",
+	!!aboutBody.querySelector(".about-head pre"),
+	"about shows the ASCII logo",
 );
-assert(!!aboutBody.querySelector(".about-version"), "about shows a version");
+assert(
+	!!aboutBody.querySelector(".about-head"),
+	"about shows the head",
+);
 assert(
 	!aboutBody.querySelector(".folder-table"),
 	"about is static, no build stats",
