@@ -1,0 +1,16 @@
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% if entry %}{{ entry.title | escape }} | {% endif %}0xFF</title>
+  <script>/* the saved mode applies before first paint: no light flash */(function(){var t=localStorage.getItem("project-desktop-theme");if(t==="dark"||t==="light")document.documentElement.dataset.theme=t;})();</script>
+  <link rel="stylesheet" href="../desktop.css">
+  <link rel="stylesheet" href="../transitions.css">
+  {% if entries %}
+  {# Shared LQIP rules and the sampling points for each image. #}
+  {% with lqip = context.lqip & css = lqip.shared_css() %}<style id="lqip-css">{{ css }}</style>{% endwith %}
+  <style id="lqip-styles">
+  {% for image in entries.where('type:image') %}{% if image.lqip_inline_style %}[data-lqip="{{ image.uri }}"] { {{ image.lqip_inline_style }}; }
+  {% endif %}{% endfor %}</style>
+  {% endif %}
+  <script defer src="https://starchart.glushak.me/script.js" data-website-id="7a2e27a3-678f-48e2-91a6-cc25fbdfd22b"></script>
+</head>

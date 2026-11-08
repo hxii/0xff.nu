@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="4" height="4" viewBox="0 0 4 4" shape-rendering="crispEdges">
+  <!-- The desktop tile at night: the same 2-bit ordered dither, in
+       the warm dark tones. -->
+  <path d="M0 0h1v1h-1zM2 0h1v1h-1zM0 2h1v1h-1zM2 2h1v1h-1z" fill="#12110f"/>
+  <path d="M1 1h1v1h-1zM3 1h1v1h-1zM1 3h1v1h-1zM3 3h1v1h-1z" fill="#181713"/>
+  <path d="M1 0h1v1h-1zM3 0h1v1h-1zM1 2h1v1h-1zM3 2h1v1h-1z" fill="#1f1e1a"/>
+  <path d="M0 1h1v1h-1zM2 1h1v1h-1zM0 3h1v1h-1zM2 3h1v1h-1z" fill="#2b2a25"/>
+</svg>

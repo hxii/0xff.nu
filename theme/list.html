@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+{% include "./parts/head.html" %}
+<body class="desktop-home">
+  <div class="boot" aria-hidden="true"><span>0xFF BIOS v1.0</span><span>mounting /notes ... ok</span><span>ready.</span></div>
+  <header class="menubar">
+    <a class="button" href="/">0xff.nu</a>
+    <span class="front-title" id="front-title"></span>
+    <div class="menubar-buttons">
+      <span class="clock" id="clock" aria-hidden="true"></span>
+      <a href="/help-desktop" class="button" aria-label="Desktop help">?</a>
+      <a href="https://lieu.cblgh.org/random" class="button" aria-label="Visit a random XXIIVV webring site"><img alt="" class="icon pix" src="data:image/gif;base64,R0lGODdhEAAQAIAAAAAAAAAAACH5BAkKAAAALAAAAAAQABAAAAIihI+pyxe9HkRyOktn2Lt1V1GhMZLlCaBZqoxV6CbczGFHAQA7" width="16" height="16"></a>
+    </div>
+  </header>
+  <main class="desktop">
+    <h1 style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;border:0">0xFF desktop</h1>
+    <noscript>
+      <nav aria-label="Notes" style="height:100%;overflow:auto;background:var(--window);color:var(--text);padding:1rem;box-sizing:border-box">
+        <h2>Notes</h2>
+        <ul>{% for item in entries.where('!hide') %}<li><a href="/{{ item.uri | escape }}/">{{ item.title | escape }}</a></li>{% endfor %}</ul>
+      </nav>
+    </noscript>
+    <script type="application/json" id="entry-data">{{ context.entry_data_json() }}</script>
+    {% include "./parts/about.html" %}
+    <div class="modal-layer"></div>
+  </main>
+  <div class="popup"></div>
+  <script type="application/json" id="note-index">{{ context.note_index_json() }}</script>
+  <script src="./desktop-data.js"></script>
+  <script src="./site.js"></script>
+</body>
+</html>

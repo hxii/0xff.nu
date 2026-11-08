@@ -1,0 +1,20 @@
+{
+  "Latest": {
+    "title": "Latest",
+    "files": [],
+    "filter": "date:this-year && !type:page",
+    "icon": "folder-open"
+  },
+  "Showcase": {
+    "title": "Showcase",
+    "files": [],
+    "filter": "type:project && tag:showcase",
+    "icon": "folder-open"
+  },
+  "Gallery": {
+    "title": "Gallery",
+    "filter": "type:image",
+    "description": "Photos and visual entries.",
+    "icon": "folder"
+  }
+}

@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="4" height="4" viewBox="0 0 4 4" shape-rendering="crispEdges">
+  <!-- The desktop tile: a 2-bit ordered dither, four tones at one pixel
+       each on a 4px grid. Warm taupe paper tones; fine enough to read
+       as flat grey-taupe from a distance, the way the System 6 desktop did. -->
+  <path d="M0 0h1v1h-1zM2 0h1v1h-1zM0 2h1v1h-1zM2 2h1v1h-1z" fill="#f4f1ea"/>
+  <path d="M1 1h1v1h-1zM3 1h1v1h-1zM1 3h1v1h-1zM3 3h1v1h-1z" fill="#eeeae1"/>
+  <path d="M1 0h1v1h-1zM3 0h1v1h-1zM1 2h1v1h-1zM3 2h1v1h-1z" fill="#d4cfc2"/>
+  <path d="M0 1h1v1h-1zM2 1h1v1h-1zM0 3h1v1h-1zM2 3h1v1h-1z" fill="#aea898"/>
+</svg>

@@ -1,0 +1,32 @@
+[meta]
+version = "0.7.1"
+site_url = "https://0xff.nu"
+site_title = "0xFF"
+path_hierarchy = true
+
+[paths]
+source_path = "source"
+output_path = "html"
+template_path = "theme"
+
+[exclude]
+tags = ["draft"]
+
+[templates]
+list = "list.html"
+page = "page.html"
+entry = "page.html"
+project = "page.html"
+link = "page.html"
+image = "image.html"
+set = "page.html"
+
+[obsidian]
+obsidian_mode = true
+vault_root = "~/Documents/Brain"
+entries_path = "blog"
+attachments_path = "Files"
+resolve_attachments = true
+
+[build]
+query_file = "config/folders.json"
