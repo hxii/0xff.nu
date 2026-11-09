@@ -1203,7 +1203,7 @@
     }
     // the menu bar is not the desktop: its buttons never close a window
     if (closest(e.target, ".menubar")) return;
-    var item = closest(e.target, ".obj");
+    var item = closest(e.target, ".obj[data-key]");
     var modal = closest(e.target, ".modal");
     if (modal?.isConnected && modals.indexOf(modal) >= 0) raise(modal);
     var row = closest(e.target, ".tile, li[data-key]");
@@ -1226,7 +1226,9 @@
   // on a phone there is no double click: the first tap opens;
   // a desktop double click does the same. Both mean openFrom().
   function openFrom(e) {
-    var item = closest(e.target, ".obj");
+    // a static note page carries a plain .obj link back to the desktop:
+    // it has no key and must keep its normal link behaviour
+    var item = closest(e.target, ".obj[data-key]");
     var row = closest(e.target, ".tile[data-key], li[data-key]");
     if (!item && !row) return;
     var key = item ? item.dataset.key : row.dataset.key;
@@ -1261,7 +1263,7 @@
     }
     if (e.key !== "Enter" && e.key !== " ") return;
     var target = e.target;
-    if (!closest(target, ".obj, .tile[data-key], li[data-key]")) return;
+    if (!closest(target, ".obj[data-key], .tile[data-key], li[data-key]")) return;
     e.preventDefault();
     openFrom(e);
   });

@@ -1443,6 +1443,59 @@ window.location.hash = "";
 window.dispatchEvent(new window.HashChangeEvent("hashchange"));
 assert(modalCount() === 0, "an empty hash closes the windows");
 
+// a direct visit to a note page shows a plain .obj link back to the
+// desktop; it has no key, so Enter and click must stay the browser's
+{
+	const noteDom = new JSDOM(readFileSync(`${DIST}saisho-edit/index.html`, "utf-8"), {
+		runScripts: "outside-only",
+		url: "http://localhost/saisho-edit/",
+	});
+	const noteWindow = noteDom.window;
+	const narrow = {
+		matches: false,
+		addEventListener() {},
+		removeEventListener() {},
+	};
+	noteWindow.matchMedia = () => narrow;
+	noteWindow.fetch = async () => ({ ok: false, status: 404, text: async () => "" });
+	noteWindow.eval(readFileSync(`${DIST}site.js`, "utf-8"));
+	const home = noteWindow.document.querySelector(".obj.home-object");
+	assert(!!home, "a note page carries a Desktop link");
+	assert(home.dataset.key === undefined, "the Desktop link is not a window key");
+	const homeEnter = new noteWindow.KeyboardEvent("keydown", {
+		key: "Enter",
+		bubbles: true,
+		cancelable: true,
+	});
+	home.dispatchEvent(homeEnter);
+	assert(
+		!homeEnter.defaultPrevented,
+		"Enter on the Desktop link keeps the link's own navigation",
+	);
+	const homeClick = new noteWindow.MouseEvent("click", {
+		bubbles: true,
+		cancelable: true,
+	});
+	home.dispatchEvent(homeClick);
+	assert(!homeClick.defaultPrevented, "a click on the Desktop link is not swallowed");
+	assert(
+		noteWindow.document.querySelectorAll(".modal-layer .modal").length === 1,
+		"the Desktop link opens no window",
+	);
+	// on a phone the same click opens objects; a link with no key must
+	// still be left to the browser
+	narrow.matches = true;
+	const tap = new noteWindow.MouseEvent("click", { bubbles: true, cancelable: true });
+	home.dispatchEvent(tap);
+	assert(!tap.defaultPrevented, "a phone tap on the Desktop link is not swallowed");
+	assert(
+		noteWindow.document.querySelectorAll(".modal-layer .modal").length === 1,
+		"a phone tap on the Desktop link opens no window",
+	);
+	narrow.matches = false;
+	noteWindow.close();
+}
+
 
 console.log("---");
 assert(
