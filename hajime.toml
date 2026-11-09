@@ -2,6 +2,7 @@
 version = "0.7.1"
 site_url = "https://0xff.nu"
 site_title = "0xFF"
+site_description = "Paul's desktop of notes, projects and experiments."
 path_hierarchy = true
 sync_commit = true
 sync_push = true

@@ -165,6 +165,7 @@
       var data = noteData(row);
       var item = document.createElement("li");
       item.className = "row";
+      keyButton(item); // a result is opened by keyboard like a tile
       item.dataset.key = data.key;
       item.dataset.date = data.date;
       item.dataset.tags = row.dataset.tags || data.tags.replace(/#/g, "").split(/\s+/).filter(Boolean).join(",");
@@ -211,6 +212,42 @@
 
   function closest(target, sel) {
     return target?.closest ? target.closest(sel) : null;
+  }
+
+  /* --- keyboard --------------------------------------------------------
+     The desktop is a pointer surface, so every object a pointer can
+     activate is also a button: Enter or Space opens it, Escape closes the
+     front window. The window controls share the same key handling. */
+
+  function keyButton(el) {
+    if (!el) return el;
+    el.setAttribute("role", "button");
+    el.setAttribute("tabindex", "0");
+    return el;
+  }
+
+  function onKeyActivate(el, fn) {
+    el.addEventListener("keydown", (e) => {
+      if (e.key !== "Enter" && e.key !== " ") return;
+      e.preventDefault();
+      e.stopPropagation();
+      fn(e);
+    });
+  }
+
+  // Focus moves into the window it opened and returns to whatever had
+  // it before the window closed.
+  function openFocus(modal, opener) {
+    modal._returnFocus = opener || document.activeElement;
+    modal.setAttribute("tabindex", "-1");
+    modal.focus({ preventScroll: true });
+  }
+
+  function restoreFocus(modal) {
+    var back = modal._returnFocus;
+    modal._returnFocus = null;
+    if (back?.isConnected && typeof back.focus === "function")
+      back.focus({ preventScroll: true });
   }
 
   var noteIndexCache = null;
@@ -307,10 +344,13 @@
     info.className = "iv-info";
     info.setAttribute("aria-label", "Info");
     info.title = "Info";
-    info.addEventListener("click", (e) => {
+    keyButton(info);
+    var toggleInfo = (e) => {
       e.stopPropagation();
       modal.classList.toggle("show-info");
-    });
+    };
+    info.addEventListener("click", toggleInfo);
+    onKeyActivate(info, toggleInfo);
     modal.querySelector(".modal-head").appendChild(info);
   }
 
@@ -330,7 +370,9 @@
     if (modal._loadingToken) modal._loadingToken.cancelled = true;
     modal._loadingKey = null; // a closed window's page must not land
     modal._loadingPromise = null;
+    var hadFocus = modal.contains(document.activeElement);
     modal.remove();
+    if (hadFocus) restoreFocus(modal);
   }
 
   // Closing a window closes the windows it fathered: their owner
@@ -360,11 +402,18 @@
   // is always the one the stack means. A window is never moved in the
   // DOM between mousedown and mouseup — Chrome cancels the click.
   function raise(modal) {
+    var hadFocus = modal.contains(document.activeElement);
     var i = modals.indexOf(modal);
     if (i >= 0) modals.splice(i, 1);
     modals.push(modal);
+    // moving a node re-creates its subtree in some engines, and a
+    // focused control would lose focus: put it back
     if (modalLayer.lastElementChild !== modal) modalLayer.appendChild(modal);
     markFront();
+    if (hadFocus && !modal.contains(document.activeElement)) {
+      modal.setAttribute("tabindex", "-1");
+      modal.focus({ preventScroll: true });
+    }
   }
 
   function markFront() {
@@ -434,10 +483,20 @@
   }
 
   async function openModal(key, ownerId) {
+    // The opener is read before anything opens: a program such as Find
+    // focuses its own field, and that field must not become the place
+    // that focus returns to when the window closes.
+    var opener = document.activeElement;
     // a note opens one window; a second look just raises it
     for (var i = 0; i < modals.length; i++) {
       if ((modals[i]._openedKey || modals[i].dataset.key) === key) {
         raise(modals[i]);
+        // a window that is already open keeps its own return target; the
+        // key press only moves focus to the window it asked for
+        if (!modals[i].contains(document.activeElement)) {
+          modals[i].setAttribute("tabindex", "-1");
+          modals[i].focus({ preventScroll: true });
+        }
         return;
       }
     }
@@ -459,6 +518,9 @@
       modal = tpl(key);
     }
     modal.dataset.key = key;
+    modal.setAttribute("role", "dialog");
+    var nameEl = modal.querySelector(".modal-head .title");
+    if (nameEl) modal.setAttribute("aria-label", nameEl.textContent.trim());
     modal._openedKey = key; // saved geometry belongs to this key, not
     // the page the window has navigated to in the meantime
     if (!modal.id) {
@@ -471,6 +533,7 @@
     }
     modal.style.display = "flex";
     modalLayer.appendChild(modal);
+    openFocus(modal, opener); // before any program grabs its own focus
     runScripts(modal);
     if (!modal.classList.contains("iv")) openAtDefault(modal);
     placeModal(modal, ownerId, key);
@@ -508,6 +571,9 @@
   }
 
   function showPage(modal, page) {
+    // read this first: renderStack and the body swap both remove nodes,
+    // and a removed node is no longer a child of the window
+    var focusWasInside = modal.contains(document.activeElement);
     modal.dataset.key = page.key;
     // the head title belongs to the container and never changes;
     // each entry in the history plus the current page gets its
@@ -532,6 +598,17 @@
     runScripts(modal);
     markFront();
     writeHash(page.key);
+    // the page took the focused tile with it: focus goes back into the
+    // window, not to the body
+    if (focusWasInside && !modal.contains(document.activeElement)) {
+      const landed = modal.querySelector(".tile[data-key], .modal-body");
+      if (landed && typeof landed.focus === "function" && landed.tabIndex >= 0) {
+        landed.focus({ preventScroll: true });
+      } else {
+        modal.setAttribute("tabindex", "-1");
+        modal.focus({ preventScroll: true });
+      }
+    }
   }
 
   function navigate(modal, key, ownerId) {
@@ -611,13 +688,16 @@
       el.dataset.levelKey = row.key;
       var b = document.createElement("span");
       b.className = "back";
+      keyButton(b);
       b.setAttribute("aria-label", "Back");
       b.title = "Back";
-      var target = row.depth - 1;
-      b.addEventListener("click", (e) => {
+      const target = row.depth - 1;
+      const goBack = (e) => {
         e.stopPropagation();
         popTo(modal, target);
-      });
+      };
+      b.addEventListener("click", goBack);
+      onKeyActivate(b, goBack);
       el.appendChild(b);
       var t = document.createElement("span");
       t.className = "pt-title";
@@ -771,11 +851,14 @@
     modal._maxBtn.className = "max";
     modal._maxBtn.setAttribute("aria-label", "Maximize");
     modal._maxBtn.title = "Maximize";
+    keyButton(modal._maxBtn);
     if (modal.dataset.max === "1") updateMaxBtn();
-    modal._maxBtn.addEventListener("click", (e) => {
+    var onMax = (e) => {
       e.stopPropagation();
       toggleMax();
-    });
+    };
+    modal._maxBtn.addEventListener("click", onMax);
+    onKeyActivate(modal._maxBtn, onMax);
 
     var head = modal.querySelector(".modal-head");
     // dragging a maximized window un-pins it: it is no longer
@@ -826,12 +909,15 @@
 
     var close = document.createElement("span");
     close.className = "close";
+    keyButton(close);
     close.setAttribute("aria-label", "Close");
     close.title = "Close";
-    close.addEventListener("click", (e) => {
+    var closeWindow = (e) => {
       e.stopPropagation();
       closeModal(modal);
-    });
+    };
+    close.addEventListener("click", closeWindow);
+    onKeyActivate(close, closeWindow);
 
     if (modal.classList.contains("iv")) {
       // a viewer keeps its title band like any other window: the
@@ -884,11 +970,21 @@
     if (key.startsWith("note:")) {
       return noteRecords().some((n) => n.key === key) ? key : null;
     }
+    var templates = document.querySelectorAll(".modal-tpl");
     var known = false;
-    document.querySelectorAll(".modal-tpl").forEach((t) => {
+    var bucketFallback = null;
+    templates.forEach((t) => {
       if (t.dataset.key === key) known = true;
+      // An old link to a topic (#folder:rant) predates the bucket
+      // container. The exact key wins; the fallback only rescues a
+      // link that has no template of its own any more.
+      if (key.startsWith("folder:")) {
+        const nested = `folder:buckets/${key.slice("folder:".length)}`;
+        if (t.dataset.key === nested) bucketFallback = nested;
+      }
     });
-    return known ? key : null;
+    if (known) return key;
+    return bucketFallback;
   }
 
   window.addEventListener("hashchange", () => {
@@ -917,6 +1013,19 @@
     var key = readHash();
     if (key) openModal(key);
   })();
+
+  // Tab can reach a control in a window that is behind another one. A
+  // window you can work in must be the front window, and Escape must
+  // close the window you are in.
+  document.addEventListener("focusin", (e) => {
+    // A press raises its window on click already. Raising it on the
+    // focus that the press causes would move the node under the
+    // pointer and could cancel that click.
+    if (pointerDown) return;
+    var host = closest(e.target, ".modal");
+    if (!host || modals.indexOf(host) < 0) return;
+    if (modals[modals.length - 1] !== host) raise(host);
+  });
 
   /* --- what the desktop remembers -----------------------------------
    * Only the objects' positions are remembered. Window geometry
@@ -1017,12 +1126,15 @@
     if (!viewer) return;
     var close = document.createElement("span");
     close.className = "close";
+    keyButton(close);
     close.setAttribute("aria-label", "Close");
     close.title = "Close";
-    close.addEventListener("click", (e) => {
+    var goHome = (e) => {
       e.stopPropagation();
       location.href = "/";
-    });
+    };
+    close.addEventListener("click", goHome);
+    onKeyActivate(close, goHome);
     var head = viewer.querySelector(".modal-head");
     head.insertBefore(close, head.firstChild);
     wireViewerInfo(viewer);
@@ -1031,13 +1143,35 @@
   // The click that ends a drag is swallowed. The next press clears the
   // flag, so a click that comes later is never lost. The capture phase
   // puts this before the pointerdown that starts the next drag.
-  document.addEventListener(
+  // A press raises its own window on click; the focus of that press must
+  // not raise a different window, or the node under the pointer moves
+  // before mouseup and the click is cancelled.
+  var pointerDown = false;
+  // window capture sees every press, including one that lands on the
+  // window itself, so the flag can never stick
+  window.addEventListener(
     "pointerdown",
     () => {
       dragging = false;
+      pointerDown = true;
     },
     true,
   );
+  ["pointerup", "pointercancel"].forEach((type) => {
+    window.addEventListener(
+      type,
+      () => {
+        pointerDown = false;
+      },
+      true,
+    );
+  });
+  // only a lost window focus, never an element blur: an element blur
+  // fires before the next focusin and would let that press raise a
+  // different window mid-press
+  window.addEventListener("blur", (e) => {
+    if (e.target === window) pointerDown = false;
+  });
 
   document.addEventListener("click", (e) => {
     if (dragging) {
@@ -1098,8 +1232,9 @@
     var key = item ? item.dataset.key : row.dataset.key;
     // a click inside an open window navigates that window; an object
     // on the desktop always opens its own window
-    if (closest(e.target, ".modal") && modals.length)
-      navigate(modals[modals.length - 1], key, item ? item.id : row ? row.id : null);
+    var host = closest(e.target, ".modal");
+    if (host && modals.indexOf(host) >= 0)
+      navigate(host, key, item ? item.id : row ? row.id : null);
     else openModal(key, item ? item.id : row ? row.id : null);
     if (item) {
       item.classList.remove("selected");
@@ -1110,6 +1245,25 @@
 
   document.addEventListener("click", (e) => {
     if (NARROW.matches) openFrom(e);
+  });
+
+  // keyboard: the same objects the pointer opens, and Escape for the
+  // front window. A note object is a real link, so Enter would fire a
+  // plain click; openFrom is the one path that opens both.
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+      const top = modals[modals.length - 1];
+      if (top) {
+        e.preventDefault();
+        closeModal(top);
+      }
+      return;
+    }
+    if (e.key !== "Enter" && e.key !== " ") return;
+    var target = e.target;
+    if (!closest(target, ".obj, .tile[data-key], li[data-key]")) return;
+    e.preventDefault();
+    openFrom(e);
   });
 
   // a double click is two clicks: on a phone the click already

@@ -508,8 +508,10 @@ assert(
 );
 assert(sample.hasAttribute("data-tags"), "notes carry their tags as data");
 
-// a folder object shows closed/open icons; a configured icon replaces both
-const folderObj = byKey("folder:rant");
+// a folder object shows closed/open icons; a configured icon replaces both.
+// Buckets are no longer desktop objects: the bucket root is, and a bucket
+// lives one level down inside it.
+const folderObj = byKey("folder:buckets");
 assert(
 	!!folderObj.querySelector(".icon.closed img[src$='folder.png']"),
 	"a folder object has a closed folder icon",
@@ -859,7 +861,7 @@ const tpls = [...document.querySelectorAll("template.modal-tpl")];
 assert(
 	tpls.some(
 		(t) =>
-			t.dataset.key === "folder:rant" &&
+			t.dataset.key === "folder:buckets/rant" &&
 			t.content.querySelector('.tile[data-key="note:adhd"]'),
 	),
 	"a bucket value makes its own container",
@@ -958,8 +960,8 @@ closeAll();
 dblclick(folder);
 const folderWindow = topModal();
 assert(!!folderWindow.querySelector(".tile"), "the folder window shows a grid");
-pointer(byKey("folder:web"), "pointerdown", 10, 10);
-pointer(byKey("folder:web"), "pointermove", 90, 90);
+pointer(byKey("folder:buckets"), "pointerdown", 10, 10);
+pointer(byKey("folder:buckets"), "pointermove", 90, 90);
 pointer(window, "pointerup", 90, 90);
 dblclick(folder);
 // every window opens at the default size and the button
@@ -1058,6 +1060,7 @@ assert(modalCount() === 1, "the window survives a resize that ends outside it");
 /* a drag must not swallow the next real click ----------------------------- */
 
 pointer(document.body, "pointerdown", 5, 5);
+pointer(document.body, "pointerup", 5, 5);
 click(document.body);
 assert(modalCount() === 0, "a click after a drag still closes the window");
 
@@ -1084,6 +1087,7 @@ assert(
 // drag flag on the next pointerdown — mirror that here so the race
 // block's clicks are not swallowed by the click-after-drag guard
 pointer(document.body, "pointerdown", 5, 5);
+pointer(document.body, "pointerup", 5, 5);
 while (modalCount() > 0) closeModalOf(topModal());
 
 // a folder with two note tiles, found through template.content
@@ -1207,6 +1211,238 @@ assert(
 );
 
 window.fetch = realFetch3;
+
+/* link previews ---------------------------------------------------------- */
+
+// the desktop page carries a description and the Open Graph basics, and
+// a note page carries its own description and title
+const metaOf = (doc) => ({
+	desc: doc.querySelector('meta[name="description"]')?.content || "",
+	ogDesc: doc.querySelector('meta[property="og:description"]')?.content || "",
+	ogTitle: doc.querySelector('meta[property="og:title"]')?.content || "",
+	ogType: doc.querySelector('meta[property="og:type"]')?.content || "",
+	ogUrl: doc.querySelector('meta[property="og:url"]')?.content || "",
+	ogSite: doc.querySelector('meta[property="og:site_name"]')?.content || "",
+});
+const homeMeta = metaOf(document);
+assert(homeMeta.desc.length > 0, "the desktop page has a description");
+assert(
+	homeMeta.desc === homeMeta.ogDesc,
+	"the description and the og:description agree",
+);
+assert(homeMeta.ogType === "website", "the desktop page is og:type website");
+assert(/^https?:\/\//.test(homeMeta.ogUrl), "the desktop page has an absolute og:url");
+assert(homeMeta.ogSite.length > 0, "the desktop page names its og:site_name");
+assert(homeMeta.ogTitle.length > 0, "the desktop page has an og:title");
+
+const notePage = new JSDOM(readFileSync(`${DIST}saisho-edit/index.html`, "utf-8"));
+const noteMeta = metaOf(notePage.window.document);
+assert(noteMeta.ogType === "article", "a note page is og:type article");
+assert(
+	noteMeta.ogTitle === "Saisho Editor",
+	"a note page carries its own title in og:title",
+);
+assert(
+	noteMeta.desc === "A tiny editor for Saisho" && noteMeta.desc === noteMeta.ogDesc,
+	"a note page carries its own description",
+);
+assert(
+	noteMeta.ogUrl.endsWith("/saisho-edit/"),
+	"a note page carries its own absolute og:url",
+);
+
+/* keyboard access and the bucket container ------------------------------ */
+
+const keydown = (el, key) =>
+	el.dispatchEvent(
+		new window.KeyboardEvent("keydown", { key, bubbles: true, cancelable: true }),
+	);
+
+// every non-link object is reachable and announces itself
+for (const el of document.querySelectorAll(".obj")) {
+	if (el.matches("a[data-url]")) continue;
+	assert(
+		el.getAttribute("role") === "button" && el.tabIndex === 0,
+		`object ${el.dataset.key} is a focusable button`,
+	);
+	assert(
+		(el.getAttribute("aria-label") || "").length > 0,
+		`object ${el.dataset.key} has an accessible name`,
+	);
+}
+
+// the buckets sit inside one container, one level down
+const bucketRootTpl = document.querySelector(
+	'template.modal-tpl[data-key="folder:buckets"]',
+);
+assert(!!bucketRootTpl, "the bucket container has a window");
+assert(
+	[...bucketRootTpl.content.querySelectorAll('.tile[data-key^="folder:"]')]
+		.length > 0,
+	"the bucket container lists its topic folders",
+);
+assert(
+	byKey("folder:rant") === null,
+	"a topic folder is no longer a desktop object",
+);
+
+// Enter opens the focused object, focus enters the window, Escape closes
+// it and focus returns to the object that opened it
+const kbdObj = byKey("folder:latest");
+kbdObj.focus();
+keydown(kbdObj, "Enter");
+assert(topModal()?.dataset.key === "folder:latest", "Enter opens the object");
+assert(
+	topModal().getAttribute("role") === "dialog",
+	"an open window is a dialog",
+);
+assert(
+	(topModal().getAttribute("aria-label") || "").length > 0,
+	"the dialog carries the window title as its name",
+);
+assert(
+	topModal().contains(document.activeElement),
+	"focus moves into the opened window",
+);
+assert(
+	topModal().getAttribute("aria-modal") === null,
+	"the window is not modal: the desktop stays reachable",
+);
+keydown(document.activeElement, "Escape");
+assert(modalCount() === 0, "Escape closes the front window");
+assert(
+	document.activeElement === kbdObj,
+	"focus returns to the object that opened the window",
+);
+
+// a second press on space does the same as Enter
+kbdObj.focus();
+keydown(kbdObj, " ");
+assert(topModal()?.dataset.key === "folder:latest", "Space opens the object");
+keydown(document.activeElement, "Escape");
+assert(modalCount() === 0, "Escape closes the space-opened window");
+
+// a second Enter on the same object raises its window and puts focus
+// back inside it, without stealing the return target
+kbdObj.focus();
+keydown(kbdObj, "Enter");
+const againWin = topModal();
+assert(againWin?.dataset.key === "folder:latest", "a second Enter raises the window");
+assert(
+	againWin.contains(document.activeElement),
+	"a raised window takes focus back",
+);
+keydown(document.activeElement, "Escape");
+assert(modalCount() === 0, "the raised window closes");
+assert(
+	document.activeElement === kbdObj,
+	"the raised window still returns focus to its object",
+);
+
+// a tile inside a window is keyboard-operable and navigates its own
+// window, not whatever else is in front
+dblclick(byKey("folder:buckets"));
+const bucketWin = topModal();
+assert(!!bucketWin.querySelector('.tile[data-key="folder:buckets/rant"]'), "the bucket window holds a topic tile");
+const bucketTile = bucketWin.querySelector('.tile[data-key="folder:buckets/rant"]');
+assert(bucketTile.getAttribute("role") === "button" && bucketTile.tabIndex === 0, "a folder tile is a focusable button");
+bucketTile.focus();
+keydown(bucketTile, "Enter");
+assert(
+	topModal() === bucketWin &&
+		bucketWin.querySelector('.tile[data-key="note:adhd"]'),
+	"Enter on a tile navigates the window that holds it",
+);
+assert(
+	bucketWin.contains(document.activeElement),
+	"focus stays in the window after navigating",
+);
+closeAll();
+
+// Find results are focusable, and closing Find returns focus to the
+// object on the desktop, not to the search field inside it
+const findObj = byKey("find");
+findObj.focus();
+keydown(findObj, "Enter");
+const findWin = topModal();
+assert(findWin?.dataset.key === "find", "Enter opens Find");
+const findField = findWin.querySelector(".find-field");
+assert(document.activeElement === findField, "Find focuses its field");
+findField.value = "adhd";
+findField.dispatchEvent(new window.Event("input", { bubbles: true }));
+const findRow = findWin.querySelector(".find-results li.row");
+assert(!!findRow, "Find renders a result");
+assert(
+	findRow.getAttribute("role") === "button" && findRow.tabIndex === 0,
+	"a Find result is a focusable button",
+);
+findRow.focus();
+keydown(findRow, "Escape");
+assert(modalCount() === 0, "Escape closes Find");
+assert(
+	document.activeElement === findObj,
+	"closing Find returns focus to its desktop object, not its field",
+);
+
+// a press does not raise a window by focus: the window under the
+// pointer must not move before the click lands
+dblclick(byKey("folder:latest"));
+const pressBack = topModal();
+dblclick(byKey("find"));
+const pressFront = topModal();
+const pressTile = pressBack.querySelector(".tile[data-key]");
+pointer(pressTile, "pointerdown", 20, 20); // a press, no release yet
+pressTile.focus();
+assert(
+	pressFront.classList.contains("is-front"),
+	"a press alone does not raise another window",
+);
+pointer(pressTile, "pointerup", 20, 20);
+pressFront.focus(); // move focus away first: focus() is a no-op otherwise
+pressTile.focus();
+assert(
+	pressBack.classList.contains("is-front"),
+	"after the release, focus raises its window",
+);
+closeAll();
+
+// two windows: focusing a control in the back window brings it to the
+// front, and Escape closes that window
+dblclick(byKey("folder:latest"));
+const backWin = topModal();
+dblclick(byKey("find"));
+const frontWin = topModal();
+assert(frontWin !== backWin, "two windows are open");
+assert(!backWin.classList.contains("is-front"), "the last opened window is in front");
+const backTile = backWin.querySelector(".tile[data-key]");
+backTile.focus();
+assert(
+	backWin.classList.contains("is-front"),
+	"focusing a control raises that window",
+);
+assert(
+	backWin.contains(document.activeElement),
+	"raising a window keeps its focused control",
+);
+keydown(document.activeElement, "Escape");
+assert(modalCount() === 1, "Escape closes the window the focus is in");
+assert(
+	topModal() === frontWin,
+	"the other window is still open",
+);
+closeAll();
+
+// an old deep link to a bucket resolves through the container
+window.location.hash = "#folder:rant";
+window.dispatchEvent(new window.HashChangeEvent("hashchange"));
+assert(
+	topModal()?.dataset.key === "folder:buckets/rant",
+	"an old #folder:rant link opens the nested folder",
+);
+window.location.hash = "";
+window.dispatchEvent(new window.HashChangeEvent("hashchange"));
+assert(modalCount() === 0, "an empty hash closes the windows");
+
 
 console.log("---");
 assert(

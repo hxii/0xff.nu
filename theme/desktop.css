@@ -1174,3 +1174,25 @@ body {
     }
   }
 }
+
+/* keyboard focus: the desktop is a 2-bit surface, so the ring is the
+   same solid black as a selection, drawn outside the label so the text
+   stays readable */
+.obj:focus-visible,
+.tile:focus-visible,
+.modal .close:focus-visible,
+.modal .max:focus-visible,
+.modal .info:focus-visible,
+.page-title .back:focus-visible {
+  outline: 2px solid var(--text);
+  outline-offset: 2px;
+}
+
+.find-results li:focus-visible {
+  background: var(--text);
+  color: var(--panel);
+}
+
+.modal:focus-visible {
+  outline: none;
+}

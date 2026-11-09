@@ -2,6 +2,29 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{% if entry %}{{ entry.title | escape }} | {% endif %}0xFF</title>
+  {# One description per page: the note's own wins, else the site's.
+     It feeds both <meta name=description> and Open Graph, so a shared
+     link carries the same text. Ibis has no conditional expression in
+     a tag, so the branches are explicit. #}
+  {% if entry %}{% if entry.description %}
+  <meta name="description" content="{{ entry.description | escape }}">
+  <meta property="og:description" content="{{ entry.description | escape }}">
+  {% else %}{% if context.config.meta.site_description %}
+  <meta name="description" content="{{ context.config.meta.site_description | escape }}">
+  <meta property="og:description" content="{{ context.config.meta.site_description | escape }}">
+  {% endif %}{% endif %}
+  <meta property="og:title" content="{{ entry.title | escape }}">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="{{ context.config.meta.site_url }}/{{ entry.uri }}/">
+  {% else %}{% if context.config.meta.site_description %}
+  <meta name="description" content="{{ context.config.meta.site_description | escape }}">
+  <meta property="og:description" content="{{ context.config.meta.site_description | escape }}">
+  {% endif %}
+  <meta property="og:title" content="{{ context.config.meta.site_title | escape }}">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="{{ context.config.meta.site_url }}/">
+  {% endif %}
+  <meta property="og:site_name" content="{{ context.config.meta.site_title | escape }}">
   <script>/* the saved mode applies before first paint: no light flash */(function(){var t=localStorage.getItem("project-desktop-theme");if(t==="dark"||t==="light")document.documentElement.dataset.theme=t;})();</script>
   <link rel="stylesheet" href="../desktop.css">
   <link rel="stylesheet" href="../transitions.css">

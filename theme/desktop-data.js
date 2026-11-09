@@ -77,13 +77,26 @@
 	const buckets = [
 		...new Set(notes.map((entry) => entry.extra.bucket).filter(Boolean)),
 	].sort((a, b) => a.localeCompare(b));
-	for (const bucket of buckets)
-		addFolder(
+	// The buckets live inside one container, so the hand-written folders
+	// keep the desktop and the topic folders stay one level down.
+	const bucketRoot = buckets.length
+		? addFolder(
+				"Buckets",
+				{ description: "Every topic folder, made from a note's bucket." },
+				null,
+				[],
+			)
+		: null;
+	const bucketFolders = new Map();
+	for (const bucket of buckets) {
+		const folder = addFolder(
 			bucket,
 			{ filter: `bucket:"${bucket}" && !type:set` },
-			null,
+			bucketRoot,
 			notes.filter((entry) => entry.extra.bucket === bucket),
 		);
+		bucketFolders.set(slug(bucket), folder);
+	}
 	for (const set of visible.filter((entry) => entry.type === "set")) {
 		const ids = new Set([set.key.slice(5), slug(set.title)]);
 		const members = notes.filter((entry) =>
@@ -99,8 +112,9 @@
 			.find(Boolean);
 		if (!parent && set.extra.bucket)
 			parent =
+				bucketFolders.get(slug(set.extra.bucket)) ||
 				folders.find((folder) => folder.slug === slug(set.extra.bucket)) ||
-				addFolder(set.extra.bucket, {}, null, []);
+				addFolder(set.extra.bucket, {}, bucketRoot, []);
 		const folder = addFolder(
 			set.title,
 			{ icon: set.extra.icon, stricon: set.extra.stricon },
@@ -120,7 +134,7 @@
 			const sub = folder.folders
 				.map(
 					(child) =>
-						`<div class="tile" id="sub-${safe}-${esc(child.slug.replaceAll("/", "-"))}" data-key="folder:${esc(child.slug)}"${attrs({ ...child, day: child.children[0]?.date })}><span class="tile-icon">${child.stricon ? noteIcon({ extra: child }) : icon(child.icon || "file")}</span><span class="tile-title">${esc(child.title)}</span><span class="tile-date">${esc(child.children[0]?.date || "")}</span></div>`,
+						`<div class="tile" role="button" tabindex="0" id="sub-${safe}-${esc(child.slug.replaceAll("/", "-"))}" data-key="folder:${esc(child.slug)}"${attrs({ ...child, day: child.children[0]?.date })}><span class="tile-icon">${child.stricon ? noteIcon({ extra: child }) : icon(child.icon || "file")}</span><span class="tile-title">${esc(child.title)}</span><span class="tile-date">${esc(child.children[0]?.date || "")}</span></div>`,
 				)
 				.join("");
 			const tiles = folder.children
@@ -185,7 +199,10 @@
 			const icons = item.openIcon
 				? `<span class="icon closed">${item.icon}</span><span class="icon open">${item.openIcon}</span>`
 				: `<span class="icon">${item.icon}</span>`;
-			return `<${tag} class="obj" id="${esc(item.id)}" data-kind="${item.kind}" data-key="${esc(item.key)}"${attrs(item)}${item.url ? ` data-url="${esc(item.url)}" href="${esc(item.url)}"` : ""} style="left:${20 + (i % 4) * 160}px;top:${20 + Math.floor(i / 4) * 120}px;">${icons}<div class="label">${esc(item.title)}</div><span class="sel-overlay"></span></${tag}>`;
+			// a note object is a real link; a folder or a system object is
+			// a div, so it needs the button role to be reachable
+			const buttonAttrs = item.url ? "" : ' role="button" tabindex="0"';
+			return `<${tag} class="obj"${buttonAttrs} aria-label="${esc(item.title)}" id="${esc(item.id)}" data-kind="${item.kind}" data-key="${esc(item.key)}"${attrs(item)}${item.url ? ` data-url="${esc(item.url)}" href="${esc(item.url)}"` : ""} style="left:${20 + (i % 4) * 160}px;top:${20 + Math.floor(i / 4) * 120}px;">${icons}<div class="label">${esc(item.title)}</div><span class="sel-overlay"></span></${tag}>`;
 		})
 		.join("");
 	const find = `<template class="modal-tpl" data-key="find"><div class="modal" data-key="find"><div class="modal-head"><span class="title">Find</span></div><div class="modal-body"><div class="body"><input class="find-field" type="search" placeholder="Search title, tag or filename" aria-label="Search notes"><ul class="find-results"></ul></div></div><div class="grip"></div></div></template>`;
