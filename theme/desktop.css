@@ -85,6 +85,9 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  cursor:
+    url("data:image/gif;base64,R0lGODdhGAAYAJEAAAAAAAAAAP///wAAACH5BAkKAAAALAAAAAAYABgAAAJVjI95wK2fmgui2luXZAZ7vQGdZ4HhSJonlRrhhmLqSmbuy7H1PF2xwBPpELIbjKUoBmiag/JocvqMQmpOZ1tecdLSzQp94sLZ8csZNEfM4zSb845vCgA7"),
+    auto;
 }
 
 html,
