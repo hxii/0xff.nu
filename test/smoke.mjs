@@ -677,10 +677,10 @@ assert(
 	!!aboutTpl.content.querySelector(".modal.about"),
 	"the system window is a small panel",
 );
-assert(
-	!document.querySelector('template.modal-tpl[data-key="status"]'),
-	"no separate status window",
-);
+const statusTpl = document.querySelector('template.modal-tpl[data-key="status"]');
+assert(!!statusTpl, "status program has a template");
+assert(statusTpl.dataset.program === "true", "status is a program");
+assert(statusTpl.dataset.size === "small", "status has data-size=small");
 const aboutBody = aboutTpl.content.querySelector(".modal-body");
 assert(
 	!!aboutBody.querySelector(".about-head pre"),
