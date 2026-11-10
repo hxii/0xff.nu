@@ -1,8 +1,9 @@
-<template class="modal-tpl" data-key="about"
+<template class="modal-tpl" data-key="about" data-program="true"
+  data-title="About This System" data-size="small" data-icon="about" data-corner="true"
   ><div class="modal about" data-key="about">
     <div class="modal-head"><span class="title">About This System</span></div>
     <div class="modal-body">
-      <div class="body">
+      <div class="body about-body">
         <div class="about-head">
           <pre><code> ██       ████ ████
 █  █      █  █ █   
@@ -10,21 +11,21 @@
 █  █  ██  █  █    █
  ██  █  █ ████ ████</code></pre>
         </div>
-        <p>
-          My name is <em>Paul Glushak</em>; online I go by <code>hxii</code>.
-        </p>
-        <p>I am a small-web, lightweight tool enthusiast.</p>
-        <p>
-          This site is a collection of my thoughts and projects, generated with
-          <a href="https://github.com/hxii/hajime">Hajime</a> — no ads, no
-          tracking.
-        </p>
-        <p>
-          Get in touch via <a href="https://merveilles.town/@hxii">Mastodon</a>,
+        <div class="about-icon">
+          <img src="icons/about.png" alt="" width="32" height="32">
+        </div>
+        <h2 class="about-name">0xFF</h2>
+        <p class="about-version">Version 1.0 (build <span id="about-build">—</span>)</p>
+        <p class="about-copyright">© 2026 Paul Glushak</p>
+        <button type="button" class="about-more" id="about-more">More Info…</button>
+        <div class="about-details" id="about-details" hidden>
+          <p>This site is a collection of my thoughts and projects, generated with
+          <a href="https://github.com/hxii/hajime">Hajime</a> — no ads, no tracking.</p>
+          <p>Get in touch via <a href="https://merveilles.town/@hxii">Mastodon</a>,
           <a href="https://twitter.com/paulglushak">Twitter</a>,
           <a href="https://bsky.app/profile/0xff.nu">BlueSky</a> or the
-          <a href="https://0xff.nu/feed.xml">RSS feed</a>.
-        </p>
+          <a href="https://0xff.nu/feed.xml">RSS feed</a>.</p>
+        </div>
       </div>
     </div>
     <div class="grip"></div></div

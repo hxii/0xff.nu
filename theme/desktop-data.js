@@ -9,11 +9,11 @@
 			/[&<>"']/g,
 			(c) =>
 				({
-					"&": "&amp;",
-					"<": "&lt;",
-					">": "&gt;",
-					'"': "&quot;",
-					"'": "&#39;",
+					"&": "&",
+					"<": "<",
+					">": ">",
+					'"': '"',
+					"'": "'",
 				})[c],
 		);
 	const slug = (value) =>
@@ -153,6 +153,28 @@
 			return `<template class="modal-tpl" data-key="folder:${esc(folder.slug)}"><div class="modal" data-key="folder:${esc(folder.slug)}"><div class="modal-head"><span class="title">${esc(folder.title)}</span></div>${strip}<div class="modal-body"><div class="folder-grid">${sub}${tiles}</div></div><div class="grip"></div></div></template>`;
 		})
 		.join("");
+	function programObjects() {
+		const objs = [];
+		document.querySelectorAll("template.modal-tpl[data-program]").forEach((tpl) => {
+			const key = tpl.dataset.key;
+			const title = tpl.dataset.title || key;
+			const iconName = tpl.dataset.icon || key;
+			const size = tpl.dataset.size;
+			const corner = tpl.dataset.corner === "true";
+			objs.push({
+				kind: "system",
+				key,
+				id: `item-${key}`,
+				title,
+				description: tpl.dataset.description || "",
+				icon: icon(iconName),
+				size,
+				corner,
+			});
+		});
+		return objs;
+	}
+	const programObjs = programObjects();
 	const objects = [
 		...folders
 			.filter((folder) => !folder.parent)
@@ -175,23 +197,7 @@
 				id: `item-note-${entry.key.slice(5)}`,
 				icon: noteIcon(entry),
 			})),
-		{
-			kind: "system",
-			key: "about",
-			id: "item-about",
-			title: "About This System",
-			description:
-				"How this desktop is put together. Stats, background and version.",
-			icon: icon("about"),
-		},
-		{
-			kind: "system",
-			key: "find",
-			id: "item-find",
-			title: "Find",
-			description: "Search every published note.",
-			icon: icon("find"),
-		},
+		...programObjs,
 	];
 	const objectHtml = objects
 		.map((item, i) => {
@@ -205,10 +211,9 @@
 			return `<${tag} class="obj"${buttonAttrs} aria-label="${esc(item.title)}" id="${esc(item.id)}" data-kind="${item.kind}" data-key="${esc(item.key)}"${attrs(item)}${item.url ? ` data-url="${esc(item.url)}" href="${esc(item.url)}"` : ""} style="left:${20 + (i % 4) * 160}px;top:${20 + Math.floor(i / 4) * 120}px;">${icons}<div class="label">${esc(item.title)}</div><span class="sel-overlay"></span></${tag}>`;
 		})
 		.join("");
-	const find = `<template class="modal-tpl" data-key="find"><div class="modal" data-key="find"><div class="modal-head"><span class="title">Find</span></div><div class="modal-body"><div class="body"><input class="find-field" type="search" placeholder="Search title, tag or filename" aria-label="Search notes"><ul class="find-results"></ul></div></div><div class="grip"></div></div></template>`;
 	const summary = `${folders.filter((folder) => !folder.parent).length} collections  ·  ${visible.length} notes  ·  ${new Set(visible.flatMap((entry) => entry.tags)).size} tags  ·  ${entries.length - visible.length} hidden`;
 	desktop.insertAdjacentHTML(
 		"afterbegin",
-		`${objectHtml}<div class="templates">${foldersHtml}${find}</div><div hidden id="desktop-summary">${esc(summary)}</div>`,
+		`${objectHtml}<div class="templates">${foldersHtml}</div><div hidden id="desktop-summary">${esc(summary)}</div>`,
 	);
 })();

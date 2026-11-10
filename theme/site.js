@@ -17,8 +17,8 @@
   }
 
   function openAtDefault(modal) {
-    // the About panel is a small fixed card; CSS owns its size
-    if (modal.classList.contains("about")) return;
+    // small programs (data-size="small") keep their CSS size
+    if (modal.dataset.size === "small") return;
     var v = defaultView();
     modal.style.width = v.width + "px";
     modal.style.height = v.height + "px";
@@ -184,7 +184,23 @@
       var words;
       var none;
       results.replaceChildren();
-      if (!term) return;
+      if (!term) {
+        // show all notes chronologically (newest first)
+        var sorted = [...rows].sort((a, b) => {
+          var da = a.dataset.date || "";
+          var db = b.dataset.date || "";
+          return db.localeCompare(da);
+        });
+        for (var i = 0; i < sorted.length && shown < 50; i++) {
+          row = sorted[i];
+          key = row.dataset.key;
+          if (!key || seen.has(key)) continue;
+          seen.add(key);
+          addResult(row);
+          shown++;
+        }
+        return;
+      }
       for (var i = 0; i < rows.length; i++) {
         if (shown >= 50) break;
         row = rows[i];
@@ -209,6 +225,21 @@
     });
     field.focus();
   }
+
+  // About This System: System 6/7 style
+  function initAbout(modal) {
+    var buildEl = modal.querySelector("#about-build");
+    var moreBtn = modal.querySelector("#about-more");
+    var details = modal.querySelector("#about-details");
+    if (buildEl) buildEl.textContent = new Date().toISOString().slice(0, 10);
+    if (moreBtn && details) {
+      moreBtn.addEventListener("click", () => {
+        details.hidden = !details.hidden;
+        moreBtn.textContent = details.hidden ? "More Info…" : "Less Info…";
+      });
+    }
+  }
+  window.initAbout = initAbout;
 
   function closest(target, sel) {
     return target?.closest ? target.closest(sel) : null;
@@ -438,9 +469,8 @@
       modal.style.top = "4px";
       return;
     }
-    // The About window belongs in a corner: it is open from the start,
-    // like a screen saver, and should not sit on top of the icons.
-    if (key === "about") {
+    // Corner placement for small programs (data-corner="true")
+    if (modal.dataset.corner === "true") {
       modal.style.left = `${Math.max(4, modalLayer.clientWidth - modal.offsetWidth - 16)}px`;
       modal.style.top = `${Math.max(4, modalLayer.clientHeight - modal.offsetHeight - 16)}px`;
       return;
@@ -518,6 +548,13 @@
       modal = tpl(key);
     }
     modal.dataset.key = key;
+    // copy program data attributes from template to modal
+    var tplNode = document.querySelector(`.modal-tpl[data-key="${CSS.escape(key)}"]`);
+    if (tplNode) {
+      for (var attr of tplNode.attributes) {
+        if (attr.name.startsWith("data-")) modal.dataset[attr.name.slice(5)] = attr.value;
+      }
+    }
     modal.setAttribute("role", "dialog");
     var nameEl = modal.querySelector(".modal-head .title");
     if (nameEl) modal.setAttribute("aria-label", nameEl.textContent.trim());
@@ -538,6 +575,14 @@
     if (!modal.classList.contains("iv")) openAtDefault(modal);
     placeModal(modal, ownerId, key);
     wireModal(modal);
+    // program init + lifecycle events
+    var tplNode = document.querySelector(`.modal-tpl[data-key="${CSS.escape(key)}"]`);
+    if (tplNode && tplNode.dataset.program) {
+      var initFn = window[`init${key.charAt(0).toUpperCase() + key.slice(1)}`];
+      if (typeof initFn === "function") initFn(modal);
+      modal.dispatchEvent(new CustomEvent("window:open"));
+      modal.addEventListener("remove", () => modal.dispatchEvent(new CustomEvent("window:close")), { once: true });
+    }
     modals.push(modal);
     modal.history = [];
     markFront();
@@ -1272,6 +1317,54 @@
   // opened, so the dblclick pass must not open again
   document.addEventListener("dblclick", (e) => {
     if (!NARROW.matches) openFrom(e);
+  });
+
+  // Arrow-key navigation between desktop icons
+  function findDesktopIcons() {
+    return Array.from(document.querySelectorAll(".desktop > .obj"));
+  }
+  function indexOfIcon(icon) {
+    return findDesktopIcons().indexOf(icon);
+  }
+  function cols() { return 4; }
+  function focusIcon(idx) {
+    var icons = findDesktopIcons();
+    if (idx >= 0 && idx < icons.length) {
+      icons[idx].focus({ preventScroll: true });
+    }
+  }
+  document.addEventListener("keydown", (e) => {
+    // Cmd/Ctrl+F opens Find
+    if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "f") {
+      e.preventDefault();
+      var findObj = document.querySelector('.obj[data-key="find"]');
+      if (findObj) {
+        findObj.focus();
+        var ev = new window.KeyboardEvent("keydown", { key: "Enter", bubbles: true });
+        findObj.dispatchEvent(ev);
+      }
+      return;
+    }
+    // Arrow keys only work when a desktop icon is focused
+    var active = document.activeElement;
+    var icons = findDesktopIcons();
+    var idx = icons.indexOf(active);
+    if (idx === -1) return;
+    var c = cols();
+    var rows = Math.ceil(icons.length / c);
+    var row = Math.floor(idx / c);
+    var col = idx % c;
+    var moved = false;
+    if (e.key === "ArrowRight") {
+      if (col < c - 1 && idx + 1 < icons.length) { focusIcon(idx + 1); moved = true; }
+    } else if (e.key === "ArrowLeft") {
+      if (col > 0) { focusIcon(idx - 1); moved = true; }
+    } else if (e.key === "ArrowDown") {
+      if (row < rows - 1 && idx + c < icons.length) { focusIcon(idx + c); moved = true; }
+    } else if (e.key === "ArrowUp") {
+      if (row > 0) { focusIcon(idx - c); moved = true; }
+    }
+    if (moved) e.preventDefault();
   });
 
   document.querySelectorAll(".desktop > .obj").forEach((item) => {
