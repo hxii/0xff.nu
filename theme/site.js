@@ -231,12 +231,28 @@
     var buildEl = modal.querySelector("#about-build");
     var moreBtn = modal.querySelector("#about-more");
     var details = modal.querySelector("#about-details");
+    var statsGrid = modal.querySelector("#about-stats-grid");
     if (buildEl) buildEl.textContent = new Date().toISOString().slice(0, 10);
     if (moreBtn && details) {
       moreBtn.addEventListener("click", () => {
         details.hidden = !details.hidden;
         moreBtn.textContent = details.hidden ? "More Info…" : "Less Info…";
       });
+    }
+    if (statsGrid) {
+      var records = noteRecords();
+      var notes = records.filter(function(r) { return r.key.startsWith("note:"); });
+      var noteCount = notes.length;
+      var tagSet = new Set();
+      notes.forEach(function(r) { (r.tags || []).forEach(function(t) { tagSet.add(t); }); });
+      var tagCount = tagSet.size;
+      var bucketSet = new Set();
+      notes.forEach(function(r) { if (r.bucket) bucketSet.add(r.bucket); });
+      var bucketCount = bucketSet.size;
+      statsGrid.innerHTML =
+        '<div class="stat-row"><span class="stat-label">Notes:</span><span class="stat-value">' + noteCount + '</span></div>' +
+        '<div class="stat-row"><span class="stat-label">Tags:</span><span class="stat-value">' + tagCount + '</span></div>' +
+        '<div class="stat-row"><span class="stat-label">Buckets:</span><span class="stat-value">' + bucketCount + '</span></div>';
     }
   }
   window.initAbout = initAbout;

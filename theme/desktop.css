@@ -19,7 +19,8 @@
   --bevel-dark: #00000044;
   --tile: url("pattern.svg");
   --code-bg: #eeeae1;
-  --font: "Departure Mono", ui-monospace, SFMono-Regular, Menlo, Consolas,
+  --font:
+    "Departure Mono", ui-monospace, SFMono-Regular, Menlo, Consolas,
     "Liberation Mono", monospace;
   --icon-size: 48px;
   --halo: #ffffff;
@@ -244,7 +245,7 @@ body {
   color: var(--text);
   background: var(--panel);
   border: 1px solid var(--text);
-  border-radius: 0;
+  border-radius: 3px;
   appearance: none;
   -webkit-appearance: none;
 
@@ -340,7 +341,7 @@ body {
 
   .label {
     display: inline-block;
-    padding: 1px 4px;
+    padding: 2px 6px;
     background: var(--panel);
     font-size: 16px;
     line-height: 1.3;
@@ -421,8 +422,6 @@ body {
   overflow: hidden;
   isolation: isolate;
 
-  /* the window is a raised panel: a lit edge inside, a dark keyline
-     outside, and a hard shadow that lifts it off the desktop */
   box-shadow:
     inset 1px 1px 0 var(--bevel-light),
     inset -1px -1px 0 var(--bevel-dark),
@@ -533,8 +532,6 @@ body {
   }
 }
 
-/* the up button lives in the entry bar, not the container head:
-   the same 16px box as .close, so the two title bars align */
 .modal-head .close,
 .modal-head .max,
 .modal-head .iv-info,
@@ -679,7 +676,6 @@ body {
     color: var(--mut);
     white-space: nowrap;
   }
-
 }
 
 .modal-body > .stale-warning {
@@ -783,7 +779,6 @@ body {
     margin: 0.1em 0;
   }
 
-
   a {
     color: var(--text);
     text-decoration: underline double;
@@ -814,7 +809,6 @@ body {
     line-height: 1.5;
     tab-size: 2;
 
-
     code {
       background: none;
       border: 0;
@@ -822,7 +816,6 @@ body {
       font-family: var(--font);
     }
   }
-
 
   blockquote {
     border-left: 3px solid var(--text);
@@ -992,15 +985,25 @@ body {
   height: 14px;
   background: var(--panel);
   border: 1px solid var(--text);
+  border-radius: 3px;
   background-image: repeating-linear-gradient(
     45deg,
     var(--text) 0 1px,
     transparent 1px 3px
   );
   box-shadow:
+    inset 1px 1px 0 var(--bevel-light),
+    inset -1px -1px 0 var(--bevel-dark),
     0 0 0 1px var(--outline),
     2px 2px 0 var(--drop);
   cursor: move;
+}
+
+.grip:active {
+  box-shadow:
+    inset 1px 1px 0 var(--bevel-dark),
+    inset -1px -1px 0 var(--bevel-light),
+    0 0 0 1px var(--outline);
 }
 
 .popup {
@@ -1013,6 +1016,8 @@ body {
   border: 1px solid var(--text);
   border-radius: 4px;
   box-shadow:
+    inset 1px 1px 0 var(--bevel-light),
+    inset -1px -1px 0 var(--bevel-dark),
     0 0 0 1px var(--outline),
     3px 3px 0 var(--drop);
   font-size: 13px;
@@ -1088,32 +1093,23 @@ body {
 }
 
 .about-head {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 3fr;
   align-items: center;
   gap: 10px;
   margin: 0 0 10px;
 }
-.about-logo {
-  display: inline-flex;
-  width: 32px;
-  height: 32px;
-}
 .about-name {
-  font-family: var(--font);
   font-size: 20px;
   font-weight: bold;
 }
-.about-version {
-  font-family: var(--font);
+.about-version,
+.about-copyright {
   font-size: 12px;
   color: var(--mut);
   margin-left: auto;
 }
 
-/* the image viewer: a framed window like any other, the head keeps
-   its title, and the picture spans the body edge to edge. The
-   metadata strip is an overlay band along the bottom edge, shown
-   on demand by the info box in the head */
 .modal.iv {
   width: min(90vw, 1280px);
   height: min(84vh, 900px);
@@ -1157,8 +1153,6 @@ body {
   }
 }
 
-/* the viewer hugs its picture on a phone: no empty bands. This sits
-   after the base .modal.iv rule so it wins at equal specificity */
 @media (width <= 720px) {
   .modal.iv {
     height: auto !important;
@@ -1178,9 +1172,6 @@ body {
   }
 }
 
-/* keyboard focus: the desktop is a 2-bit surface, so the ring is the
-   same solid black as a selection, drawn outside the label so the text
-   stays readable */
 .obj:focus-visible,
 .tile:focus-visible,
 .modal .close:focus-visible,
@@ -1198,4 +1189,43 @@ body {
 
 .modal:focus-visible {
   outline: none;
+}
+
+.about-stats-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px 12px;
+  margin: 12px 0;
+  padding: 10px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  background: var(--panel);
+}
+.stat-row {
+  display: contents;
+}
+.stat-label {
+  color: var(--muted);
+  font-size: 12px;
+}
+.stat-value {
+  font-weight: 600;
+  font-size: 12px;
+  text-align: right;
+}
+.about-more {
+  font-family: var(--font);
+  font-size: 12px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 4px 10px;
+  cursor: pointer;
+}
+.about-more:hover {
+  background: var(--bg);
+}
+.about-more:focus-visible {
+  outline: 2px solid var(--text);
+  outline-offset: 2px;
 }
