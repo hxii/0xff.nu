@@ -1,0 +1,94 @@
+<template
+  class="modal-tpl"
+  data-key="hire"
+  data-program="true"
+  data-title="Hire Me!"
+  data-size="small"
+  data-icon="contract"
+>
+  <div class="modal" data-key="hire">
+    <div class="modal-head"><span class="title">Hire Me!</span></div>
+    <div class="modal-body">
+      <div class="body">
+        <style>
+          .hire-wave-inner {
+            font-size: 4rem;
+            display: flex;
+            justify-content: center;
+            margin: 2rem 0;
+            span {
+              display: inline-block;
+              /* animation: cubic-bezier(0.67, -0.01, 0, 0.84) wave 2s infinite; */
+              animation: cubic-bezier(0.43, 0.1, 0.39, 1.32) wave 2s infinite;
+              animation-delay: calc(0.15s * sibling-index());
+              text-shadow: 0 1px 2px
+                color-mix(in srgb, var(--text) 50%, transparent 50%);
+            }
+            .spacer {
+              width: 0.3ch;
+            }
+          }
+
+          @keyframes wave {
+            0% {
+              transform: translateY(0);
+            }
+            50% {
+              transform: translateY(-0.5ch) scale(1.1);
+              text-shadow: 0 calc(1px + 0.5ch) 5px
+                color-mix(in srgb, var(--text) 15%, transparent 85%);
+            }
+          }
+        </style>
+        <h1 class="hire-wave" aria-label="Hire Me!">
+          <span class="hire-wave-inner" aria-hidden="true">
+            <span>H</span>
+            <span>i</span>
+            <span>r</span>
+            <span>e</span>
+            <span class="spacer"></span>
+            <span>M</span>
+            <span>e</span>
+            <span>!</span>
+          </span>
+        </h1>
+        <p>
+          I'm a polymath and I have ADHD, which means I have
+          <i>many</i> interests, but it also means I am able to understand and
+          connect multiple different domains together to find creative,
+          interesting and efficient solutions.
+        </p>
+        <p>The TL;DR is &mdash; I love creating, I love solving tangible problems and coming up with solutions that will impact people positively.<br>
+        My skillset is always expanding, as I find many things interesting on various levels, but if I had to summarize it:
+        <ul>
+<li>Python</li>
+            <li>HTML and CSS (but I am trying to pick up JavaScript here and there)</li>
+            <li>Leveraging AI &mdash; personal agents, RAG, fine-tuning</li>
+            <li>Smart Home Automation</li>
+            <li>Process Automation and efficiency</li>
+          </ul></p>
+        <p>I'd love to join a (ideally <strong>remote</strong>) team of people with a healthy understanding of where work starts and ends, and for who the word "family" means their actual family, rather than a vague buzzword at work.
+        <br>
+        I'm a big believer in personal growth, teamwork and doing things that actually mean something, rather than just pushing buttons.</p>
+        <p><strong>Are you the one?</strong></p>
+        <p>
+          I have an
+          <a href="https://hxii.github.io">online version of my CV</a>, or you
+          can take a look at my
+          <a href="https://www.linkedin.com/in/paulglushak/">LinkedIn</a> if
+          that's your thing.
+          <br>
+          You can also get in touch via
+          <a href="https://bsky.app/profile/0xff.nu">BlueSky</a> or send me an
+          email:<br>
+          <object
+            class="mail"
+            height="24"
+            data="mail.svg"
+            type="image/svg+xml"
+            aria-label="My email address"
+          ></object>
+        </p>
+      </div>
+    </div>
+    <div class="grip"></div></div></template>
