@@ -25,6 +25,19 @@
   <meta property="og:url" content="{{ context.config.meta.site_url }}/">
   {% endif %}
   <meta property="og:site_name" content="{{ context.config.meta.site_title | escape }}">
+  <!-- Twitter Cards -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{% if entry %}{{ entry.title | escape }}{% else %}{{ context.config.meta.site_title | escape }}{% endif %}">
+  <meta name="twitter:description" content="{% if entry %}{{ entry.description | escape }}{% else %}{{ context.config.meta.site_description | escape }}{% endif %}">
+  <meta name="twitter:image" content="{% if entry and entry.extra.stricon %}data:image/gif;base64,{{ entry.extra.stricon | escape }}{% else %}{{ context.config.meta.site_url }}/icons/0xFF.png{% endif %}">
+  <!-- Author, Keywords, Robots -->
+  <meta name="author" content="Paul Glushak">
+  <meta name="keywords" content="notes, personal blog, Hajime, 0xFF, web design">
+  <meta name="robots" content="index, follow">
+  <!-- Favicon and Theme Color -->
+  <link rel="icon" type="image/png" href="../icons/0xFF.png">
+  <link rel="apple-touch-icon" href="../icons/0xFF.png">
+  <meta name="theme-color" content="#000000">
   <script>/* the saved mode applies before first paint: no light flash */(function(){var t=localStorage.getItem("project-desktop-theme");if(t==="dark"||t==="light")document.documentElement.dataset.theme=t;})();</script>
   <link rel="stylesheet" href="../desktop.css">
   <link rel="stylesheet" href="../transitions.css">

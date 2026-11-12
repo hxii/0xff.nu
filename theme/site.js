@@ -659,6 +659,34 @@
     runScripts(modal);
     markFront();
     writeHash(page.key);
+    // Update meta tags from the fetched page's head
+    if (page.head) {
+      var head = page.head;
+      var headEl = modal.querySelector("head");
+      if (headEl) {
+        // Update title
+        var title = head.querySelector("title");
+        if (title) {
+          var titleEl = modal.querySelector("title");
+          if (titleEl) titleEl.textContent = title.textContent;
+        }
+        // Update meta tags
+        var metas = head.querySelectorAll("meta");
+        for (var i = 0; i < metas.length; i++) {
+          var meta = metas[i];
+          var tag = modal.querySelector("meta[" + meta.tagName + "]");
+          if (tag) {
+            for (var attr of meta.attributes) {
+              if (attr.name === "content") {
+                tag.setAttribute("content", meta.getAttribute("content"));
+              } else if (attr.name !== "content" && !tag.hasAttribute(attr.name)) {
+                tag.setAttribute(attr.name, meta.getAttribute(attr.name));
+              }
+            }
+          }
+        }
+      }
+    }
     // the page took the focused tile with it: focus goes back into the
     // window, not to the body
     if (focusWasInside && !modal.contains(document.activeElement)) {
