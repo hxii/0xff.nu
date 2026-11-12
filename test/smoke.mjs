@@ -683,8 +683,8 @@ assert(statusTpl.dataset.program === "true", "status is a program");
 assert(statusTpl.dataset.size === "small", "status has data-size=small");
 const aboutBody = aboutTpl.content.querySelector(".modal-body");
 assert(
-	!!aboutBody.querySelector(".about-head pre"),
-	"about shows the ASCII logo",
+	!!aboutBody.querySelector(".about-head img"),
+	"about shows the logo image",
 );
 assert(
 	!!aboutBody.querySelector(".about-head"),
